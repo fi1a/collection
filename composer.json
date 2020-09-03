@@ -34,7 +34,7 @@
   },
   "scripts": {
     "fl:lint": "./vendor/bin/phpcs --cache=./build/cache/phpcs.cache",
-    "fl:phpcbf": "./vendor/bin/phpcbf",
+    "fl:phpcbf": "./vendor/bin/phpcbf --cache=build/cache/phpcs.cache",
     "fl:test:unit:coverage:ci": "./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml"
   },
   "scripts-descriptions": {
