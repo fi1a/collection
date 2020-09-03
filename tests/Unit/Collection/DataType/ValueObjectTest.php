@@ -23,7 +23,7 @@ class ValueObjectTest extends TestCase
     /**
      * Конструктор
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $input = static::$input;
         $array = new ValueObject($input);
@@ -35,7 +35,7 @@ class ValueObjectTest extends TestCase
     /**
      * Методы инициализации из массива и т.д.
      */
-    public function testArray()
+    public function testArray(): void
     {
         $input = static::$input;
         $array = new ValueObject();
@@ -49,7 +49,7 @@ class ValueObjectTest extends TestCase
     /**
      * Восстановление состояния
      */
-    public function testSetState()
+    public function testSetState(): void
     {
         $input = static::$input;
         $array = ValueObject::__set_state($input);
@@ -60,7 +60,7 @@ class ValueObjectTest extends TestCase
     /**
      * Тестирование метода клонирования
      */
-    public function testGetClone()
+    public function testGetClone(): void
     {
         $input = static::$input;
         $array = new ValueObject();

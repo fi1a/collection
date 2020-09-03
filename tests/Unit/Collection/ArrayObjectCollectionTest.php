@@ -15,7 +15,7 @@ class ArrayObjectCollectionTest extends TestCase
     /**
      * Вызов методов элементов
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $collection = new ArrayObjectCollection([
             ['key1' => 1, 'key2' => 'string', 'key3' => [1, 2, 3,]],
@@ -32,7 +32,7 @@ class ArrayObjectCollectionTest extends TestCase
     /**
      * Вызов сеттера
      */
-    public function testSet()
+    public function testSet(): void
     {
         /**
          * @var $collection ArrayObjectCollection|ArrayObject|ArrayObject[]

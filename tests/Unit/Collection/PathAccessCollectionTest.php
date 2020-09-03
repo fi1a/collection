@@ -15,7 +15,7 @@ class PathAccessCollectionTest extends TestCase
     /**
      * Вызов методов элементов
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $collection = new PathAccessCollection([
             ['key1' => 1, 'key2' => 'string', 'key3' => [1, 2, 3,]],
@@ -32,7 +32,7 @@ class PathAccessCollectionTest extends TestCase
     /**
      * Вызов сеттера
      */
-    public function testSetAndCall()
+    public function testSetAndCall(): void
     {
         /**
          * @var $collection PathAccessCollection|PathAccess|PathAccess[]

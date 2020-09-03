@@ -15,7 +15,7 @@ class TCollectionTest extends TestCase
     /**
      * Тестирование методов
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $collection = new FixtureCollection();
         $collection->set(0, 1);

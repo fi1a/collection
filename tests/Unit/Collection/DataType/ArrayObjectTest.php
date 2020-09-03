@@ -36,7 +36,7 @@ class ArrayObjectTest extends TestCase
      *
      * @dataProvider dataProviderConstruct
      */
-    public function testConstruct($data, $equal)
+    public function testConstruct($data, $equal): void
     {
         $this->assertEquals($equal, (new ArrayObject($data))->getArrayCopy());
     }
@@ -59,7 +59,7 @@ class ArrayObjectTest extends TestCase
      *
      * @dataProvider dataProviderOffset
      */
-    public function testOffset(IArrayObject $array)
+    public function testOffset(IArrayObject $array): void
     {
         $array[1] = 1;
         $this->assertEquals(1, $array[1]);
@@ -92,7 +92,7 @@ class ArrayObjectTest extends TestCase
      *
      * @dataProvider dataProviderOffset
      */
-    public function testClone(IArrayObject $array)
+    public function testClone(IArrayObject $array): void
     {
         $array[0] = 1;
         $array[2] = 2;

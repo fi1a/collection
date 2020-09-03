@@ -21,9 +21,11 @@ abstract class AInstanceCollection extends Collection implements IInstanceCollec
     public function __construct(?array $input = null, int $flags = 0, string $iteratorClass = ArrayIterator::class)
     {
         parent::__construct([], $flags, $iteratorClass);
+
         if (!is_array($input)) {
             return;
         }
+
         foreach ($input as $key => $value) {
             $this->offsetSet($key, $value);
         }
@@ -36,7 +38,7 @@ abstract class AInstanceCollection extends Collection implements IInstanceCollec
     {
         $result = [];
         foreach ($this as $item) {
-            if (!method_exists($item, $func)) {
+            if (!is_object($item) || !method_exists($item, $func)) {
                 $result[] = null;
 
                 continue;
