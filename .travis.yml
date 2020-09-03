@@ -27,4 +27,4 @@ script:
   - composer fl:test:unit:coverage:ci
 
 after_success:
-  - travis_retry php ./vendor/bin/php-coveralls -v
+  - travis_retry php vendor/bin/php-coveralls -v
