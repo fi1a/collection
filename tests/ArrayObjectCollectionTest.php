@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection;
 
-use Fi1a\Collection\PathAccessCollection;
+use Fi1a\Collection\ArrayObjectCollection;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Тестирование коллекции PathAccessCollection
+ * Тестирование коллекции ArrayObjectCollection
  */
-class PathAccessCollectionTest extends TestCase
+class ArrayObjectCollectionTest extends TestCase
 {
     /**
      * Вызов методов элементов
      */
     public function testConstructor(): void
     {
-        $collection = new PathAccessCollection([
+        $collection = new ArrayObjectCollection([
             ['key1' => 1, 'key2' => 'string', 'key3' => [1, 2, 3,]],
             null,
             1,
@@ -32,16 +32,15 @@ class PathAccessCollectionTest extends TestCase
     /**
      * Вызов сеттера
      */
-    public function testSetAndCall(): void
+    public function testSet(): void
     {
         /**
-         * @var $collection PathAccessCollection|PathAccess|PathAccess[]
+         * @var $collection ArrayObjectCollection
          */
-        $collection = new PathAccessCollection();
+        $collection = new ArrayObjectCollection();
         $collection[] = ['key1' => 1, 'key2' => null,];
         $collection[] = 'key1';
-        $collection[] = PathAccessCollection::factory(2, ['key1' => 2, 'key2' => null,]);
+        $collection[] = ArrayObjectCollection::factory(2, ['key1' => 2, 'key2' => null,]);
         $this->assertCount(3, $collection);
-        $this->assertEquals([1, false, 2,], $collection->__call('get', ['key1',]));
     }
 }

@@ -9,6 +9,8 @@ use Fi1a\Collection\DataType\PathAccess;
 
 /**
  * Коллекция экземпляров классов PathAccess
+ *
+ * @mixin PathAccess
  */
 class PathAccessCollection extends AInstanceCollection
 {

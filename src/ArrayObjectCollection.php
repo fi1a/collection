@@ -9,6 +9,8 @@ use Fi1a\Collection\DataType\IArrayObject;
 
 /**
  * Коллекция экземпляров классов ArrayObject
+ *
+ * @mixin IArrayObject
  */
 class ArrayObjectCollection extends AInstanceCollection
 {

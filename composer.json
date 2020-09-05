@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Fi1a\\": "src"
+      "Fi1a\\Collection\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Fi1a\\": "tests"
+      "Fi1a\\Unit\\Collection\\": "tests"
     }
   },
   "scripts": {
