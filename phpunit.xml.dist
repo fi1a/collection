@@ -26,7 +26,7 @@
     </coverage>
     <testsuites>
         <testsuite name="Collection Test Suite">
-            <directory>./tests/Unit</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>
