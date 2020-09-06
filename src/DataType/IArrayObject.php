@@ -28,11 +28,4 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
      * @return void
      */
     public function exchangeArray(array $input);
-
-    /**
-     * Клонирование объекта.
-     *
-     * @return static
-     */
-    public function getClone();
 }

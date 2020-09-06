@@ -51,7 +51,7 @@ class ValueObject extends ArrayObject implements IValueObject
     }
 
     /**
-     * Возвращает массив с значениями по умолчанию
+     * Возвращает массив со значениями по умолчанию
      *
      * @return string[]
      */
@@ -155,7 +155,9 @@ class ValueObject extends ArrayObject implements IValueObject
     }
 
     /**
-     * @inheritDoc
+     * Клонирует объект-значение с вызовом get-методов
+     *
+     * @return $this
      */
     public function getClone()
     {

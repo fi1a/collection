@@ -14,10 +14,10 @@ interface IPathAccess extends IArrayObject
     public const PATH_SEPARATOR = ':';
 
     /**
-     * Возвращает значение используя путь.
+     * Возвращает значение, используя путь.
      *
      * @param string     $path    путь до значения.
-     * @param mixed|null $default если значения нет, будет возвращено это.
+     * @param mixed|null $default если значения нет, будет возвращено это значение.
      *
      * @return mixed
      */
@@ -31,7 +31,7 @@ interface IPathAccess extends IArrayObject
     public function has(string $path): bool;
 
     /**
-     * Устанавливает значение используя путь.
+     * Устанавливает значение, используя путь.
      *
      * @param string $path  путь до значения.
      * @param mixed  $value значение, которое будет установлено.
@@ -39,14 +39,14 @@ interface IPathAccess extends IArrayObject
     public function set(string $path, $value): IPathAccess;
 
     /**
-     * Удаляет значение используя путь.
+     * Удаляет значение, используя путь.
      *
      * @param string $path путь до значения.
      */
     public function delete(string $path): IPathAccess;
 
     /**
-     * Возвращает значение с преобразованием к bool.
+     * Возвращает значение с преобразованием к boolean.
      *
      * @param string    $path путь до значения.
      * @param bool|null $default значение по умолчанию.
@@ -54,7 +54,7 @@ interface IPathAccess extends IArrayObject
     public function getBool(string $path, ?bool $default = null): ?bool;
 
     /**
-     * Возвращает значение с преобразование к int.
+     * Возвращает значение с преобразованием к integer.
      *
      * @param string   $path путь до значения.
      * @param int|null $default значение по умолчанию.

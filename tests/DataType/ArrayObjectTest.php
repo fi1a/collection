@@ -98,7 +98,10 @@ class ArrayObjectTest extends TestCase
         $array[2] = 2;
         $array[3] = 3;
         $this->assertCount(3, $array);
-        $clone = $array->getClone();
+        $clone = clone $array;
         $this->assertCount(3, $clone);
+        $clone[0] = 4;
+        $this->assertEquals(4, $clone[0]);
+        $this->assertEquals(1, $array[0]);
     }
 }

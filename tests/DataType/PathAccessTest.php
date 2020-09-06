@@ -269,6 +269,11 @@ class PathAccessTest extends TestCase
                 'key1:not_exist',
                 false,
             ],
+            [
+                ['key1' => ['key2' => 1]],
+                'key1:key2:not_exist',
+                false,
+            ],
         ];
     }
 

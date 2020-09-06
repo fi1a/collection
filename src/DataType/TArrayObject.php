@@ -14,12 +14,12 @@ trait TArrayObject
     /**
      * @var array
      */
-    protected $storage = [];
+    private $storage = [];
 
     /**
      * Конструктор.
      *
-     * @param mixed[] $data массив с которым бужет инициализирован объект.
+     * @param mixed[] $data массив, с которым бужет инициализирован объект.
      */
     public function __construct(array $data = [])
     {
@@ -103,15 +103,5 @@ trait TArrayObject
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->storage);
-    }
-
-    /**
-     * Клонирование.
-     *
-     * @return static возвращает новый экземпляр класса со значениями текущего.
-     */
-    public function getClone()
-    {
-        return new static($this->getArrayCopy());
     }
 }

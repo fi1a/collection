@@ -38,7 +38,7 @@ class PathAccess extends ArrayObject implements IPathAccess
         $data = $this->getArrayCopy();
         while (count($paths)) {
             $key = array_shift($paths);
-            if (!array_key_exists($key, $data)) {
+            if (!is_array($data) || !array_key_exists($key, $data)) {
                 return false;
             }
             $data = $data[$key];
