@@ -50,4 +50,17 @@ class TCollectionTest extends TestCase
         $collection->add(3);
         $this->assertEquals([0 => 1, 1 => 2, 2 => 3,], $collection->getArrayCopy());
     }
+
+    /**
+     * Тестирование метода count коллекции
+     */
+    public function testCount(): void
+    {
+        $collection = new FixtureCollection();
+        $this->assertEquals(0, $collection->count());
+        $collection->add(1);
+        $collection->add(2);
+        $collection->add(3);
+        $this->assertEquals(3, $collection->count());
+    }
 }
