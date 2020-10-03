@@ -25,8 +25,9 @@ class AInstanceCollectionTest extends TestCase
         $this->assertTrue($collection->has(0));
         $this->assertInstanceOf(FixtureClass1::class, $collection->get(0));
         $this->assertEquals(1, $collection->get(0)->value);
-        $this->assertTrue($collection->delete(0));
-        $this->assertFalse($collection->delete(0));
+        $collection->delete(0);
+        $this->assertFalse($collection->has(0));
+        $collection->delete(0);
         $this->assertFalse($collection->has(0));
         $counter = 0;
         $collection->each(function ($index, $element) use (&$counter) {

@@ -41,12 +41,12 @@ trait TCollection
      *
      * @param mixed $key ключ
      * @param mixed $value устанавливаемое значение
-     *
-     * @return mixed
      */
-    public function set($key, $value)
+    public function set($key, $value): self
     {
-        return $this[$key] = $value;
+        $this[$key] = $value;
+
+        return $this;
     }
 
     /**
@@ -54,24 +54,22 @@ trait TCollection
      *
      * @param mixed $key ключ
      */
-    public function delete($key): bool
+    public function delete($key): self
     {
         if (!$this->has($key)) {
-            return false;
+            return $this;
         }
         unset($this[$key]);
 
-        return true;
+        return $this;
     }
 
     /**
      * Вызывает функцию, передавая ключ и значение из коллекции
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
-     *
-     * @return static
      */
-    public function each(callable $callback)
+    public function each(callable $callback): self
     {
         foreach ($this as $ind => $value) {
             call_user_func($callback, $ind, $value);
@@ -84,10 +82,8 @@ trait TCollection
      * Вызывает функцию, передавая ключ и значение из коллекции и заменяет элемент результатом
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
-     *
-     * @return static
      */
-    public function map(callable $callback)
+    public function map(callable $callback): self
     {
         foreach ($this as $ind => $value) {
             $this[$ind] = call_user_func($callback, $ind, $value);
