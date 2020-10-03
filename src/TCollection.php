@@ -99,4 +99,18 @@ trait TCollection
 
         return $this;
     }
+
+    /**
+     * Добавить в коллекцию значение
+     *
+     * @param mixed $value значение
+     *
+     * @return static
+     */
+    public function add($value): ICollection
+    {
+        $this[] = $value;
+
+        return $this;
+    }
 }

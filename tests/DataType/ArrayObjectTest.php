@@ -72,6 +72,8 @@ class ArrayObjectTest extends TestCase
         foreach ($array as $ind => $value) {
             $this->assertEquals($array[$ind], $value);
         }
+        $array[] = 1;
+        $this->assertEquals([0 => 0, 1 => 1,], $array->getArrayCopy());
     }
 
     /**

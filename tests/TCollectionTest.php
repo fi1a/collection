@@ -38,4 +38,16 @@ class TCollectionTest extends TestCase
         });
         $this->assertEquals([3 => 4, 4 => 5,], $collection->getArrayCopy());
     }
+
+    /**
+     * Тестирование метода add коллекции
+     */
+    public function testAdd(): void
+    {
+        $collection = new FixtureCollection();
+        $collection->add(1);
+        $collection->add(2);
+        $collection->add(3);
+        $this->assertEquals([0 => 1, 1 => 2, 2 => 3,], $collection->getArrayCopy());
+    }
 }

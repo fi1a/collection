@@ -56,6 +56,11 @@ trait TArrayObject
      */
     public function offsetSet($offset, $value): void
     {
+        if (is_null($offset)) {
+            $this->storage[] = $value;
+
+            return;
+        }
         $this->storage[$offset] = $value;
     }
 

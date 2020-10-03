@@ -64,4 +64,13 @@ interface ICollection extends IArrayObject
      * @return static
      */
     public function map(callable $callback): ICollection;
+
+    /**
+     * Добавить в коллекцию значение
+     *
+     * @param mixed $value значение
+     *
+     * @return static
+     */
+    public function add($value): ICollection;
 }
