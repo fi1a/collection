@@ -33,27 +33,35 @@ interface ICollection extends IArrayObject
      *
      * @param mixed $key ключ
      * @param mixed $value устанавливаемое значение
+     *
+     * @return static
      */
-    public function set($key, $value): self;
+    public function set($key, $value): ICollection;
 
     /**
      * Удаляет элемент по ключу
      *
      * @param mixed $key ключ
+     *
+     * @return static
      */
-    public function delete($key): self;
+    public function delete($key): ICollection;
 
     /**
      * Вызывает функцию, передавая ключ и значение из коллекции
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
+     *
+     * @return static
      */
-    public function each(callable $callback): self;
+    public function each(callable $callback): ICollection;
 
     /**
      * Вызывает функцию, передавая ключ и значение из коллекции и заменяет элемент результатом
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
+     *
+     * @return static
      */
-    public function map(callable $callback): self;
+    public function map(callable $callback): ICollection;
 }

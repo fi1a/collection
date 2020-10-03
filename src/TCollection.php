@@ -41,8 +41,10 @@ trait TCollection
      *
      * @param mixed $key ключ
      * @param mixed $value устанавливаемое значение
+     *
+     * @return static
      */
-    public function set($key, $value): self
+    public function set($key, $value): ICollection
     {
         $this[$key] = $value;
 
@@ -53,8 +55,10 @@ trait TCollection
      * Удаляет элемент по ключу
      *
      * @param mixed $key ключ
+     *
+     * @return static
      */
-    public function delete($key): self
+    public function delete($key): ICollection
     {
         if (!$this->has($key)) {
             return $this;
@@ -68,8 +72,10 @@ trait TCollection
      * Вызывает функцию, передавая ключ и значение из коллекции
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
+     *
+     * @return static
      */
-    public function each(callable $callback): self
+    public function each(callable $callback): ICollection
     {
         foreach ($this as $ind => $value) {
             call_user_func($callback, $ind, $value);
@@ -82,8 +88,10 @@ trait TCollection
      * Вызывает функцию, передавая ключ и значение из коллекции и заменяет элемент результатом
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
+     *
+     * @return static
      */
-    public function map(callable $callback): self
+    public function map(callable $callback): ICollection
     {
         foreach ($this as $ind => $value) {
             $this[$ind] = call_user_func($callback, $ind, $value);
