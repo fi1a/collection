@@ -77,8 +77,8 @@ trait TCollection
      */
     public function each(callable $callback): ICollection
     {
-        foreach ($this as $ind => $value) {
-            call_user_func($callback, $ind, $value);
+        foreach ($this as $index => $value) {
+            call_user_func($callback, $value, $index);
         }
 
         return $this;
@@ -93,8 +93,8 @@ trait TCollection
      */
     public function map(callable $callback): ICollection
     {
-        foreach ($this as $ind => $value) {
-            $this[$ind] = call_user_func($callback, $ind, $value);
+        foreach ($this as $index => $value) {
+            $this[$index] = call_user_func($callback, $value, $index);
         }
 
         return $this;

@@ -33,7 +33,7 @@ class TCollectionTest extends TestCase
             $counter++;
         });
         $this->assertEquals(2, $counter);
-        $collection->map(function ($index, $element) {
+        $collection->map(function ($element, $index) {
             return $element + 1;
         });
         $this->assertEquals([3 => 4, 4 => 5,], $collection->getArrayCopy());
