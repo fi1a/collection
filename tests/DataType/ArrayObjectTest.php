@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fi1a\Unit\Collection\DataType;
 
 use Fi1a\Collection\DataType\ArrayObject;
+use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
 use Fi1a\Collection\DataType\IArrayObject;
 use Fi1a\Unit\Collection\DataType\Fixtures\FixtureArrayObject;
 use PHPUnit\Framework\TestCase;
@@ -130,5 +131,52 @@ class ArrayObjectTest extends TestCase
         $this->assertTrue($array->isEmpty());
         $array[] = 1;
         $this->assertFalse($array->isEmpty());
+    }
+
+    /**
+     * Провайдер данных для теста testFirst
+     *
+     * @return IArrayObject[][]
+     */
+    public function dataProviderFirst(): array
+    {
+        return [
+            [new ArrayObject([1, 2, 3])],
+            [new FixtureArrayObject([1, 2, 3])],
+        ];
+    }
+
+    /**
+     * Тестирование метода first
+     *
+     * @dataProvider dataProviderFirst
+     */
+    public function testFirst(IArrayObject $array): void
+    {
+        $this->assertEquals(1, $array->first());
+    }
+
+    /**
+     * Провайдер данных для теста testFirstException
+     *
+     * @return IArrayObject[][]
+     */
+    public function dataProviderFirstException(): array
+    {
+        return [
+            [new ArrayObject()],
+            [new FixtureArrayObject()],
+        ];
+    }
+
+    /**
+     * Тестирование метода first (исключение при пустых данных)
+     *
+     * @dataProvider dataProviderFirstException
+     */
+    public function testFirstException(IArrayObject $array): void
+    {
+        $this->expectException(OutOfBoundsException::class);
+        $array->first();
     }
 }

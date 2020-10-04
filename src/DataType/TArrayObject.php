@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fi1a\Collection\DataType;
 
 use ArrayIterator;
+use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
 
 /**
  * Реализует интерфейсы \ArrayAccess, \Countable
@@ -116,5 +117,20 @@ trait TArrayObject
     public function isEmpty(): bool
     {
         return count($this->storage) === 0;
+    }
+
+    /**
+     * Возвращает первый элемент массива
+     *
+     * @return mixed
+     */
+    public function first()
+    {
+        if ($this->isEmpty()) {
+            throw new OutOfBoundsException('Can\'t determine first item. Array is empty');
+        }
+        reset($this->storage);
+
+        return current($this->storage);
     }
 }
