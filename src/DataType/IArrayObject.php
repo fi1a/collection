@@ -35,9 +35,16 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
     public function isEmpty(): bool;
 
     /**
-     * Возвращает первый элемент массива
+     * Возвращает первый элемент
      *
      * @return mixed
      */
     public function first();
+
+    /**
+     * Возвращает последний элемент
+     *
+     * @return mixed
+     */
+    public function last();
 }

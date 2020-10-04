@@ -133,4 +133,20 @@ trait TArrayObject
 
         return current($this->storage);
     }
+
+    /**
+     * Возвращает последний элемент
+     *
+     * @return mixed
+     */
+    public function last()
+    {
+        if ($this->isEmpty()) {
+            throw new OutOfBoundsException('Can\'t determine last item. Array is empty');
+        }
+        $value = end($this->storage);
+        reset($this->storage);
+
+        return $value;
+    }
 }

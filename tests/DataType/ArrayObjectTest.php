@@ -179,4 +179,51 @@ class ArrayObjectTest extends TestCase
         $this->expectException(OutOfBoundsException::class);
         $array->first();
     }
+
+    /**
+     * Провайдер данных для теста testLast
+     *
+     * @return IArrayObject[][]
+     */
+    public function dataProviderLast(): array
+    {
+        return [
+            [new ArrayObject([1, 2, 3])],
+            [new FixtureArrayObject([1, 2, 3])],
+        ];
+    }
+
+    /**
+     * Тестирование метода last
+     *
+     * @dataProvider dataProviderLast
+     */
+    public function testLast(IArrayObject $array): void
+    {
+        $this->assertEquals(3, $array->last());
+    }
+
+    /**
+     * Провайдер данных для теста testLastException
+     *
+     * @return IArrayObject[][]
+     */
+    public function dataProviderLastException(): array
+    {
+        return [
+            [new ArrayObject()],
+            [new FixtureArrayObject()],
+        ];
+    }
+
+    /**
+     * Тестирование метода first (исключение при пустых данных)
+     *
+     * @dataProvider dataProviderLastException
+     */
+    public function testLastException(IArrayObject $array): void
+    {
+        $this->expectException(OutOfBoundsException::class);
+        $array->last();
+    }
 }

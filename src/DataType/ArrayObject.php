@@ -29,9 +29,7 @@ class ArrayObject extends \ArrayObject implements IArrayObject
     }
 
     /**
-     * Возвращает первый элемент массива
-     *
-     * @return mixed
+     * @inheritDoc
      */
     public function first()
     {
@@ -40,6 +38,20 @@ class ArrayObject extends \ArrayObject implements IArrayObject
         }
         $iterator = new ArrayIterator($this->getArrayCopy());
         $iterator->rewind();
+
+        return $iterator->current();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function last()
+    {
+        if ($this->isEmpty()) {
+            throw new OutOfBoundsException('Can\'t determine last item. Array is empty');
+        }
+        $iterator = new ArrayIterator($this->getArrayCopy());
+        $iterator->seek($iterator->count() - 1);
 
         return $iterator->current();
     }
