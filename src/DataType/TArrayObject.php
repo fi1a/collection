@@ -109,4 +109,12 @@ trait TArrayObject
     {
         return new ArrayIterator($this->storage);
     }
+
+    /**
+     * Определяет пустой массив или нет
+     */
+    public function isEmpty(): bool
+    {
+        return count($this->storage) === 0;
+    }
 }

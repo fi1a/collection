@@ -28,4 +28,9 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
      * @return void
      */
     public function exchangeArray(array $input);
+
+    /**
+     * Определяет пустой массив или нет
+     */
+    public function isEmpty(): bool;
 }

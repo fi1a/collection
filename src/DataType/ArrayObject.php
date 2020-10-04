@@ -18,4 +18,12 @@ class ArrayObject extends \ArrayObject implements IArrayObject
     {
         parent::__construct((array) $input, $flags, $iteratorClass);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function isEmpty(): bool
+    {
+        return count($this) === 0;
+    }
 }

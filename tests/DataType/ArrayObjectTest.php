@@ -106,4 +106,29 @@ class ArrayObjectTest extends TestCase
         $this->assertEquals(4, $clone[0]);
         $this->assertEquals(1, $array[0]);
     }
+
+    /**
+     * Провайдер данных для теста testIsEmpty
+     *
+     * @return IArrayObject[][]
+     */
+    public function dataProviderIsEmpty(): array
+    {
+        return [
+            [new ArrayObject()],
+            [new FixtureArrayObject()],
+        ];
+    }
+
+    /**
+     * Тестирование метода isEmpty
+     *
+     * @dataProvider dataProviderIsEmpty
+     */
+    public function testIsEmpty(IArrayObject $array): void
+    {
+        $this->assertTrue($array->isEmpty());
+        $array[] = 1;
+        $this->assertFalse($array->isEmpty());
+    }
 }
