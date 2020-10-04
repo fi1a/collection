@@ -113,4 +113,15 @@ trait TCollection
 
         return $this;
     }
+
+    /**
+     * Проверяет, присутствует ли в коллекции значение
+     *
+     * @param mixed $value значение
+     * @param bool $strict если true, также проверяет типы значений
+     */
+    public function contains($value, bool $strict = true): bool
+    {
+        return in_array($value, $this->getArrayCopy(), $strict);
+    }
 }

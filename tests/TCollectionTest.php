@@ -63,4 +63,19 @@ class TCollectionTest extends TestCase
         $collection->add(3);
         $this->assertEquals(3, $collection->count());
     }
+
+    /**
+     * Тестирование метода contains коллекции
+     */
+    public function testContains(): void
+    {
+        $collection = new FixtureCollection();
+        $collection->add(1);
+        $collection->add(2);
+        $collection->add(3);
+        $this->assertTrue($collection->contains(1));
+        $this->assertTrue($collection->contains(2));
+        $this->assertTrue($collection->contains(3));
+        $this->assertFalse($collection->contains(4));
+    }
 }

@@ -73,4 +73,12 @@ interface ICollection extends IArrayObject
      * @return static
      */
     public function add($value): ICollection;
+
+    /**
+     * Проверяет, присутствует ли в коллекции значение
+     *
+     * @param mixed $value значение
+     * @param bool $strict если true, также проверяет типы значений
+     */
+    public function contains($value, bool $strict = true): bool;
 }
