@@ -6,6 +6,7 @@ namespace Fi1a\Collection;
 
 use Fi1a\Collection\DataType\IArrayObject;
 use Fi1a\Collection\Exception\ExtractValueException;
+use Fi1a\Collection\Exception\InvalidArgumentException;
 
 /**
  * Методы коллекции
@@ -170,5 +171,27 @@ trait TCollection
         }
 
         throw new ExtractValueException(sprintf('Name of column "%s" not found', $name));
+    }
+
+    /**
+     * Сортировка элементов коллекции по значениям переданного ключа, свойства или метода
+     *
+     * @param string $name ключ, свойство или метод
+     * @param string $order направление сортировки
+     */
+    public function sort(string $name, string $order = self::SORT_ASC): ICollection
+    {
+        if (!in_array($order, [self::SORT_ASC, self::SORT_DESC], true)) {
+            throw new InvalidArgumentException('Invalid order: ' . $order);
+        }
+        $values = $this->getArrayCopy();
+        uasort($values, function ($a, $b) use ($name, $order) {
+            $aValue = $this->extractValue($a, $name);
+            $bValue = $this->extractValue($b, $name);
+
+            return ($aValue <=> $bValue) * ($order === self::SORT_DESC ? -1 : 1);
+        });
+
+        return new static($values);
     }
 }

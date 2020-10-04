@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Fi1a\Unit\Collection;
 
 use Fi1a\Collection\Exception\ExtractValueException;
+use Fi1a\Collection\Exception\InvalidArgumentException;
+use Fi1a\Collection\ICollection;
 use Fi1a\Unit\Collection\Fixtures\FixtureCollection;
 use Fi1a\Unit\Collection\Fixtures\FixtureInstanceCollection;
 use PHPUnit\Framework\TestCase;
@@ -100,5 +102,33 @@ class TCollectionTest extends TestCase
         $this->assertEquals([1, 2, 3,], $collection->column('getValue'));
         $this->expectException(ExtractValueException::class);
         $collection->column('fooBar');
+    }
+
+    /**
+     * Тестирование метода sort коллекции
+     */
+    public function testSort(): void
+    {
+        $collection = new FixtureCollection();
+        $collection->add(['foo' => 3,]);
+        $collection->add(['foo' => 2,]);
+        $collection->add(['foo' => 1,]);
+        $sorted = $collection->sort('foo', ICollection::SORT_ASC);
+        $this->assertEquals([1, 2, 3,], $sorted->column('foo'));
+        $sorted = $collection->sort('foo', ICollection::SORT_DESC);
+        $this->assertEquals([3, 2, 1,], $sorted->column('foo'));
+    }
+
+    /**
+     * Исключение при не известном напрмарвлении сортировки
+     */
+    public function testSortOrderException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $collection = new FixtureCollection();
+        $collection->add(['foo' => 3,]);
+        $collection->add(['foo' => 2,]);
+        $collection->add(['foo' => 1,]);
+        $collection->sort('foo', 'unknown');
     }
 }

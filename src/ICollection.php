@@ -11,6 +11,10 @@ use Fi1a\Collection\DataType\IArrayObject;
  */
 interface ICollection extends IArrayObject
 {
+    public const SORT_ASC = 'asc';
+
+    public const SORT_DESC = 'desc';
+
     /**
      * Есть ли элемент с таким ключем
      *
@@ -90,4 +94,12 @@ interface ICollection extends IArrayObject
      * @return mixed[]
      */
     public function column(string $name): array;
+
+    /**
+     * Сортировка элементов коллекции по значениям переданного ключа, свойства или метода
+     *
+     * @param string $name ключ, свойство или метод
+     * @param string $order направление сортировки
+     */
+    public function sort(string $name, string $order = self::SORT_ASC): ICollection;
 }
