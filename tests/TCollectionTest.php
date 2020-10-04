@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection;
 
+use Fi1a\Collection\Exception\ExtractValueException;
 use Fi1a\Unit\Collection\Fixtures\FixtureCollection;
+use Fi1a\Unit\Collection\Fixtures\FixtureInstanceCollection;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -77,5 +79,26 @@ class TCollectionTest extends TestCase
         $this->assertTrue($collection->contains(2));
         $this->assertTrue($collection->contains(3));
         $this->assertFalse($collection->contains(4));
+    }
+
+    /**
+     * Тестирование метода column коллекции
+     */
+    public function testColumn(): void
+    {
+        $collection = new FixtureCollection();
+        $collection->add(['foo' => 1,]);
+        $collection->add(['foo' => 2,]);
+        $collection->add(['foo' => 3,]);
+        $this->assertEquals([1, 2, 3,], $collection->column('foo'));
+
+        $collection = new FixtureInstanceCollection();
+        $collection->add(1);
+        $collection->add(2);
+        $collection->add(3);
+        $this->assertEquals([1, 2, 3,], $collection->column('value'));
+        $this->assertEquals([1, 2, 3,], $collection->column('getValue'));
+        $this->expectException(ExtractValueException::class);
+        $collection->column('fooBar');
     }
 }
