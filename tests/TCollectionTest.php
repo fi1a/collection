@@ -131,4 +131,19 @@ class TCollectionTest extends TestCase
         $collection->add(['foo' => 1,]);
         $collection->sort('foo', 'unknown');
     }
+
+    /**
+     * Фильтрация значений коллекции
+     */
+    public function testFilter(): void
+    {
+        $collection = new FixtureCollection();
+        $collection->add(['foo' => 3,]);
+        $collection->add(['foo' => 2,]);
+        $collection->add(['foo' => 1,]);
+        $filtered = $collection->filter(function ($item) {
+            return $item['foo'] >= 2;
+        });
+        $this->assertEquals([['foo' => 3,], ['foo' => 2,]], $filtered->getArrayCopy());
+    }
 }

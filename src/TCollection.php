@@ -194,4 +194,12 @@ trait TCollection
 
         return new static($values);
     }
+
+    /**
+     * Возвращает отфильтрованную коллекцию
+     */
+    public function filter(callable $callback): ICollection
+    {
+        return new static(array_filter($this->getArrayCopy(), $callback));
+    }
 }

@@ -102,4 +102,9 @@ interface ICollection extends IArrayObject
      * @param string $order направление сортировки
      */
     public function sort(string $name, string $order = self::SORT_ASC): ICollection;
+
+    /**
+     * Возвращает отфильтрованную коллекцию
+     */
+    public function filter(callable $callback): ICollection;
 }
