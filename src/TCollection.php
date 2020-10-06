@@ -197,9 +197,24 @@ trait TCollection
 
     /**
      * Возвращает отфильтрованную коллекцию
+     *
+     * @param callable $callback функция для фильтрации
      */
     public function filter(callable $callback): ICollection
     {
-        return new static(array_filter($this->getArrayCopy(), $callback));
+        return new static(array_values(array_filter($this->getArrayCopy(), $callback)));
+    }
+
+    /**
+     * Возвразает коллекцию с элементами у которых значение ключа, свойства или метода равно переданному значению
+     *
+     * @param string $name ключ, свойство или метод
+     * @param mixed $value значение для сравнения
+     */
+    public function where(string $name, $value): ICollection
+    {
+        return $this->filter(function ($item) use ($name, $value) {
+            return $value === $this->extractValue($item, $name);
+        });
     }
 }

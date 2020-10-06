@@ -146,4 +146,17 @@ class TCollectionTest extends TestCase
         });
         $this->assertEquals([['foo' => 3,], ['foo' => 2,]], $filtered->getArrayCopy());
     }
+
+    /**
+     * Возвразает коллекцию с элементами у которых значение ключа, свойства или метода равно переданному значению
+     */
+    public function testWhere(): void
+    {
+        $collection = new FixtureCollection();
+        $collection->add(['foo' => 3,]);
+        $collection->add(['foo' => 2,]);
+        $collection->add(['foo' => 1,]);
+        $filtered = $collection->where('foo', 2);
+        $this->assertEquals([['foo' => 2,]], $filtered->getArrayCopy());
+    }
 }
