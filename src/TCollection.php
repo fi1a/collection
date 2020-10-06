@@ -217,4 +217,26 @@ trait TCollection
             return $value === $this->extractValue($item, $name);
         });
     }
+
+    /**
+     * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
+     *
+     * @param ICollection $collection коллекция для вычисления расхождения
+     */
+    public function diff(ICollection $collection): ICollection
+    {
+        $comparator = function ($a, $b): int {
+            if (is_object($a) && is_object($b)) {
+                $a = spl_object_id($a);
+                $b = spl_object_id($b);
+            }
+
+            return $a === $b ? 0 : ($a < $b ? 1 : -1);
+        };
+
+        $diff1 = array_udiff($this->getArrayCopy(), $collection->getArrayCopy(), $comparator);
+        $diff2 = array_udiff($collection->getArrayCopy(), $this->getArrayCopy(), $comparator);
+
+        return new static(array_merge($diff1, $diff2));
+    }
 }

@@ -159,4 +159,20 @@ class TCollectionTest extends TestCase
         $filtered = $collection->where('foo', 2);
         $this->assertEquals([['foo' => 2,]], $filtered->getArrayCopy());
     }
+
+    /**
+     * Вычисление расхождения коллекциц с массивами
+     */
+    public function testDiff(): void
+    {
+        $collection1 = new FixtureCollection();
+        $collection1->add(['foo' => 3,]);
+        $collection1->add(['foo' => 2,]);
+        $collection1->add(['foo' => 1,]);
+        $collection2 = new FixtureCollection();
+        $collection2->add(['foo' => 4,]);
+        $collection2->add(['foo' => 2,]);
+        $collection2->add(['foo' => 1,]);
+        $this->assertEquals([['foo' => 3,], ['foo' => 4,]], $collection1->diff($collection2)->getArrayCopy());
+    }
 }

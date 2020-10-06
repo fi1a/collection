@@ -117,4 +117,11 @@ interface ICollection extends IArrayObject
      * @param mixed $value значение для сравнения
      */
     public function where(string $name, $value): ICollection;
+
+    /**
+     * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
+     *
+     * @param ICollection $collection коллекция для вычисления расхождения
+     */
+    public function diff(ICollection $collection): ICollection;
 }
