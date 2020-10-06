@@ -79,4 +79,24 @@ class AInstanceCollectionTest extends TestCase
         $collection2->add($value1);
         $this->assertEquals([$value3, $value4], $collection1->diff($collection2)->getArrayCopy());
     }
+
+    /**
+     * Вычисление расхождения коллекциц с классами
+     */
+    public function testIntersect(): void
+    {
+        $value1 = new FixtureClass1(1);
+        $value2 = new FixtureClass1(2);
+        $value3 = new FixtureClass1(3);
+        $value4 = new FixtureClass1(4);
+        $collection1 = new FixtureInstanceCollection();
+        $collection1->add($value1);
+        $collection1->add($value2);
+        $collection1->add($value3);
+        $collection2 = new FixtureInstanceCollection();
+        $collection2->add($value4);
+        $collection2->add($value2);
+        $collection2->add($value1);
+        $this->assertEquals([$value1, $value2], $collection1->intersect($collection2)->getArrayCopy());
+    }
 }

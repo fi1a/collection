@@ -157,11 +157,11 @@ class TCollectionTest extends TestCase
         $collection->add(['foo' => 2,]);
         $collection->add(['foo' => 1,]);
         $filtered = $collection->where('foo', 2);
-        $this->assertEquals([['foo' => 2,]], $filtered->getArrayCopy());
+        $this->assertEquals([1 => ['foo' => 2,]], $filtered->getArrayCopy());
     }
 
     /**
-     * Вычисление расхождения коллекциц с массивами
+     * Вычисление расхождения коллекций с массивами
      */
     public function testDiff(): void
     {
@@ -174,5 +174,24 @@ class TCollectionTest extends TestCase
         $collection2->add(['foo' => 2,]);
         $collection2->add(['foo' => 1,]);
         $this->assertEquals([['foo' => 3,], ['foo' => 4,]], $collection1->diff($collection2)->getArrayCopy());
+    }
+
+    /**
+     * Вычисляет пересечение коллекций с массивами
+     */
+    public function testIntersect(): void
+    {
+        $collection1 = new FixtureCollection();
+        $collection1->add(['foo' => 3,]);
+        $collection1->add(['foo' => 2,]);
+        $collection1->add(['foo' => 1,]);
+        $collection2 = new FixtureCollection();
+        $collection2->add(['foo' => 4,]);
+        $collection2->add(['foo' => 2,]);
+        $collection2->add(['foo' => 1,]);
+        $this->assertEquals(
+            [1 => ['foo' => 2,], 2 => ['foo' => 1,]],
+            $collection1->intersect($collection2)->getArrayCopy()
+        );
     }
 }

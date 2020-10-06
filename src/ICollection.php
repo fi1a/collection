@@ -124,4 +124,11 @@ interface ICollection extends IArrayObject
      * @param ICollection $collection коллекция для вычисления расхождения
      */
     public function diff(ICollection $collection): ICollection;
+
+    /**
+     * Возвращает новую коллекцию с пересечением элементов текущей коллекции с переданной
+     *
+     * @param ICollection $collection коллекция для вычисления пересечения
+     */
+    public function intersect(ICollection $collection): ICollection;
 }
