@@ -22,8 +22,11 @@ trait TArrayObject
      *
      * @param mixed[] $data массив, с которым бужет инициализирован объект.
      */
-    public function __construct(array $data = [])
+    public function __construct(?array $data = null)
     {
+        if (!$data) {
+            $data = [];
+        }
         $this->exchangeArray($data);
     }
 
@@ -55,7 +58,7 @@ trait TArrayObject
      * @param mixed $offset ключ.
      * @param mixed $value значение.
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
             $this->storage[] = $value;

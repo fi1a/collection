@@ -6,8 +6,6 @@ namespace Fi1a\Unit\Collection\DataType;
 
 use Fi1a\Collection\DataType\ArrayObject;
 use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
-use Fi1a\Collection\DataType\IArrayObject;
-use Fi1a\Unit\Collection\DataType\Fixtures\FixtureArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -43,25 +41,11 @@ class ArrayObjectTest extends TestCase
     }
 
     /**
-     * Провайдер данных для теста testOffset
-     *
-     * @return IArrayObject[]
-     */
-    public function dataProviderOffset(): array
-    {
-        return [
-            [new ArrayObject()],
-            [new FixtureArrayObject()],
-        ];
-    }
-
-    /**
      * Доступ к объекту как к массиву
-     *
-     * @dataProvider dataProviderOffset
      */
-    public function testOffset(IArrayObject $array): void
+    public function testOffset(): void
     {
+        $array = new ArrayObject();
         $array[1] = 1;
         $this->assertEquals(1, $array[1]);
         $this->assertEquals([1 => 1], $array->getArrayCopy());
@@ -78,25 +62,11 @@ class ArrayObjectTest extends TestCase
     }
 
     /**
-     * Провайдер данных для теста testClone
-     *
-     * @return IArrayObject[]
-     */
-    public function dataProviderClone(): array
-    {
-        return [
-            [new ArrayObject()],
-            [new FixtureArrayObject()],
-        ];
-    }
-
-    /**
      * Тестирование клонирования объекта
-     *
-     * @dataProvider dataProviderOffset
      */
-    public function testClone(IArrayObject $array): void
+    public function testClone(): void
     {
+        $array = new ArrayObject();
         $array[0] = 1;
         $array[2] = 2;
         $array[3] = 3;
@@ -109,120 +79,50 @@ class ArrayObjectTest extends TestCase
     }
 
     /**
-     * Провайдер данных для теста testIsEmpty
-     *
-     * @return IArrayObject[][]
-     */
-    public function dataProviderIsEmpty(): array
-    {
-        return [
-            [new ArrayObject()],
-            [new FixtureArrayObject()],
-        ];
-    }
-
-    /**
      * Тестирование метода isEmpty
-     *
-     * @dataProvider dataProviderIsEmpty
      */
-    public function testIsEmpty(IArrayObject $array): void
+    public function testIsEmpty(): void
     {
+        $array = new ArrayObject();
         $this->assertTrue($array->isEmpty());
         $array[] = 1;
         $this->assertFalse($array->isEmpty());
     }
 
     /**
-     * Провайдер данных для теста testFirst
-     *
-     * @return IArrayObject[][]
-     */
-    public function dataProviderFirst(): array
-    {
-        return [
-            [new ArrayObject([1, 2, 3])],
-            [new FixtureArrayObject([1, 2, 3])],
-        ];
-    }
-
-    /**
      * Тестирование метода first
-     *
-     * @dataProvider dataProviderFirst
      */
-    public function testFirst(IArrayObject $array): void
+    public function testFirst(): void
     {
+        $array = new ArrayObject([1, 2, 3]);
         $this->assertEquals(1, $array->first());
     }
 
     /**
-     * Провайдер данных для теста testFirstException
-     *
-     * @return IArrayObject[][]
-     */
-    public function dataProviderFirstException(): array
-    {
-        return [
-            [new ArrayObject()],
-            [new FixtureArrayObject()],
-        ];
-    }
-
-    /**
      * Тестирование метода first (исключение при пустых данных)
-     *
-     * @dataProvider dataProviderFirstException
      */
-    public function testFirstException(IArrayObject $array): void
+    public function testFirstException(): void
     {
+        $array = new ArrayObject();
         $this->expectException(OutOfBoundsException::class);
         $array->first();
     }
 
     /**
-     * Провайдер данных для теста testLast
-     *
-     * @return IArrayObject[][]
-     */
-    public function dataProviderLast(): array
-    {
-        return [
-            [new ArrayObject([1, 2, 3])],
-            [new FixtureArrayObject([1, 2, 3])],
-        ];
-    }
-
-    /**
      * Тестирование метода last
-     *
-     * @dataProvider dataProviderLast
      */
-    public function testLast(IArrayObject $array): void
+    public function testLast(): void
     {
+        $array = new ArrayObject([1, 2, 3]);
         $this->assertEquals(3, $array->last());
     }
 
     /**
-     * Провайдер данных для теста testLastException
-     *
-     * @return IArrayObject[][]
-     */
-    public function dataProviderLastException(): array
-    {
-        return [
-            [new ArrayObject()],
-            [new FixtureArrayObject()],
-        ];
-    }
-
-    /**
      * Тестирование метода first (исключение при пустых данных)
-     *
-     * @dataProvider dataProviderLastException
      */
-    public function testLastException(IArrayObject $array): void
+    public function testLastException(): void
     {
+        $array = new ArrayObject();
         $this->expectException(OutOfBoundsException::class);
         $array->last();
     }
