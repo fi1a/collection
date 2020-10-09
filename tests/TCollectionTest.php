@@ -194,4 +194,19 @@ class TCollectionTest extends TestCase
             $collection1->intersect($collection2)->getArrayCopy()
         );
     }
+
+    /**
+     * Объединяет элементы текущей коллекции с элементами переданной и возвращает новую коллекцию
+     */
+    public function testMerge(): void
+    {
+        $collection1 = new FixtureCollection();
+        $collection1->add(['foo' => 1,]);
+        $collection2 = new FixtureCollection();
+        $collection2->add(['foo' => 2,]);
+        $this->assertEquals(
+            [['foo' => 1,], ['foo' => 2,]],
+            $collection1->merge($collection2)->getArrayCopy()
+        );
+    }
 }

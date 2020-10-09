@@ -131,4 +131,11 @@ interface ICollection extends IArrayObject
      * @param ICollection $collection коллекция для вычисления пересечения
      */
     public function intersect(ICollection $collection): ICollection;
+
+    /**
+     * Объединяет элементы текущей коллекции с элементами переданной и возвращает новую коллекцию
+     *
+     * @param ICollection $collection коллекция для объединения
+     */
+    public function merge(ICollection $collection): ICollection;
 }

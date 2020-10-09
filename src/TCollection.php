@@ -262,4 +262,14 @@ trait TCollection
             )
         );
     }
+
+    /**
+     * Объединяет элементы текущей коллекции с элементами переданной и возвращает новую коллекцию
+     *
+     * @param ICollection $collection коллекция для объединения
+     */
+    public function merge(ICollection $collection): ICollection
+    {
+        return new static(array_merge($this->getArrayCopy(), $collection->getArrayCopy()));
+    }
 }
