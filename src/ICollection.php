@@ -138,4 +138,9 @@ interface ICollection extends IArrayObject
      * @param ICollection $collection коллекция для объединения
      */
     public function merge(ICollection $collection): ICollection;
+
+    /**
+     * Сбросить ключи коллекции
+     */
+    public function resetKeys(): ICollection;
 }

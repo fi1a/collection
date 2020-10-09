@@ -209,4 +209,15 @@ class TCollectionTest extends TestCase
             $collection1->merge($collection2)->getArrayCopy()
         );
     }
+
+    /**
+     * Сбросить ключи коллекции
+     */
+    public function testResetKeys(): void
+    {
+        $collection = new FixtureCollection();
+        $collection->set(1, ['foo' => 1,]);
+        $collection->set(2, ['foo' => 2,]);
+        $this->assertEquals([0 => ['foo' => 1,], 1 => ['foo' => 2,]], $collection->resetKeys()->getArrayCopy());
+    }
 }

@@ -272,4 +272,14 @@ trait TCollection
     {
         return new static(array_merge($this->getArrayCopy(), $collection->getArrayCopy()));
     }
+
+    /**
+     * Сбросить ключи коллекции
+     */
+    public function resetKeys(): ICollection
+    {
+        $this->exchangeArray(array_values($this->getArrayCopy()));
+
+        return $this;
+    }
 }
