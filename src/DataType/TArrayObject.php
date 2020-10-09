@@ -152,4 +152,14 @@ trait TArrayObject
 
         return $value;
     }
+
+    /**
+     * Очистить массив значений
+     */
+    public function clear(): IArrayObject
+    {
+        $this->storage = [];
+
+        return $this;
+    }
 }

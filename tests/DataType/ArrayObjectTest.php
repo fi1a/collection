@@ -126,4 +126,16 @@ class ArrayObjectTest extends TestCase
         $this->expectException(OutOfBoundsException::class);
         $array->last();
     }
+
+    /**
+     * Очистить массив значений
+     */
+    public function testClear(): void
+    {
+        $array = new ArrayObject([1, 2, 3]);
+        $this->assertEquals(3, $array->count());
+        $array->clear();
+        $this->assertEquals(0, $array->count());
+        $this->assertEquals([], $array->getArrayCopy());
+    }
 }

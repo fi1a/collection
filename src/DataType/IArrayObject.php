@@ -47,4 +47,9 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
      * @return mixed
      */
     public function last();
+
+    /**
+     * Очистить массив значений
+     */
+    public function clear(): IArrayObject;
 }
