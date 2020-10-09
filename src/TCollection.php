@@ -46,9 +46,9 @@ trait TCollection
      * @param mixed $key ключ
      * @param mixed $value устанавливаемое значение
      *
-     * @return static
+     * @return self
      */
-    public function set($key, $value): ICollection
+    public function set($key, $value)
     {
         $this[$key] = $value;
 
@@ -60,9 +60,9 @@ trait TCollection
      *
      * @param mixed $key ключ
      *
-     * @return static
+     * @return self
      */
-    public function delete($key): ICollection
+    public function delete($key)
     {
         if (!$this->has($key)) {
             return $this;
@@ -77,9 +77,9 @@ trait TCollection
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return static
+     * @return self
      */
-    public function each(callable $callback): ICollection
+    public function each(callable $callback)
     {
         foreach ($this as $index => $value) {
             call_user_func($callback, $value, $index);
@@ -93,9 +93,9 @@ trait TCollection
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return static
+     * @return self
      */
-    public function map(callable $callback): ICollection
+    public function map(callable $callback)
     {
         foreach ($this as $index => $value) {
             $this[$index] = call_user_func($callback, $value, $index);
@@ -109,9 +109,9 @@ trait TCollection
      *
      * @param mixed $value значение
      *
-     * @return static
+     * @return self
      */
-    public function add($value): ICollection
+    public function add($value)
     {
         $this[] = $value;
 
@@ -178,8 +178,10 @@ trait TCollection
      *
      * @param string $name ключ, свойство или метод
      * @param string $order направление сортировки
+     *
+     * @return static
      */
-    public function sort(string $name, string $order = self::SORT_ASC): ICollection
+    public function sort(string $name, string $order = self::SORT_ASC)
     {
         if (!in_array($order, [self::SORT_ASC, self::SORT_DESC], true)) {
             throw new InvalidArgumentException('Invalid order: ' . $order);
@@ -199,8 +201,10 @@ trait TCollection
      * Возвращает отфильтрованную коллекцию
      *
      * @param callable $callback функция для фильтрации
+     *
+     * @return static
      */
-    public function filter(callable $callback): ICollection
+    public function filter(callable $callback)
     {
         return new static(array_filter($this->getArrayCopy(), $callback));
     }
@@ -210,8 +214,10 @@ trait TCollection
      *
      * @param string $name ключ, свойство или метод
      * @param mixed $value значение для сравнения
+     *
+     * @return static
      */
-    public function where(string $name, $value): ICollection
+    public function where(string $name, $value)
     {
         return $this->filter(function ($item) use ($name, $value) {
             return $value === $this->extractValue($item, $name);
@@ -222,8 +228,10 @@ trait TCollection
      * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
      *
      * @param ICollection $collection коллекция для вычисления расхождения
+     *
+     * @return static
      */
-    public function diff(ICollection $collection): ICollection
+    public function diff(ICollection $collection)
     {
         $comparator = function ($a, $b): int {
             if (is_object($a) && is_object($b)) {
@@ -244,8 +252,10 @@ trait TCollection
      * Возвращает новую коллекцию с пересечением элементов текущей коллекции с переданной
      *
      * @param ICollection $collection коллекция для вычисления пересечения
+     *
+     * @return static
      */
-    public function intersect(ICollection $collection): ICollection
+    public function intersect(ICollection $collection)
     {
         return new static(
             array_uintersect(
@@ -267,16 +277,20 @@ trait TCollection
      * Объединяет элементы текущей коллекции с элементами переданной и возвращает новую коллекцию
      *
      * @param ICollection $collection коллекция для объединения
+     *
+     * @return static
      */
-    public function merge(ICollection $collection): ICollection
+    public function merge(ICollection $collection)
     {
         return new static(array_merge($this->getArrayCopy(), $collection->getArrayCopy()));
     }
 
     /**
      * Сбросить ключи коллекции
+     *
+     * @return self
      */
-    public function resetKeys(): ICollection
+    public function resetKeys()
     {
         $this->exchangeArray(array_values($this->getArrayCopy()));
 

@@ -50,6 +50,8 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
 
     /**
      * Очистить массив значений
+     *
+     * @return self
      */
-    public function clear(): IArrayObject;
+    public function clear();
 }
