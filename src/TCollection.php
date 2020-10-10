@@ -193,8 +193,10 @@ trait TCollection
 
             return ($aValue <=> $bValue) * ($order === self::SORT_DESC ? -1 : 1);
         });
+        $collection = clone $this;
+        $collection->exchangeArray($values);
 
-        return new static($values);
+        return $collection;
     }
 
     /**

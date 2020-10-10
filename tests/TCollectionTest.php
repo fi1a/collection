@@ -115,8 +115,10 @@ class TCollectionTest extends TestCase
         $collection->add(['foo' => 1,]);
         $sorted = $collection->sort('foo', ICollection::SORT_ASC);
         $this->assertEquals([1, 2, 3,], $sorted->column('foo'));
+        $this->assertEquals([3, 2, 1,], $collection->column('foo'));
         $sorted = $collection->sort('foo', ICollection::SORT_DESC);
         $this->assertEquals([3, 2, 1,], $sorted->column('foo'));
+        $this->assertEquals([3, 2, 1,], $collection->column('foo'));
     }
 
     /**
