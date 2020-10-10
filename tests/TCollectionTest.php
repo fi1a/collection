@@ -177,6 +177,8 @@ class TCollectionTest extends TestCase
         $collection2->add(['foo' => 2,]);
         $collection2->add(['foo' => 1,]);
         $this->assertEquals([['foo' => 3,], ['foo' => 4,]], $collection1->diff($collection2)->getArrayCopy());
+        $this->assertEquals([['foo' => 3,], ['foo' => 2,], ['foo' => 1,]], $collection1->getArrayCopy());
+        $this->assertEquals([['foo' => 4,], ['foo' => 2,], ['foo' => 1,]], $collection2->getArrayCopy());
     }
 
     /**

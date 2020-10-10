@@ -249,8 +249,10 @@ trait TCollection
 
         $diff1 = array_udiff($this->getArrayCopy(), $collection->getArrayCopy(), $comparator);
         $diff2 = array_udiff($collection->getArrayCopy(), $this->getArrayCopy(), $comparator);
+        $cloneCollection = clone $this;
+        $cloneCollection->exchangeArray(array_merge($diff1, $diff2));
 
-        return new static(array_merge($diff1, $diff2));
+        return $cloneCollection;
     }
 
     /**
