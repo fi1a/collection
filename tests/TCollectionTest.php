@@ -147,6 +147,7 @@ class TCollectionTest extends TestCase
             return $item['foo'] >= 2;
         });
         $this->assertEquals([['foo' => 3,], ['foo' => 2,]], $filtered->getArrayCopy());
+        $this->assertEquals([['foo' => 3,], ['foo' => 2,], ['foo' => 1,]], $collection->getArrayCopy());
     }
 
     /**

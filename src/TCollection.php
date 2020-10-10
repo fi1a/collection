@@ -208,7 +208,10 @@ trait TCollection
      */
     public function filter(callable $callback)
     {
-        return new static(array_filter($this->getArrayCopy(), $callback));
+        $collection = clone $this;
+        $collection->exchangeArray(array_filter($this->getArrayCopy(), $callback));
+
+        return $collection;
     }
 
     /**
