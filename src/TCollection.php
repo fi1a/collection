@@ -290,7 +290,10 @@ trait TCollection
      */
     public function merge(ICollection $collection)
     {
-        return new static(array_merge($this->getArrayCopy(), $collection->getArrayCopy()));
+        $cloneCollection = clone $this;
+        $cloneCollection->exchangeArray(array_merge($this->getArrayCopy(), $collection->getArrayCopy()));
+
+        return $cloneCollection;
     }
 
     /**

@@ -221,6 +221,14 @@ class TCollectionTest extends TestCase
             [['foo' => 1,], ['foo' => 2,]],
             $collection1->merge($collection2)->getArrayCopy()
         );
+        $this->assertEquals(
+            [['foo' => 1,]],
+            $collection1->getArrayCopy()
+        );
+        $this->assertEquals(
+            [['foo' => 2,]],
+            $collection2->getArrayCopy()
+        );
     }
 
     /**
