@@ -198,6 +198,14 @@ class TCollectionTest extends TestCase
             [1 => ['foo' => 2,], 2 => ['foo' => 1,]],
             $collection1->intersect($collection2)->getArrayCopy()
         );
+        $this->assertEquals(
+            [['foo' => 3,], ['foo' => 2,], ['foo' => 1,]],
+            $collection1->getArrayCopy()
+        );
+        $this->assertEquals(
+            [['foo' => 4,], ['foo' => 2,], ['foo' => 1,]],
+            $collection2->getArrayCopy()
+        );
     }
 
     /**

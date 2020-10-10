@@ -264,20 +264,21 @@ trait TCollection
      */
     public function intersect(ICollection $collection)
     {
-        return new static(
-            array_uintersect(
-                $this->getArrayCopy(),
-                $collection->getArrayCopy(),
-                function ($a, $b): int {
-                    if (is_object($a) && is_object($b)) {
-                        $a = spl_object_id($a);
-                        $b = spl_object_id($b);
-                    }
-
-                    return $a === $b ? 0 : ($a < $b ? 1 : -1);
+        $cloneCollection = clone $this;
+        $cloneCollection->exchangeArray(array_uintersect(
+            $this->getArrayCopy(),
+            $collection->getArrayCopy(),
+            function ($a, $b): int {
+                if (is_object($a) && is_object($b)) {
+                    $a = spl_object_id($a);
+                    $b = spl_object_id($b);
                 }
-            )
-        );
+
+                return $a === $b ? 0 : ($a < $b ? 1 : -1);
+            }
+        ));
+
+        return $cloneCollection;
     }
 
     /**
