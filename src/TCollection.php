@@ -126,7 +126,7 @@ trait TCollection
      */
     public function contains($value, bool $strict = true): bool
     {
-        return in_array($value, $this->getArrayCopy(), $strict);
+        return in_array($value, $this->storage, $strict);
     }
 
     /**
@@ -209,7 +209,7 @@ trait TCollection
     public function filter(callable $callback)
     {
         $collection = clone $this;
-        $collection->exchangeArray(array_filter($this->getArrayCopy(), $callback));
+        $collection->exchangeArray(array_filter($this->storage, $callback));
 
         return $collection;
     }
@@ -303,7 +303,7 @@ trait TCollection
      */
     public function resetKeys()
     {
-        $this->exchangeArray(array_values($this->getArrayCopy()));
+        $this->storage = array_values($this->storage);
 
         return $this;
     }

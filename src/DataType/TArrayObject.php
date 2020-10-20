@@ -15,7 +15,7 @@ trait TArrayObject
     /**
      * @var array
      */
-    private $storage = [];
+    protected $storage = [];
 
     /**
      * Конструктор.
