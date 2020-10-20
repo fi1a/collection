@@ -24,7 +24,7 @@ install:
 
 script:
   - composer fl:lint
-  - composer fl:test:unit:coverage:ci
+  - composer fl:test:ci
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v

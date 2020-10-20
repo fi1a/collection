@@ -12,7 +12,7 @@
     }
   ],
   "require": {
-    "php": "^7.3",
+    "php": "^7.3 || ^8.0",
     "ext-mbstring": "*"
   },
   "require-dev": {
@@ -35,11 +35,11 @@
   "scripts": {
     "fl:lint": "phpcs --cache=build/cache/phpcs.cache",
     "fl:phpcbf": "phpcbf --cache=build/cache/phpcs.cache",
-    "fl:test:unit:coverage:ci": "phpunit --coverage-clover build/logs/clover.xml"
+    "fl:test:ci": "phpunit --coverage-clover build/logs/clover.xml"
   },
   "scripts-descriptions": {
     "fl:lint": "Проверяет весь исходный код на соответсвие стандартам.",
     "fl:phpcbf": "Поправляет весь исходный код на соответсвие стандартам.",
-    "fl:test:unit:coverage:ci": "Запускает все модульные тесты и генериреут отчет покрытия Clover."
+    "fl:test:ci": "Запускает все модульные тесты и генериреут отчет покрытия Clover."
   }
 }
