@@ -72,4 +72,18 @@ class ValueObjectTest extends TestCase
         $this->assertCount(3, $array);
         $this->assertCount(4, $clone);
     }
+
+    /**
+     * Тестирование set & get методов
+     */
+    public function testSetGetMethods(): void
+    {
+        $array = new ValueObject();
+        $array['fields'] = [];
+        $this->assertIsArray($array['fields']);
+        $array['fields'][] = 1;
+        $array['fields'][] = 2;
+        $array['fields'][] = 3;
+        $this->assertEquals([1, 2, 3], $array['fields']);
+    }
 }

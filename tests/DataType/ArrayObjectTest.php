@@ -59,6 +59,12 @@ class ArrayObjectTest extends TestCase
         }
         $array[] = 1;
         $this->assertEquals([0 => 0, 1 => 1,], $array->getArrayCopy());
+        $array['fields'] = [];
+        $this->assertIsArray($array['fields']);
+        $array['fields'][] = 1;
+        $array['fields'][] = 2;
+        $array['fields'][] = 3;
+        $this->assertEquals([1, 2, 3], $array['fields']);
     }
 
     /**

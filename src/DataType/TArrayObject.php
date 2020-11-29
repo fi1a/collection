@@ -47,9 +47,14 @@ trait TArrayObject
      *
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function &offsetGet($offset)
     {
-        return $this->storage[$offset];
+        $value = null;
+        if ($this->offsetExists($offset)) {
+            $value = &$this->storage[$offset];
+        }
+
+        return $value;
     }
 
     /**
@@ -123,7 +128,7 @@ trait TArrayObject
     }
 
     /**
-     * Возвращает первый элемент массива
+     * Возвращает первый элемент
      *
      * @return mixed
      */

@@ -77,9 +77,11 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * Возвращает название функции на основе ключа для set
      *
+     * @param int|string $key
+     *
      * @return string
      */
-    protected function getFuncNameOfSetter(string $key)
+    protected function getFuncNameOfSetter($key)
     {
         return static::$modelSetPrefix . static::classify((string) $key);
     }
@@ -87,12 +89,12 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * Обертка для метода ArrayObject::offsetSet
      *
-     * @param string $key   ключ значения
+     * @param string|int $key   ключ значения
      * @param mixed  $value значение
      *
      * @return void
      */
-    protected function modelSet(string $key, $value)
+    protected function modelSet($key, $value)
     {
         ArrayObject::offsetSet($key, $value);
     }
@@ -122,22 +124,28 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * @inheritDoc
      */
-    public function offsetGet($key)
+    public function &offsetGet($key)
     {
+        $value = null;
+
         $func = static::getFuncNameOfGetter($key);
         if (method_exists($this, $func)) {
-            return $this->$func();
+            $value = $this->$func();
+        } else {
+            $value = &$this->modelGet($key);
         }
 
-        return $this->modelGet($key);
+        return $value;
     }
 
     /**
      * Возвращает название функции на основе ключа для get
      *
+     * @param string|int $key
+     *
      * @return string
      */
-    protected function getFuncNameOfGetter(string $key)
+    protected function getFuncNameOfGetter($key)
     {
         return static::$modelGetPrefix . static::classify((string) $key);
     }
@@ -145,13 +153,15 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * Обертка для метода ArrayObject::offsetGet
      *
-     * @param string $key ключ значения
+     * @param string|int $key ключ значения
      *
      * @return mixed
      */
-    protected function modelGet(string $key)
+    protected function &modelGet($key)
     {
-        return ArrayObject::offsetGet($key);
+        $value = &ArrayObject::offsetGet($key);
+
+        return $value;
     }
 
     /**
