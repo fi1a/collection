@@ -10,6 +10,7 @@ jobs:
   include:
     - php: 7.3
     - php: 7.4
+    - php: 8.0
     - php: nightly
       env: COMPOSER_OPTIONS=--ignore-platform-reqs
   allow_failures:
@@ -24,7 +25,7 @@ install:
 
 script:
   - composer fl:lint
-  - composer fl:test:ci
+  - composer fl:test:unit:coverage:ci
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v

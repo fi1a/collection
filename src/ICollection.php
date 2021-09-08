@@ -18,14 +18,14 @@ interface ICollection extends IArrayObject
     /**
      * Есть ли элемент с таким ключем
      *
-     * @param mixed $key ключ
+     * @param string|int $key ключ
      */
     public function has($key): bool;
 
     /**
      * Возвращает элемент по ключу
      *
-     * @param mixed $key ключ
+     * @param string|int $key ключ
      * @param mixed $default значение по умолчанию, возвращается при отсутствии ключа
      *
      * @return mixed
@@ -35,7 +35,7 @@ interface ICollection extends IArrayObject
     /**
      * Устанавливает значение по ключу
      *
-     * @param mixed $key ключ
+     * @param string|int $key ключ
      * @param mixed $value устанавливаемое значение
      *
      * @return self
@@ -45,7 +45,7 @@ interface ICollection extends IArrayObject
     /**
      * Удаляет элемент по ключу
      *
-     * @param mixed $key ключ
+     * @param string|int $key ключ
      *
      * @return self
      */

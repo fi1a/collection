@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection\DataType;
 
-use ArrayIterator;
-
 /**
  * Класс модели вызова set & get методов при обращении к ключам массива
  */
@@ -22,16 +20,16 @@ class ValueObject extends ArrayObject implements IValueObject
     protected static $modelSetPrefix = 'set';
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $modelKeys = [];
 
     /**
      * @inheritDoc
      */
-    public function __construct($input = null, $flags = 0, $iteratorClass = ArrayIterator::class)
+    final public function __construct(?array $input = null)
     {
-        parent::__construct([], $flags, $iteratorClass);
+        parent::__construct([]);
         $this->fromArray((array) $input);
     }
 
@@ -43,7 +41,10 @@ class ValueObject extends ArrayObject implements IValueObject
         $default = $this->getDefaultModelValues();
         $this->exchangeArray($default);
         $input = array_merge($default, (array) $input);
-        foreach ((array) $input as $key => $value) {
+        /**
+         * @var mixed $value
+         */
+        foreach ($input as $key => $value) {
             $this->offsetSet($key, $value);
         }
 
@@ -53,7 +54,7 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * Возвращает массив со значениями по умолчанию
      *
-     * @return string[]
+     * @return null[]
      */
     protected function getDefaultModelValues()
     {
@@ -66,7 +67,7 @@ class ValueObject extends ArrayObject implements IValueObject
     public function offsetSet($key, $value)
     {
         $func = static::getFuncNameOfSetter($key);
-        if (method_exists($this, $func)) {
+        if ($func && method_exists($this, $func)) {
             $this->$func($value);
 
             return;
@@ -77,9 +78,9 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * Возвращает название функции на основе ключа для set
      *
-     * @param int|string $key
+     * @param int|string|null $key
      *
-     * @return string
+     * @return string|null
      */
     protected function getFuncNameOfSetter($key)
     {
@@ -89,7 +90,7 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * Обертка для метода ArrayObject::offsetSet
      *
-     * @param string|int $key   ключ значения
+     * @param string|int|null $key   ключ значения
      * @param mixed  $value значение
      *
      * @return void
@@ -115,6 +116,9 @@ class ValueObject extends ArrayObject implements IValueObject
         $data = [];
         $keys = array_keys($this->getArrayCopy());
         foreach ($keys as $key) {
+            /**
+             * @var mixed
+             */
             $data[$key] = $this->offsetGet($key);
         }
 
@@ -124,15 +128,19 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * @inheritDoc
      */
-    public function &offsetGet($key)
+    public function &offsetGet($offset)
     {
-        $value = null;
-
-        $func = static::getFuncNameOfGetter($key);
+        $func = static::getFuncNameOfGetter($offset);
         if (method_exists($this, $func)) {
+            /**
+             * @var mixed
+             */
             $value = $this->$func();
         } else {
-            $value = &$this->modelGet($key);
+            /**
+             * @var mixed
+             */
+            $value = &$this->modelGet($offset);
         }
 
         return $value;
@@ -142,10 +150,8 @@ class ValueObject extends ArrayObject implements IValueObject
      * Возвращает название функции на основе ключа для get
      *
      * @param string|int $key
-     *
-     * @return string
      */
-    protected function getFuncNameOfGetter($key)
+    protected function getFuncNameOfGetter($key): string
     {
         return static::$modelGetPrefix . static::classify((string) $key);
     }
@@ -159,19 +165,13 @@ class ValueObject extends ArrayObject implements IValueObject
      */
     protected function &modelGet($key)
     {
+        /**
+         * @psalm-suppress UnusedVariable
+         * @psalm-suppress MixedAssignment
+         */
         $value = &ArrayObject::offsetGet($key);
 
         return $value;
-    }
-
-    /**
-     * Клонирует объект-значение с вызовом get-методов
-     *
-     * @return $this
-     */
-    public function getClone()
-    {
-        return new static($this->toArray());
     }
 
     /**
@@ -181,8 +181,11 @@ class ValueObject extends ArrayObject implements IValueObject
      */
     private static function classify(string $value, string $delimiter = ''): string
     {
-        return trim(preg_replace_callback('/(^|_|\.|\-|\/)([a-z ]+)/im', function ($matches) use ($delimiter) {
-            return ucfirst(mb_strtolower($matches[2])) . $delimiter;
-        }, $value . ' '), ' ' . $delimiter);
+        return trim(
+            preg_replace_callback('/(^|_|\.|\-|\/)([a-z ]+)/im', function (array $matches) use ($delimiter) {
+                return ucfirst(mb_strtolower((string) $matches[2])) . $delimiter;
+            }, $value . ' '),
+            ' ' . $delimiter
+        );
     }
 }

@@ -66,7 +66,7 @@ class ValueObjectTest extends TestCase
         $array = new ValueObject();
         $array->fromArray($input);
         $this->assertCount(3, $array);
-        $clone = $array->getClone();
+        $clone = clone $array;
         $this->assertCount(3, $clone);
         $clone['key4'] = 4;
         $this->assertCount(3, $array);

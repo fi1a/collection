@@ -6,6 +6,7 @@ namespace Fi1a\Collection\DataType;
 
 use ArrayIterator;
 use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
+use Traversable;
 
 /**
  * Реализует интерфейсы \ArrayAccess, \Countable
@@ -33,7 +34,7 @@ trait TArrayObject
     /**
      * Проверяет наличие.
      *
-     * @param mixed $offset ключ.
+     * @param string|int $offset ключ.
      */
     public function offsetExists($offset): bool
     {
@@ -43,7 +44,7 @@ trait TArrayObject
     /**
      * Возвращает значение.
      *
-     * @param mixed $offset ключ.
+     * @param string|int $offset ключ.
      *
      * @return mixed
      */
@@ -51,6 +52,9 @@ trait TArrayObject
     {
         $value = null;
         if ($this->offsetExists($offset)) {
+            /**
+             * @var mixed
+             */
             $value = &$this->storage[$offset];
         }
 
@@ -60,23 +64,23 @@ trait TArrayObject
     /**
      * Устанавливает значение.
      *
-     * @param mixed $offset ключ.
+     * @param string|int|null $key ключ.
      * @param mixed $value значение.
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($key, $value)
     {
-        if (is_null($offset)) {
+        if (is_null($key)) {
             $this->storage[] = $value;
 
             return;
         }
-        $this->storage[$offset] = $value;
+        $this->storage[$key] = $value;
     }
 
     /**
      * Удаляет значение.
      *
-     * @param mixed $offset ключ.
+     * @param string|int $offset ключ.
      */
     public function offsetUnset($offset)
     {
@@ -114,7 +118,7 @@ trait TArrayObject
     /**
      * Возвращает итератор.
      */
-    public function getIterator(): ArrayIterator
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->storage);
     }
@@ -152,6 +156,9 @@ trait TArrayObject
         if ($this->isEmpty()) {
             throw new OutOfBoundsException('Can\'t determine last item. Array is empty');
         }
+        /**
+         * @var mixed
+         */
         $value = end($this->storage);
         reset($this->storage);
 
@@ -161,7 +168,7 @@ trait TArrayObject
     /**
      * Очистить массив значений
      *
-     * @return self
+     * @return static
      */
     public function clear()
     {

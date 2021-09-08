@@ -12,7 +12,7 @@ interface IInstanceCollection extends ICollection
     /**
      * Возвращает экземпляр класса элемента коллекции
      *
-     * @param mixed $key ключ
+     * @param string|int $key ключ
      * @param mixed $value значение
      *
      * @return mixed
@@ -38,4 +38,11 @@ interface IInstanceCollection extends ICollection
      * @return mixed[]
      */
     public function __call(string $func, array $args);
+
+    /**
+     * Возвращает копию объекта
+     *
+     * @return static
+     */
+    public function getClone();
 }

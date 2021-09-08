@@ -79,6 +79,12 @@ class PathAccessTest extends TestCase
                 'default',
                 'default',
             ],
+            [
+                $data,
+                '',
+                null,
+                null,
+            ],
         ];
     }
 

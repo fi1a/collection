@@ -16,7 +16,7 @@ trait TCollection
     /**
      * Есть ли элемент с таким ключем
      *
-     * @param mixed $key ключ
+     * @param string|int $key ключ
      */
     public function has($key): bool
     {
@@ -26,7 +26,7 @@ trait TCollection
     /**
      * Возвращает элемент по ключу
      *
-     * @param mixed $key ключ
+     * @param string|int $key ключ
      * @param mixed $default значение по умолчанию, возвращается при отсутствии ключа
      *
      * @return mixed
@@ -43,13 +43,16 @@ trait TCollection
     /**
      * Устанавливает значение по ключу
      *
-     * @param mixed $key ключ
+     * @param string|int $key ключ
      * @param mixed $value устанавливаемое значение
      *
-     * @return self
+     * @return static
      */
     public function set($key, $value)
     {
+        /**
+         * @var mixed
+         */
         $this[$key] = $value;
 
         return $this;
@@ -58,9 +61,9 @@ trait TCollection
     /**
      * Удаляет элемент по ключу
      *
-     * @param mixed $key ключ
+     * @param string|int $key ключ
      *
-     * @return self
+     * @return static
      */
     public function delete($key)
     {
@@ -77,10 +80,14 @@ trait TCollection
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return self
+     * @return static
      */
     public function each(callable $callback)
     {
+        /**
+         * @var string|int $index
+         * @var mixed $value
+         */
         foreach ($this as $index => $value) {
             call_user_func($callback, $value, $index);
         }
@@ -93,11 +100,18 @@ trait TCollection
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return self
+     * @return static
      */
     public function map(callable $callback)
     {
+        /**
+         * @var string|int $index
+         * @var mixed $value
+         */
         foreach ($this as $index => $value) {
+            /**
+             * @var mixed
+             */
             $this[$index] = call_user_func($callback, $value, $index);
         }
 
@@ -109,10 +123,13 @@ trait TCollection
      *
      * @param mixed $value значение
      *
-     * @return self
+     * @return static
      */
     public function add($value)
     {
+        /**
+         * @var mixed
+         */
         $this[] = $value;
 
         return $this;
@@ -139,7 +156,13 @@ trait TCollection
     public function column(string $name): array
     {
         $values = [];
+        /**
+         * @var mixed $value
+         */
         foreach ($this as $value) {
+            /**
+             * @var mixed
+             */
             $values[] = $this->extractValue($value, $name);
         }
 
@@ -187,12 +210,24 @@ trait TCollection
             throw new InvalidArgumentException('Invalid order: ' . $order);
         }
         $values = $this->getArrayCopy();
-        uasort($values, function ($a, $b) use ($name, $order) {
+        $sort = /**
+         * @param mixed $a
+         * @param mixed $b
+         *
+         * @return int
+         */function ($a, $b) use ($name, $order): int {
+            /**
+             * @var mixed
+             */
             $aValue = $this->extractValue($a, $name);
+            /**
+             * @var mixed
+             */
             $bValue = $this->extractValue($b, $name);
 
             return ($aValue <=> $bValue) * ($order === self::SORT_DESC ? -1 : 1);
-        });
+};
+        uasort($values, $sort);
         $collection = clone $this;
         $collection->exchangeArray($values);
 
@@ -209,6 +244,9 @@ trait TCollection
     public function filter(callable $callback)
     {
         $collection = clone $this;
+        /**
+         * @psalm-suppress MixedArgumentTypeCoercion
+         */
         $collection->exchangeArray(array_filter($this->storage, $callback));
 
         return $collection;
@@ -224,9 +262,13 @@ trait TCollection
      */
     public function where(string $name, $value)
     {
-        return $this->filter(function ($item) use ($name, $value) {
+        $filter = /**
+     * @param mixed $item
+     */function ($item) use ($name, $value): bool {
             return $value === $this->extractValue($item, $name);
-        });
+};
+
+        return $this->filter($filter);
     }
 
     /**
@@ -238,14 +280,17 @@ trait TCollection
      */
     public function diff(ICollection $collection)
     {
-        $comparator = function ($a, $b): int {
-            if (is_object($a) && is_object($b)) {
-                $a = spl_object_id($a);
-                $b = spl_object_id($b);
-            }
+        $comparator = /**
+        * @param mixed $a
+         * @param mixed $b
+         */function ($a, $b): int {
+    if (is_object($a) && is_object($b)) {
+        $a = spl_object_id($a);
+        $b = spl_object_id($b);
+    }
 
             return $a === $b ? 0 : ($a < $b ? 1 : -1);
-        };
+};
 
         $diff1 = array_udiff($this->getArrayCopy(), $collection->getArrayCopy(), $comparator);
         $diff2 = array_udiff($collection->getArrayCopy(), $this->getArrayCopy(), $comparator);
@@ -264,18 +309,22 @@ trait TCollection
      */
     public function intersect(ICollection $collection)
     {
+        $function = /**
+         * @param mixed $a
+         * @param mixed $b
+         */function ($a, $b): int {
+    if (is_object($a) && is_object($b)) {
+        $a = spl_object_id($a);
+        $b = spl_object_id($b);
+    }
+
+            return $a === $b ? 0 : ($a < $b ? 1 : -1);
+};
         $cloneCollection = clone $this;
         $cloneCollection->exchangeArray(array_uintersect(
             $this->getArrayCopy(),
             $collection->getArrayCopy(),
-            function ($a, $b): int {
-                if (is_object($a) && is_object($b)) {
-                    $a = spl_object_id($a);
-                    $b = spl_object_id($b);
-                }
-
-                return $a === $b ? 0 : ($a < $b ? 1 : -1);
-            }
+            $function
         ));
 
         return $cloneCollection;
@@ -299,7 +348,7 @@ trait TCollection
     /**
      * Сбросить ключи коллекции
      *
-     * @return self
+     * @return static
      */
     public function resetKeys()
     {

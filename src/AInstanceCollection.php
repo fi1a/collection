@@ -13,8 +13,6 @@ abstract class AInstanceCollection extends Collection implements IInstanceCollec
      * Конструктор
      *
      * @param mixed[]|null $input массив со значениями
-     * @param int        $flags         флаги
-     * @param string     $iteratorClass класс итератора
      */
     public function __construct(?array $input = null)
     {
@@ -24,6 +22,9 @@ abstract class AInstanceCollection extends Collection implements IInstanceCollec
             return;
         }
 
+        /**
+         * @var mixed $value
+         */
         foreach ($input as $key => $value) {
             $this->offsetSet($key, $value);
         }
@@ -41,6 +42,9 @@ abstract class AInstanceCollection extends Collection implements IInstanceCollec
 
                 continue;
             }
+            /**
+             * @var mixed[]
+             */
             $result[] = call_user_func_array([$item, $func], $args);
         }
 
@@ -53,6 +57,9 @@ abstract class AInstanceCollection extends Collection implements IInstanceCollec
     public function offsetSet($key, $value)
     {
         if (!is_object($value) || !static::isInstance($value)) {
+            /**
+             * @var mixed
+             */
             $value = static::factory($key, $value);
         }
 
@@ -64,8 +71,13 @@ abstract class AInstanceCollection extends Collection implements IInstanceCollec
      */
     public function getClone()
     {
-        $collection = new static();
+        $collection = clone $this;
+        $collection->exchangeArray([]);
 
+        /**
+         * @var string|int $key
+         * @var object $value
+         */
         foreach ($this as $key => $value) {
             $collection[$key] = clone $value;
         }
