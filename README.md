@@ -19,7 +19,199 @@ composer require fi1a/collection
 
 ## Использование
 
-Примеры использования классов пакета доступны в [wiki проекта](https://github.com/fi1a/collection/wiki).
+### Типы данных
+
+#### Объект Fi1a\Collection\DataType\ArrayObject, работающий также как и массив
+
+Реализует интерфейс Fi1a\Collection\DataType\IArrayObject.
+
+```php
+use Fi1a\Collection\DataType\ArrayObject;
+
+$arrayObject = new ArrayObject(['foo', 'bar', 'baz',]);
+
+foreach ($arrayObject as $value) {
+    $value; // 'foo', 'bar', 'baz'
+}
+
+count($arrayObject); // 3
+
+...
+
+```
+
+#### Fi1a\Collection\DataType\PathAccess класс реализует доступ по пути к значениям
+
+Реализует интерфейс Fi1a\Collection\DataType\IPathAccess. Данный класс позволяет получать доступ к ключам массива по пути (foo:bar:baz).
+
+```php
+use Fi1a\Collection\DataType\PathAccess;
+
+$register = new PathAccess(['foo' => ['bar' => ['baz' => 1], 'qux' => 2,],]);
+
+$register->get('foo:bar:baz'); // 1
+$register->get('foo:qux'); // 2
+
+$register->has('foo:bar'); // true
+$register->has('foo:bar:baz'); // true
+$register->has('foo:bar:baz:bat'); // false
+
+...
+
+```
+
+#### Объект-значение Fi1a\Collection\DataType\ValueObject с методами set/get
+
+Реализует интерфейс Fi1a\Collection\DataType\IValueObject. Предоставляет возможность задать set/get методы для значений и работает также как и массив.
+
+```php
+use Fi1a\Collection\DataType\ValueObject;
+
+class Foo extends ValueObject
+{
+    public function getBar(): string
+    {
+        return (string) $this->modelGet('bar');
+    }
+
+    public function setBar(string $bar): self
+    {
+        $this->modelSet('bar', $bar . 'baz');
+
+        return $this;
+    }
+}
+
+$valueObject = new Foo();
+
+$valueObject['bar'] = 'bar';
+
+isset($valueObject['bar']); // true
+$valueObject['bar']; // 'barbaz'
+$valueObject->getBar(); // 'barbaz'
+
+...
+
+```
+
+### Коллекции
+
+#### Базовая коллекция значений Fi1a\Collection\Collection
+
+Реализует интерфейс Fi1a\Collection\ICollection.
+
+```php
+use Fi1a\Collection\Collection;
+
+$collection = new Collection();
+
+$collection[] = 'foo';
+$collection->add('bar');
+
+foreach ($collection as $item) {
+    $item; // 'foo', 'bar'
+}
+
+count($collection); // 2
+
+$collection->has(0); // true
+$collection->has(1); // true
+$collection->has(2); // false
+
+...
+
+```
+
+#### Коллекции экземпляров классов
+
+Реализует интерфейс Fi1a\Collection\IInstanceCollection.
+
+```php
+use Fi1a\Collection\AInstanceCollection;
+
+class Foo
+{
+    private $value = null;
+
+    public function __construct(string $value)
+    {
+        $this->value = $value;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+}
+
+class FooCollection extends AInstanceCollection
+{
+    public static function factory($key, $value)
+    {
+        return new Foo((string) $value);
+    }
+
+    public static function isInstance($value): bool
+    {
+        return $value instanceof Foo;
+    }
+}
+
+$collection = new FooCollection(['bar',]);
+$collection[] = 'baz';
+$collection[] = new Foo('qux');
+
+foreach ($collection as $foo) {
+    $foo->getValue(); // 'bar', 'baz', 'qux'
+}
+
+...
+
+```
+
+#### Коллекция экземпляров классов Fi1a\Collection\DataType\ArrayObject
+
+Частная реализация коллекции Fi1a\Collection\AInstanceCollection для классов ArrayObject.
+
+```php
+use Fi1a\Collection\ArrayObjectCollection;
+use Fi1a\Collection\DataType\ArrayObject;
+
+$collection = new ArrayObjectCollection([['foo',],]);
+$collection[] = ['bar',];
+$collection[] = new ArrayObject(['baz',]);
+
+foreach ($collection as $item) {
+    $item[0]; // 'foo', 'bar', 'baz'
+}
+
+count($collection); // 3
+
+...
+
+```
+
+#### Коллекция экземпляров классов Fi1a\Collection\DataType\PathAccess
+
+Частная реализация коллекции Fi1a\Collection\AInstanceCollection для классов PathAccess.
+
+```php
+use Fi1a\Collection\PathAccessCollection;
+use Fi1a\Collection\DataType\PathAccess;
+
+$collection = new PathAccessCollection([['foo' => ['bar' => 1,],],]);
+$collection[] = ['foo' => ['bar' => 2,],];
+$collection[] = new PathAccess(['foo' => ['bar' => 3,],]);
+
+foreach ($collection as $item) {
+    $item->get('foo:bar'); // 1, 2, 3
+}
+
+count($collection); // 3
+
+...
+
+```
 
 [badge-release]: https://img.shields.io/packagist/v/fi1a/collection?label=release
 [badge-license]: https://img.shields.io/github/license/fi1a/collection?style=flat-square
