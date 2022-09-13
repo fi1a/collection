@@ -22,7 +22,11 @@
     "vimeo/psalm": "^4.3",
     "captainhook/captainhook": "^5.4"
   },
-  "suggest" : {
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "autoload": {
     "psr-4": {

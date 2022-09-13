@@ -21,7 +21,7 @@ before_install:
 
 install:
   - travis_retry composer require --no-update php-coveralls/php-coveralls:^2
-  - travis_retry composer install --no-interaction --prefer-dist --no-progress --no-suggest $COMPOSER_OPTIONS
+  - travis_retry composer install --no-interaction --prefer-dist --no-progress $COMPOSER_OPTIONS
 
 script:
   - composer fl:lint
