@@ -213,6 +213,25 @@ count($collection); // 3
 
 ```
 
+#### Очередь Fi1a\Collection\Queue
+
+Коллекция реализующая двунаправленную очередь упорядоченных элементов.
+
+```php
+use Fi1a\Collection\Queue;
+
+$queue = new Queue();
+$queue->addBegin(1); // true
+$queue->addBegin(2); // true
+$queue->pollEnd(); // 1
+$queue->pollEnd(); // 2
+$queue->pollEnd(); // null
+$queue->addBegin(3); // true
+$queue->pollEnd(); // 3
+$queue->pollEnd(); // null
+
+```
+
 [badge-release]: https://img.shields.io/packagist/v/fi1a/collection?label=release
 [badge-license]: https://img.shields.io/github/license/fi1a/collection?style=flat-square
 [badge-php]: https://img.shields.io/packagist/php-v/fi1a/collection?style=flat-square
