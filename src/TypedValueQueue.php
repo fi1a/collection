@@ -8,7 +8,7 @@ use Fi1a\Collection\Exception\InvalidArgumentException;
 use Fi1a\Format\Formatter;
 
 /**
- * Очередь с типизацией значений.
+ * Очередь с типизацией значений
  */
 class TypedValueQueue extends Queue implements ITypedValueQueue
 {

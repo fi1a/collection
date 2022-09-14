@@ -235,6 +235,55 @@ $queue->pollEnd(); // null
 
 ```
 
+#### Очередь с типизацией значений Fi1a\Collection\TypedValueQueue
+
+Коллекция реализующая двунаправленную очередь упорядоченных элементов с проверкой типов значений.
+
+Возможные типы значений:
+
+- array
+- boolean, bool
+- callable
+- int, integer
+- float, double
+- numeric
+- string
+- resource
+- scalar
+- object
+- название класса
+
+Пример, в качестве типа boolean:
+
+```php
+use Fi1a\Collection\TypedValueQueue;
+
+$queue = new TypedValueQueue('boolean');
+$queue->addBegin(true); // true
+$queue->count(); // 1
+$queue->addBegin(false); // true
+$queue->count(); // 2
+try {
+    $queue->addBegin(10); // throw InvalidArgumentException
+} catch (InvalidArgumentException $exception) {
+
+}
+```
+
+Пример, в качестве типа класс:
+
+```php
+use Fi1a\Collection\TypedValueQueue;
+
+$queue = new TypedValueQueue(\stdClass::class);
+$queue->addBegin(new \stdClass()); // true
+try {
+    $queue->addBegin(10); // throw InvalidArgumentException
+} catch (InvalidArgumentException $exception) {
+
+}
+```
+
 [badge-release]: https://img.shields.io/packagist/v/fi1a/collection?label=release
 [badge-license]: https://img.shields.io/github/license/fi1a/collection?style=flat-square
 [badge-php]: https://img.shields.io/packagist/php-v/fi1a/collection?style=flat-square
