@@ -12,7 +12,7 @@ interface IInstanceCollection extends ICollection
     /**
      * Возвращает экземпляр класса элемента коллекции
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      * @param mixed $value значение
      *
      * @return mixed

@@ -12,21 +12,14 @@ use Fi1a\Collection\DataType\IArrayObject;
 interface IQueue extends IArrayObject
 {
     /**
-     * Конструктор
-     *
-     * @param mixed[] $queue
-     */
-    public function __construct(array $queue = []);
-
-    /**
-     * Добавить в очередь как первый элемент
+     * Добавить в начало очереди
      *
      * @param mixed $value
      */
     public function addBegin($value): bool;
 
     /**
-     * Добавить в очередь как последний элемент
+     * Добавить в конец очереди
      *
      * @param mixed $value
      */

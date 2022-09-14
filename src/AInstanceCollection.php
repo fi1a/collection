@@ -58,7 +58,8 @@ abstract class AInstanceCollection extends Collection implements IInstanceCollec
     {
         if (!is_object($value) || !static::isInstance($value)) {
             /**
-             * @var mixed
+             * @var mixed $value
+             * @psalm-suppress PossiblyNullArgument
              */
             $value = static::factory($key, $value);
         }
