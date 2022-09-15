@@ -16,7 +16,7 @@ trait TCollection
     /**
      * Вызывает функцию, передавая ключ и значение из коллекции
      *
-     * @param callable $callback функция, принимающая ключ и значение из коллекции
+     * @param callable(mixed, mixed):void $callback функция, принимающая ключ и значение из коллекции
      *
      * @return static
      */
@@ -36,7 +36,7 @@ trait TCollection
     /**
      * Вызывает функцию, передавая ключ и значение из коллекции и заменяет элемент результатом
      *
-     * @param callable $callback функция, принимающая ключ и значение из коллекции
+     * @param callable(mixed, mixed):mixed $callback функция, принимающая ключ и значение из коллекции
      *
      * @return static
      */
@@ -175,16 +175,13 @@ trait TCollection
     /**
      * Возвращает отфильтрованную коллекцию
      *
-     * @param callable $callback функция для фильтрации
+     * @param callable(mixed, mixed=):scalar $callback функция для фильтрации
      *
      * @return static
      */
     public function filter(callable $callback)
     {
         $collection = clone $this;
-        /**
-         * @psalm-suppress MixedArgumentTypeCoercion
-         */
         $collection->exchangeArray(array_filter($this->storage, $callback));
 
         return $collection;

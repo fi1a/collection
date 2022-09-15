@@ -18,7 +18,7 @@ interface ICollection extends IArrayObject
     /**
      * Вызывает функцию, передавая ключ и значение из коллекции
      *
-     * @param callable $callback функция, принимающая ключ и значение из коллекции
+     * @param callable(mixed, mixed):void $callback функция, принимающая ключ и значение из коллекции
      *
      * @return self
      */
@@ -27,7 +27,7 @@ interface ICollection extends IArrayObject
     /**
      * Вызывает функцию, передавая ключ и значение из коллекции и заменяет элемент результатом
      *
-     * @param callable $callback функция, принимающая ключ и значение из коллекции
+     * @param callable(mixed, mixed):mixed $callback функция, принимающая ключ и значение из коллекции
      *
      * @return self
      */
@@ -72,7 +72,7 @@ interface ICollection extends IArrayObject
     /**
      * Возвращает отфильтрованную коллекцию
      *
-     * @param callable $callback функция для фильтрации
+     * @param callable(mixed, mixed=):scalar $callback функция для фильтрации
      *
      * @return static
      */
