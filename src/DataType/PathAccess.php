@@ -14,22 +14,22 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * @inheritDoc
      */
-    public function get(string $path, $default = null)
+    public function get($key, $default = null)
     {
-        $paths = $this->getKeys($path);
+        $paths = $this->getKeys((string) $key);
         $data = $this->getArrayCopy();
         while (count($paths)) {
-            $key = array_shift($paths);
+            $currentKey = array_shift($paths);
             if (
                 !(is_array($data) || $data instanceof IArrayObject)
-                || (is_array($data) && !array_key_exists($key, $data))
+                || (is_array($data) && !array_key_exists($currentKey, $data))
             ) {
                 return $default;
             }
             /**
              * @var mixed $data
              */
-            $data = $data[$key];
+            $data = $data[$currentKey];
         }
 
         return $data;
@@ -38,19 +38,19 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * @inheritDoc
      */
-    public function has(string $path): bool
+    public function has($key): bool
     {
-        $paths = $this->getKeys($path);
+        $paths = $this->getKeys((string) $key);
         $data = $this->getArrayCopy();
         while (count($paths)) {
-            $key = array_shift($paths);
-            if (!is_array($data) || !array_key_exists($key, $data)) {
+            $currentKey = array_shift($paths);
+            if (!is_array($data) || !array_key_exists($currentKey, $data)) {
                 return false;
             }
             /**
              * @var mixed $data
              */
-            $data = $data[$key];
+            $data = $data[$currentKey];
         }
 
         return true;
@@ -59,14 +59,14 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * @inheritDoc
      */
-    public function set(string $path, $value): IPathAccess
+    public function set($key, $value): IPathAccess
     {
         /**
          * @var mixed[]
          */
         $data = $this->setRecursive(
             $this->getArrayCopy(),
-            $this->getKeys($path),
+            $this->getKeys((string) $key),
             $value
         );
         $this->exchangeArray($data);
@@ -112,9 +112,9 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * @inheritDoc
      */
-    public function delete(string $path): IPathAccess
+    public function delete($key): IPathAccess
     {
-        $this->exchangeArray($this->deleteRecursive($this->getArrayCopy(), $this->getKeys($path)));
+        $this->exchangeArray($this->deleteRecursive($this->getArrayCopy(), $this->getKeys((string) $key)));
 
         return $this;
     }

@@ -176,4 +176,183 @@ trait TArrayObject
 
         return $this;
     }
+
+    /**
+     * Проверяет, присутствует ли в массиве указанное значение
+     *
+     * @param mixed $value
+     */
+    public function hasValue($value): bool
+    {
+        return in_array($value, $this->storage, true);
+    }
+
+    /**
+     * Возвращает ключи массива
+     *
+     * @return mixed[]
+     */
+    public function keys(): array
+    {
+        return array_keys($this->storage);
+    }
+
+    /**
+     * Есть ли элемент с таким ключем
+     *
+     * @param string|int $key ключ
+     */
+    public function has($key): bool
+    {
+        return $this->offsetExists($key);
+    }
+
+    /**
+     * Возвращает элемент по ключу
+     *
+     * @param string|int $key ключ
+     * @param mixed $default значение по умолчанию, возвращается при отсутствии ключа
+     *
+     * @return mixed
+     */
+    public function get($key, $default = null)
+    {
+        if (!$this->has($key)) {
+            return $default;
+        }
+
+        return $this[$key];
+    }
+
+    /**
+     * Устанавливает значение по ключу
+     *
+     * @param string|int $key ключ
+     * @param mixed $value устанавливаемое значение
+     *
+     * @return static
+     */
+    public function set($key, $value)
+    {
+        $this->storage[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Удаляет элемент по ключу, возвращает удаленное значение
+     *
+     * @param string|int $key ключ
+     *
+     * @return mixed
+     */
+    public function delete($key)
+    {
+        /**
+         * @var mixed $prev
+         */
+        $prev = $this->get($key);
+        if ($this->has($key)) {
+            unset($this[$key]);
+        }
+
+        return $prev;
+    }
+
+    /**
+     * Удаляет элемент по ключу, если значение равно переданному. Если элемент удален, возвращает true.
+     *
+     * @param string|int $key ключ
+     * @param mixed $value
+     */
+    public function deleteIf($key, $value): bool
+    {
+        if ($this->get($key) === $value) {
+            $this->delete($key);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Устанавливает значение по ключу, если значение уже есть в массиве, возвращает его
+     *
+     * @param string|int $key
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public function put($key, $value)
+    {
+        /**
+         * @var mixed $prev
+         */
+        $prev = $this->get($key);
+        $this->set($key, $value);
+
+        return $prev;
+    }
+
+    /**
+     * Устанавливает значение по ключу, если его нет. Возвращает предыдущее значение
+     *
+     * @param string|int $key
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public function putIfAbsent($key, $value)
+    {
+        /**
+         * @var mixed $prev
+         */
+        $prev = $this->get($key);
+        if (is_null($prev)) {
+            $this->set($key, $value);
+        }
+
+        return $prev;
+    }
+
+    /**
+     * Заменяет значение элемента по ключу, только если есть значение. Возвращает предыдущее значение
+     *
+     * @param string|int $key
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public function replace($key, $value)
+    {
+        /**
+         * @var mixed $prev
+         */
+        $prev = $this->get($key);
+        if ($this->has($key)) {
+            $this->set($key, $value);
+        }
+
+        return $prev;
+    }
+
+    /**
+     * Заменяет значение элемента по ключу, только если текущее значение равно $oldValue.
+     * Если элемент заменен, возвращает true.
+     *
+     * @param string|int $key
+     * @param mixed $oldValue
+     * @param mixed $newValue
+     */
+    public function replaceIf($key, $oldValue, $newValue): bool
+    {
+        if ($this->get($key) === $oldValue) {
+            $this->set($key, $newValue);
+
+            return true;
+        }
+
+        return false;
+    }
 }

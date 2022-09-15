@@ -144,4 +144,126 @@ class ArrayObjectTest extends TestCase
         $this->assertEquals(0, $array->count());
         $this->assertEquals([], $array->getArrayCopy());
     }
+
+    /**
+     * Проверяет, присутствует ли в массиве указанное значение
+     */
+    public function testHasValue(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3]);
+        $this->assertTrue($array->hasValue(2));
+        $this->assertFalse($array->hasValue(4));
+        $this->assertFalse($array->hasValue(null));
+    }
+
+    /**
+     * Проверяет, присутствует ли в массиве указанный ключ или индекс
+     */
+    public function testHas(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3]);
+        $this->assertTrue($array->has('key1'));
+        $this->assertFalse($array->has('key4'));
+        $this->assertFalse($array->has(null));
+    }
+
+    /**
+     * Возвращает ключи массива
+     */
+    public function testKeys(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3]);
+        $this->assertEquals(['key1', 'key2', 'key3'], $array->keys());
+    }
+
+    /**
+     * Вовзвращает значение по ключу, если значения в массиве нет, то возвращает значение $default
+     */
+    public function testGet(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3]);
+        $this->assertEquals(1, $array->get('key1'));
+        $this->assertNull($array->get('key4'));
+        $this->assertEquals(4, $array->get('key4', 4));
+        $this->assertNull($array->get(null));
+    }
+
+    /**
+     * Устанавливает значение по ключу, если значение уже есть в массиве, возвращает его
+     */
+    public function testPut(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3]);
+        $this->assertNull($array->put('key4', 4));
+        $this->assertEquals(4, $array->put('key4', 5));
+        $this->assertEquals(5, $array->get('key4'));
+        $this->assertNull($array->put(null, 6));
+        $this->assertEquals(6, $array->put(null, 7));
+        $this->assertEquals(7, $array->get(null));
+    }
+
+    /**
+     * Устанавливает значение по ключу, если его нет. Возвращает предыдущее значение
+     */
+    public function testPutIfAbsent(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3]);
+        $this->assertNull($array->putIfAbsent('key4', 4));
+        $this->assertEquals(4, $array->putIfAbsent('key4', 5));
+        $this->assertEquals(4, $array->get('key4'));
+        $this->assertNull($array->putIfAbsent(null, 5));
+        $this->assertEquals(5, $array->putIfAbsent(null, 5));
+    }
+
+    /**
+     * Удаляет элемент по ключу, возвращает удаленное значение
+     */
+    public function testDelete(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3, null => 5,]);
+        $this->assertNull($array->delete('key4'));
+        $this->assertEquals(1, $array->delete('key1'));
+        $this->assertNull($array->delete('key1'));
+        $this->assertEquals(5, $array->delete(null));
+        $this->assertNull($array->delete(null));
+    }
+
+    /**
+     * Удаляет элемент по ключу, если значение равно переданному. Если элемент удален, возвращает true.
+     */
+    public function testDeleteIf(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3, null => 5,]);
+        $this->assertTrue($array->deleteIf('key1', 1));
+        $this->assertFalse($array->deleteIf('key1', 1));
+        $this->assertFalse($array->deleteIf('key2', 1));
+        $this->assertTrue($array->deleteIf(null, 5));
+        $this->assertFalse($array->deleteIf(null, 5));
+    }
+
+    /**
+     * Заменяет значение элемента по ключу, только если есть значение. Возвращает предыдущее значение
+     */
+    public function testReplace(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3, null => 5,]);
+        $this->assertEquals(1, $array->replace('key1', 4));
+        $this->assertEquals(4, $array->get('key1'));
+        $this->assertNull($array->replace('key4', 4));
+        $this->assertNull($array->get('key4'));
+        $this->assertEquals(5, $array->replace(null, 6));
+    }
+
+    /**
+     * Заменяет значение элемента по ключу, только если текущее значение равно $oldValue.
+     * Если элемент заменен, возвращает true.
+     */
+    public function testReplaceIf(): void
+    {
+        $array = new ArrayObject(['key1' => 1, 'key2' => 2, 'key3' => 3, null => 5]);
+        $this->assertTrue($array->replaceIf('key1', 1, 4));
+        $this->assertFalse($array->replaceIf('key1', 1, 4));
+        $this->assertTrue($array->replaceIf(null, 5, 6));
+        $this->assertFalse($array->replaceIf(null, 5, 6));
+    }
 }

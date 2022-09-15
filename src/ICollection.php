@@ -16,42 +16,6 @@ interface ICollection extends IArrayObject
     public const SORT_DESC = 'desc';
 
     /**
-     * Есть ли элемент с таким ключем
-     *
-     * @param string|int $key ключ
-     */
-    public function has($key): bool;
-
-    /**
-     * Возвращает элемент по ключу
-     *
-     * @param string|int $key ключ
-     * @param mixed $default значение по умолчанию, возвращается при отсутствии ключа
-     *
-     * @return mixed
-     */
-    public function get($key, $default = null);
-
-    /**
-     * Устанавливает значение по ключу
-     *
-     * @param string|int $key ключ
-     * @param mixed $value устанавливаемое значение
-     *
-     * @return self
-     */
-    public function set($key, $value);
-
-    /**
-     * Удаляет элемент по ключу
-     *
-     * @param string|int $key ключ
-     *
-     * @return self
-     */
-    public function delete($key);
-
-    /**
      * Вызывает функцию, передавая ключ и значение из коллекции
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции

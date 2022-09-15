@@ -70,6 +70,22 @@ abstract class AInstanceCollection extends Collection implements IInstanceCollec
     /**
      * @inheritDoc
      */
+    public function set($key, $value)
+    {
+        if (!is_object($value) || !static::isInstance($value)) {
+            /**
+             * @var mixed $value
+             * @psalm-suppress PossiblyNullArgument
+             */
+            $value = static::factory($key, $value);
+        }
+
+        return parent::set($key, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getClone()
     {
         $collection = clone $this;

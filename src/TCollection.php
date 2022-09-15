@@ -14,68 +14,6 @@ use Fi1a\Collection\Exception\InvalidArgumentException;
 trait TCollection
 {
     /**
-     * Есть ли элемент с таким ключем
-     *
-     * @param string|int $key ключ
-     */
-    public function has($key): bool
-    {
-        return $this->offsetExists($key);
-    }
-
-    /**
-     * Возвращает элемент по ключу
-     *
-     * @param string|int $key ключ
-     * @param mixed $default значение по умолчанию, возвращается при отсутствии ключа
-     *
-     * @return mixed
-     */
-    public function get($key, $default = null)
-    {
-        if (!$this->has($key)) {
-            return $default;
-        }
-
-        return $this[$key];
-    }
-
-    /**
-     * Устанавливает значение по ключу
-     *
-     * @param string|int $key ключ
-     * @param mixed $value устанавливаемое значение
-     *
-     * @return static
-     */
-    public function set($key, $value)
-    {
-        /**
-         * @var mixed
-         */
-        $this[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Удаляет элемент по ключу
-     *
-     * @param string|int $key ключ
-     *
-     * @return static
-     */
-    public function delete($key)
-    {
-        if (!$this->has($key)) {
-            return $this;
-        }
-        unset($this[$key]);
-
-        return $this;
-    }
-
-    /**
      * Вызывает функцию, передавая ключ и значение из коллекции
      *
      * @param callable $callback функция, принимающая ключ и значение из коллекции
