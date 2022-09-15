@@ -157,4 +157,14 @@ interface ICollection extends IArrayObject
      * @return self
      */
     public function resetKeys();
+
+    /**
+     * Итеративно уменьшает коллекцию к единственному значению, используя callback-функцию
+     *
+     * @param callable(mixed, mixed):mixed $callback
+     * @param mixed    $initial
+     *
+     * @return mixed
+     */
+    public function reduce(callable $callback, $initial = null);
 }

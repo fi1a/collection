@@ -241,4 +241,17 @@ class TCollectionTest extends TestCase
         $collection->set(2, ['foo' => 2,]);
         $this->assertEquals([0 => ['foo' => 1,], 1 => ['foo' => 2,]], $collection->resetKeys()->getArrayCopy());
     }
+
+    /**
+     * Итеративно уменьшает коллекцию к единственному значению, используя callback-функцию
+     */
+    public function testReduce(): void
+    {
+        $collection = new FixtureCollection([1, 2, 3]);
+        $this->assertEquals(6, $collection->reduce(function (?int $sum, int $value) {
+            $sum += $value;
+
+            return $sum;
+        }));
+    }
 }

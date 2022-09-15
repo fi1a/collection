@@ -356,4 +356,17 @@ trait TCollection
 
         return $this;
     }
+
+    /**
+     * Итеративно уменьшает коллекцию к единственному значению, используя callback-функцию
+     *
+     * @param callable(mixed, mixed):mixed $callback
+     * @param mixed    $initial
+     *
+     * @return mixed
+     */
+    public function reduce(callable $callback, $initial = null)
+    {
+        return array_reduce($this->storage, $callback, $initial);
+    }
 }
