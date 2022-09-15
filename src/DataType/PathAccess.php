@@ -196,7 +196,7 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * @inheritDoc
      */
-    public function filter(string $path, $default = null, int $filter = FILTER_DEFAULT, $options = [])
+    public function filter(string $path, $default = null, int $filter = FILTER_DEFAULT, $options = 0)
     {
         return filter_var($this->get($path, $default), $filter, $options);
     }

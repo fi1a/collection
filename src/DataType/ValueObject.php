@@ -183,7 +183,7 @@ class ValueObject extends ArrayObject implements IValueObject
     {
         return trim(
             preg_replace_callback('/(^|_|\.|\-|\/)([a-z ]+)/im', function (array $matches) use ($delimiter) {
-                return ucfirst(mb_strtolower((string) $matches[2])) . $delimiter;
+                return ucfirst(mb_strtolower($matches[2])) . $delimiter;
             }, $value . ' '),
             ' ' . $delimiter
         );

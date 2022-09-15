@@ -69,9 +69,9 @@ interface IPathAccess extends IArrayObject
      * @param string $path путь до значения.
      * @param mixed   $default значение по умолчанию.
      * @param int    $filter идентификатор (ID) применяемого фильтра.
-     * @param mixed|mixed[]  $options ассоциативный массив параметров либо логическая дизъюнкция (операция ИЛИ) флагов.
+     * @param mixed[]|int  $options ассоциативный массив параметров либо логическая дизъюнкция (операция ИЛИ) флагов.
      *
      * @return mixed
      */
-    public function filter(string $path, $default = null, int $filter = FILTER_DEFAULT, $options = []);
+    public function filter(string $path, $default = null, int $filter = FILTER_DEFAULT, $options = 0);
 }
