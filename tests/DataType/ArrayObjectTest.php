@@ -65,6 +65,11 @@ class ArrayObjectTest extends TestCase
         $array['fields'][] = 2;
         $array['fields'][] = 3;
         $this->assertEquals([1, 2, 3], $array['fields']);
+        $this->assertNull($array[null]);
+        $array->set(null, 4);
+        $this->assertEquals(4, $array[null]);
+        unset($array[null]);
+        $this->assertNull($array[null]);
     }
 
     /**
