@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Fi1a\Collection;
 
 use Fi1a\Collection\Exception\InvalidArgumentException;
-use Fi1a\Format\Formatter;
 
 /**
  * Очередь с типизацией значений
@@ -15,25 +14,12 @@ class TypedValueQueue extends Queue implements ITypedValueQueue
     use TTypedValue;
 
     /**
-     * @var string
-     */
-    protected $type;
-
-    /**
      * @inheritDoc
      */
     public function __construct(string $type, ?array $data = null)
     {
         $this->type = $type;
         parent::__construct($data);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getType(): string
-    {
-        return $this->type;
     }
 
     /**
@@ -77,20 +63,6 @@ class TypedValueQueue extends Queue implements ITypedValueQueue
         $this->validateType($value);
 
         return parent::addEnd($value);
-    }
-
-    /**
-     * Валидация типа значения. Если тип не совпадает с объявленным, выбрасывает исключение.
-     *
-     * @param mixed $value
-     */
-    private function validateType($value): void
-    {
-        if (!$this->checkValueType($this->getType(), $value)) {
-            throw new InvalidArgumentException(
-                Formatter::format('Value {{0}} not is type {{1}}', [$value, $this->getType()])
-            );
-        }
     }
 
     /**

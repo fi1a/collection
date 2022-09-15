@@ -32,6 +32,7 @@ class TTypedValueTest extends TestCase
             [true, 'scalar', '1.2'],
             [true, 'object', new stdClass()],
             [true, stdClass::class, new stdClass()],
+            [true, 'mixed', null],
         ];
     }
 

@@ -38,9 +38,6 @@ foreach ($arrayObject as $value) {
 }
 
 count($arrayObject); // 3
-
-...
-
 ```
 
 #### Fi1a\Collection\DataType\PathAccess класс реализует доступ по пути к значениям
@@ -58,9 +55,6 @@ $register->get('foo:qux'); // 2
 $register->has('foo:bar'); // true
 $register->has('foo:bar:baz'); // true
 $register->has('foo:bar:baz:bat'); // false
-
-...
-
 ```
 
 #### Объект-значение Fi1a\Collection\DataType\ValueObject с методами set/get
@@ -92,9 +86,43 @@ $valueObject['bar'] = 'bar';
 isset($valueObject['bar']); // true
 $valueObject['bar']; // 'barbaz'
 $valueObject->getBar(); // 'barbaz'
+```
 
-...
+#### Объект-массив с типизацией значений Fi1a\Collection\DataType\TypedValueArray
 
+Объект-массив с проверкой типов значений.
+
+Возможные типы значений:
+
+- mixed
+- array
+- boolean, bool
+- callable
+- int, integer
+- float, double
+- numeric
+- string
+- resource
+- scalar
+- object
+- название класса
+
+Пример, в качестве типа boolean:
+
+```php
+use Fi1a\Collection\DataType\TypedValueArray;
+use Fi1a\Collection\Exception\InvalidArgumentException;
+
+$arrayObject = new TypedValueArray('boolean');
+$arrayObject[] = true;
+$arrayObject->count(); // 1
+$arrayObject[] = false;
+$arrayObject->count(); // 2
+try {
+    $arrayObject[] = 10; // throw InvalidArgumentException
+} catch (InvalidArgumentException $exception) {
+
+}
 ```
 
 ### Коллекции
@@ -120,9 +148,6 @@ count($collection); // 2
 $collection->has(0); // true
 $collection->has(1); // true
 $collection->has(2); // false
-
-...
-
 ```
 
 #### Коллекции экземпляров классов
@@ -167,9 +192,6 @@ $collection[] = new Foo('qux');
 foreach ($collection as $foo) {
     $foo->getValue(); // 'bar', 'baz', 'qux'
 }
-
-...
-
 ```
 
 #### Коллекция экземпляров классов Fi1a\Collection\DataType\ArrayObject
@@ -189,9 +211,6 @@ foreach ($collection as $item) {
 }
 
 count($collection); // 3
-
-...
-
 ```
 
 #### Коллекция экземпляров классов Fi1a\Collection\DataType\PathAccess
@@ -211,9 +230,6 @@ foreach ($collection as $item) {
 }
 
 count($collection); // 3
-
-...
-
 ```
 
 #### Очередь Fi1a\Collection\Queue
@@ -232,7 +248,6 @@ $queue->pollEnd(); // null
 $queue->addBegin(3); // true
 $queue->pollEnd(); // 3
 $queue->pollEnd(); // null
-
 ```
 
 #### Очередь с типизацией значений Fi1a\Collection\TypedValueQueue
@@ -241,6 +256,7 @@ $queue->pollEnd(); // null
 
 Возможные типы значений:
 
+- mixed
 - array
 - boolean, bool
 - callable
@@ -257,6 +273,7 @@ $queue->pollEnd(); // null
 
 ```php
 use Fi1a\Collection\TypedValueQueue;
+use Fi1a\Collection\Exception\InvalidArgumentException;
 
 $queue = new TypedValueQueue('boolean');
 $queue->addBegin(true); // true
@@ -274,6 +291,7 @@ try {
 
 ```php
 use Fi1a\Collection\TypedValueQueue;
+use Fi1a\Collection\Exception\InvalidArgumentException;
 
 $queue = new TypedValueQueue(\stdClass::class);
 $queue->addBegin(new \stdClass()); // true

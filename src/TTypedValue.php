@@ -4,11 +4,27 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
+use Fi1a\Collection\Exception\InvalidArgumentException;
+use Fi1a\Format\Formatter;
+
 /**
  * Методы типизации значений
  */
 trait TTypedValue
 {
+    /**
+     * @var string
+     */
+    protected $type = 'mixed';
+
+    /**
+     * Возвращает объявленный тип значений
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
     /**
      * Сравнивает переданный тип значения с реальным
      *
@@ -17,6 +33,8 @@ trait TTypedValue
     protected function checkValueType(string $type, $value): bool
     {
         switch ($type) {
+            case 'mixed':
+                return true;
             case 'array':
                 return is_array($value);
             case 'boolean':
@@ -42,6 +60,20 @@ trait TTypedValue
                 return is_object($value);
             default:
                 return $value instanceof $type;
+        }
+    }
+
+    /**
+     * Валидация типа значения. Если тип не совпадает с объявленным, выбрасывает исключение.
+     *
+     * @param mixed $value
+     */
+    protected function validateType($value): void
+    {
+        if (!$this->checkValueType($this->getType(), $value)) {
+            throw new InvalidArgumentException(
+                Formatter::format('Value {{0}} not is type {{1}}', [$value, $this->getType()])
+            );
         }
     }
 }
