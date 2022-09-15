@@ -34,17 +34,21 @@ trait TArrayObject
     /**
      * Проверяет наличие.
      *
-     * @param string|int $offset ключ.
+     * @param string|int|null $offset ключ.
      */
     public function offsetExists($offset): bool
     {
+        if (is_null($offset)) {
+            $offset = (string) $offset;
+        }
+
         return array_key_exists($offset, $this->storage);
     }
 
     /**
      * Возвращает значение.
      *
-     * @param string|int $offset ключ.
+     * @param string|int|null $offset ключ.
      *
      * @return mixed
      */
@@ -52,8 +56,11 @@ trait TArrayObject
     {
         $value = null;
         if ($this->offsetExists($offset)) {
+            if (is_null($offset)) {
+                $offset = (string) $offset;
+            }
             /**
-             * @var mixed
+             * @var mixed $value
              */
             $value = &$this->storage[$offset];
         }
@@ -80,10 +87,13 @@ trait TArrayObject
     /**
      * Удаляет значение.
      *
-     * @param string|int $offset ключ.
+     * @param string|int|null $offset ключ.
      */
     public function offsetUnset($offset)
     {
+        if (is_null($offset)) {
+            $offset = (string) $offset;
+        }
         unset($this->storage[$offset]);
     }
 
@@ -200,7 +210,7 @@ trait TArrayObject
     /**
      * Есть ли элемент с таким ключем
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      */
     public function has($key): bool
     {
@@ -210,7 +220,7 @@ trait TArrayObject
     /**
      * Возвращает элемент по ключу
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      * @param mixed $default значение по умолчанию, возвращается при отсутствии ключа
      *
      * @return mixed
@@ -220,6 +230,9 @@ trait TArrayObject
         if (!$this->has($key)) {
             return $default;
         }
+        if (is_null($key)) {
+            $key = (string) $key;
+        }
 
         return $this[$key];
     }
@@ -227,13 +240,16 @@ trait TArrayObject
     /**
      * Устанавливает значение по ключу
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      * @param mixed $value устанавливаемое значение
      *
      * @return static
      */
     public function set($key, $value)
     {
+        if (is_null($key)) {
+            $key = (string) $key;
+        }
         $this->storage[$key] = $value;
 
         return $this;
@@ -242,7 +258,7 @@ trait TArrayObject
     /**
      * Удаляет элемент по ключу, возвращает удаленное значение
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      *
      * @return mixed
      */
@@ -253,6 +269,9 @@ trait TArrayObject
          */
         $prev = $this->get($key);
         if ($this->has($key)) {
+            if (is_null($key)) {
+                $key = (string) $key;
+            }
             unset($this[$key]);
         }
 
@@ -262,7 +281,7 @@ trait TArrayObject
     /**
      * Удаляет элемент по ключу, если значение равно переданному. Если элемент удален, возвращает true.
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      * @param mixed $value
      */
     public function deleteIf($key, $value): bool
@@ -279,7 +298,7 @@ trait TArrayObject
     /**
      * Устанавливает значение по ключу, если значение уже есть в массиве, возвращает его
      *
-     * @param string|int $key
+     * @param string|int|null $key
      * @param mixed $value
      *
      * @return mixed
@@ -298,7 +317,7 @@ trait TArrayObject
     /**
      * Устанавливает значение по ключу, если его нет. Возвращает предыдущее значение
      *
-     * @param string|int $key
+     * @param string|int|null $key
      * @param mixed $value
      *
      * @return mixed
@@ -319,7 +338,7 @@ trait TArrayObject
     /**
      * Заменяет значение элемента по ключу, только если есть значение. Возвращает предыдущее значение
      *
-     * @param string|int $key
+     * @param string|int|null $key
      * @param mixed $value
      *
      * @return mixed
@@ -341,7 +360,7 @@ trait TArrayObject
      * Заменяет значение элемента по ключу, только если текущее значение равно $oldValue.
      * Если элемент заменен, возвращает true.
      *
-     * @param string|int $key
+     * @param string|int|null $key
      * @param mixed $oldValue
      * @param mixed $newValue
      */

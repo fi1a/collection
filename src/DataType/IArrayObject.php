@@ -72,14 +72,14 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
     /**
      * Есть ли элемент с таким ключем
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      */
     public function has($key): bool;
 
     /**
      * Возвращает элемент по ключу
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      * @param mixed $default значение по умолчанию, возвращается при отсутствии ключа
      *
      * @return mixed
@@ -89,7 +89,7 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
     /**
      * Устанавливает значение по ключу
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      * @param mixed $value устанавливаемое значение
      *
      * @return self
@@ -99,7 +99,7 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
     /**
      * Удаляет элемент по ключу, возвращает удаленное значение
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      *
      * @return mixed
      */
@@ -108,7 +108,7 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
     /**
      * Удаляет элемент по ключу, если значение равно переданному. Если элемент удален, возвращает true.
      *
-     * @param string|int $key ключ
+     * @param string|int|null $key ключ
      * @param mixed $value
      */
     public function deleteIf($key, $value): bool;
@@ -116,7 +116,7 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
     /**
      * Устанавливает значение по ключу, если значение уже есть в массиве, возвращает его
      *
-     * @param string|int $key
+     * @param string|int|null $key
      * @param mixed $value
      *
      * @return mixed
@@ -126,7 +126,7 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
     /**
      * Устанавливает значение по ключу, если его нет. Возвращает предыдущее значение
      *
-     * @param string|int $key
+     * @param string|int|null $key
      * @param mixed $value
      *
      * @return mixed
@@ -136,7 +136,7 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
     /**
      * Заменяет значение элемента по ключу, только если есть значение. Возвращает предыдущее значение
      *
-     * @param string|int $key
+     * @param string|int|null $key
      * @param mixed $value
      *
      * @return mixed
@@ -147,7 +147,7 @@ interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
      * Заменяет значение элемента по ключу, только если текущее значение равно $oldValue.
      * Если элемент заменен, возвращает true.
      *
-     * @param string|int $key
+     * @param string|int|null $key
      * @param mixed $oldValue
      * @param mixed $newValue
      */
