@@ -149,7 +149,7 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * Возвращает название функции на основе ключа для get
      *
-     * @param string|int $key
+     * @param string|int|null $key
      */
     protected function getFuncNameOfGetter($key): string
     {
@@ -159,7 +159,7 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * Обертка для метода ArrayObject::offsetGet
      *
-     * @param string|int $key ключ значения
+     * @param string|int|null $key ключ значения
      *
      * @return mixed
      */
