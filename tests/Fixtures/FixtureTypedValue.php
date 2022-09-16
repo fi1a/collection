@@ -20,4 +20,13 @@ class FixtureTypedValue
     {
         return $this->checkValueType($type, $value);
     }
+
+    /**
+     * @param mixed $value
+     */
+    public function validateTypeTest(string $type, $value): void
+    {
+        $this->type = $type;
+        $this->validateType($value);
+    }
 }

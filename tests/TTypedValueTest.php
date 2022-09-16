@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection;
 
+use Fi1a\Collection\Exception\InvalidArgumentException;
 use Fi1a\Unit\Collection\Fixtures\FixtureTypedValue;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -47,5 +48,35 @@ class TTypedValueTest extends TestCase
     {
         $instance = new FixtureTypedValue();
         $this->assertEquals($expected, $instance->validate($type, $value));
+    }
+
+    /**
+     * Провайдер данных для теста testConstruct
+     *
+     * @return mixed[]
+     */
+    public function dataInvalidArgumentException(): array
+    {
+        return [
+            ['float', true],
+            ['float', null],
+            ['float', [1, 2, 3]],
+            ['float', new stdClass()],
+            ['bool', 0],
+        ];
+    }
+
+    /**
+     * Исключение при ошибочных типах
+     *
+     * @param mixed $value
+     *
+     * @dataProvider dataInvalidArgumentException
+     */
+    public function testInvalidArgumentException(string $type, $value): void
+    {
+        $instance = new FixtureTypedValue();
+        $this->expectException(InvalidArgumentException::class);
+        $instance->validateTypeTest($type, $value);
     }
 }
