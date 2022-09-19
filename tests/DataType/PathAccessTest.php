@@ -8,11 +8,6 @@ use Fi1a\Collection\DataType\ArrayObject;
 use Fi1a\Collection\DataType\PathAccess;
 use PHPUnit\Framework\TestCase;
 
-use const FILTER_FLAG_ALLOW_OCTAL;
-use const FILTER_NULL_ON_FAILURE;
-use const FILTER_VALIDATE_BOOLEAN;
-use const FILTER_VALIDATE_INT;
-
 /**
  * Тестирование объекта с доступом по пути
  */
@@ -383,49 +378,5 @@ class PathAccessTest extends TestCase
     public function testGetInt(array $data, $equal): void
     {
         $this->assertEquals($equal, (new PathAccess($data))->getInt('key'));
-    }
-
-    /**
-     * Провайдер данных для теста testFilter
-     *
-     * @return mixed[]
-     */
-    public function dataProviderFilter(): array
-    {
-        return [
-            [
-                ['key' => '0755'],
-                FILTER_VALIDATE_INT,
-                [
-                    'options' => [
-                        'default' => 3,
-                        'min_range' => 0,
-                    ],
-                    'flags' => FILTER_FLAG_ALLOW_OCTAL,
-                ],
-                0755,
-            ],
-            [
-                ['key' => 'oops'],
-                FILTER_VALIDATE_BOOLEAN,
-                FILTER_NULL_ON_FAILURE,
-                null,
-            ],
-        ];
-    }
-
-    /**
-     * Фильтрация значений
-     *
-     * @param mixed[] $data
-     * @param int $filter параметр фильтра
-     * @param mixed $options
-     * @param mixed $equal
-     *
-     * @dataProvider dataProviderFilter
-     */
-    public function testFilter(array $data, int $filter, $options, $equal): void
-    {
-        $this->assertEquals($equal, (new PathAccess($data))->filter('key', null, $filter, $options));
     }
 }

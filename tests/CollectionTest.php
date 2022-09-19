@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection;
 
+use Fi1a\Collection\Collection;
 use Fi1a\Collection\Exception\ExtractValueException;
 use Fi1a\Collection\Exception\InvalidArgumentException;
 use Fi1a\Collection\ICollection;
-use Fi1a\Unit\Collection\Fixtures\FixtureCollection;
 use Fi1a\Unit\Collection\Fixtures\FixtureInstanceCollection;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Тестироввние методов коллекции
  */
-class TCollectionTest extends TestCase
+class CollectionTest extends TestCase
 {
     /**
      * Тестирование методов
      */
     public function testConstruct(): void
     {
-        $collection = new FixtureCollection();
+        $collection = new Collection('mixed');
         $collection->set(0, 1);
         $collection->set(3, 3);
         $collection->set(4, 4);
@@ -48,7 +48,7 @@ class TCollectionTest extends TestCase
      */
     public function testAdd(): void
     {
-        $collection = new FixtureCollection();
+        $collection = new Collection('int');
         $collection->add(1);
         $collection->add(2);
         $collection->add(3);
@@ -60,7 +60,7 @@ class TCollectionTest extends TestCase
      */
     public function testCount(): void
     {
-        $collection = new FixtureCollection();
+        $collection = new Collection('int');
         $this->assertEquals(0, $collection->count());
         $collection->add(1);
         $collection->add(2);
@@ -73,7 +73,7 @@ class TCollectionTest extends TestCase
      */
     public function testContains(): void
     {
-        $collection = new FixtureCollection();
+        $collection = new Collection('int');
         $collection->add(1);
         $collection->add(2);
         $collection->add(3);
@@ -88,7 +88,7 @@ class TCollectionTest extends TestCase
      */
     public function testColumn(): void
     {
-        $collection = new FixtureCollection();
+        $collection = new Collection('array');
         $collection->add(['foo' => 1,]);
         $collection->add(['foo' => 2,]);
         $collection->add(['foo' => 3,]);
@@ -109,7 +109,7 @@ class TCollectionTest extends TestCase
      */
     public function testSort(): void
     {
-        $collection = new FixtureCollection();
+        $collection = new Collection('array');
         $collection->add(['foo' => 3,]);
         $collection->add(['foo' => 2,]);
         $collection->add(['foo' => 1,]);
@@ -127,7 +127,7 @@ class TCollectionTest extends TestCase
     public function testSortOrderException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $collection = new FixtureCollection();
+        $collection = new Collection('int');
         $collection->add(['foo' => 3,]);
         $collection->add(['foo' => 2,]);
         $collection->add(['foo' => 1,]);
@@ -139,7 +139,7 @@ class TCollectionTest extends TestCase
      */
     public function testFilter(): void
     {
-        $collection = new FixtureCollection();
+        $collection = new Collection('array');
         $collection->add(['foo' => 3,]);
         $collection->add(['foo' => 2,]);
         $collection->add(['foo' => 1,]);
@@ -155,7 +155,7 @@ class TCollectionTest extends TestCase
      */
     public function testWhere(): void
     {
-        $collection = new FixtureCollection();
+        $collection = new Collection('array');
         $collection->add(['foo' => 3,]);
         $collection->add(['foo' => 2,]);
         $collection->add(['foo' => 1,]);
@@ -168,11 +168,11 @@ class TCollectionTest extends TestCase
      */
     public function testDiff(): void
     {
-        $collection1 = new FixtureCollection();
+        $collection1 = new Collection('array');
         $collection1->add(['foo' => 3,]);
         $collection1->add(['foo' => 2,]);
         $collection1->add(['foo' => 1,]);
-        $collection2 = new FixtureCollection();
+        $collection2 = new Collection('array');
         $collection2->add(['foo' => 4,]);
         $collection2->add(['foo' => 2,]);
         $collection2->add(['foo' => 1,]);
@@ -186,11 +186,11 @@ class TCollectionTest extends TestCase
      */
     public function testIntersect(): void
     {
-        $collection1 = new FixtureCollection();
+        $collection1 = new Collection('array');
         $collection1->add(['foo' => 3,]);
         $collection1->add(['foo' => 2,]);
         $collection1->add(['foo' => 1,]);
-        $collection2 = new FixtureCollection();
+        $collection2 = new Collection('array');
         $collection2->add(['foo' => 4,]);
         $collection2->add(['foo' => 2,]);
         $collection2->add(['foo' => 1,]);
@@ -213,9 +213,9 @@ class TCollectionTest extends TestCase
      */
     public function testMerge(): void
     {
-        $collection1 = new FixtureCollection();
+        $collection1 = new Collection('array');
         $collection1->add(['foo' => 1,]);
-        $collection2 = new FixtureCollection();
+        $collection2 = new Collection('array');
         $collection2->add(['foo' => 2,]);
         $this->assertEquals(
             [['foo' => 1,], ['foo' => 2,]],
@@ -236,7 +236,7 @@ class TCollectionTest extends TestCase
      */
     public function testResetKeys(): void
     {
-        $collection = new FixtureCollection();
+        $collection = new Collection('array');
         $collection->set(1, ['foo' => 1,]);
         $collection->set(2, ['foo' => 2,]);
         $this->assertEquals([0 => ['foo' => 1,], 1 => ['foo' => 2,]], $collection->resetKeys()->getArrayCopy());
@@ -247,7 +247,7 @@ class TCollectionTest extends TestCase
      */
     public function testReduce(): void
     {
-        $collection = new FixtureCollection([1, 2, 3]);
+        $collection = new Collection('int', [1, 2, 3]);
         $this->assertEquals(6, $collection->reduce(function (?int $sum, int $value) {
             $sum += $value;
 

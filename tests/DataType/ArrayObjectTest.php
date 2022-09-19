@@ -6,6 +6,8 @@ namespace Fi1a\Unit\Collection\DataType;
 
 use Fi1a\Collection\DataType\ArrayObject;
 use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
+use Fi1a\Collection\DataType\IArrayObject;
+use Fi1a\Collection\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -270,5 +272,208 @@ class ArrayObjectTest extends TestCase
         $this->assertFalse($array->replaceIf('key1', 1, 4));
         $this->assertTrue($array->replaceIf(null, 5, 6));
         $this->assertFalse($array->replaceIf(null, 5, 6));
+    }
+
+    /**
+     * Тестирование метода add массива
+     */
+    public function testAdd(): void
+    {
+        $array = new ArrayObject();
+        $array->add(1);
+        $array->add(2);
+        $array->add(3);
+        $this->assertEquals([0 => 1, 1 => 2, 2 => 3,], $array->getArrayCopy());
+    }
+
+    /**
+     * Тестирование метода count массива
+     */
+    public function testCount(): void
+    {
+        $array = new ArrayObject();
+        $this->assertEquals(0, $array->count());
+        $array->add(1);
+        $array->add(2);
+        $array->add(3);
+        $this->assertEquals(3, $array->count());
+    }
+
+    /**
+     * Тестирование метода contains массива
+     */
+    public function testContains(): void
+    {
+        $array = new ArrayObject();
+        $array->add(1);
+        $array->add(2);
+        $array->add(3);
+        $this->assertTrue($array->contains(1));
+        $this->assertTrue($array->contains(2));
+        $this->assertTrue($array->contains(3));
+        $this->assertFalse($array->contains(4));
+    }
+
+    /**
+     * Тестирование метода column массива
+     */
+    public function testColumn(): void
+    {
+        $array = new ArrayObject();
+        $array->add(['foo' => 1,]);
+        $array->add(['foo' => 2,]);
+        $array->add(['foo' => 3,]);
+        $this->assertEquals([1, 2, 3,], $array->column('foo'));
+    }
+
+    /**
+     * Тестирование метода sort массива
+     */
+    public function testSort(): void
+    {
+        $array = new ArrayObject();
+        $array->add(['foo' => 3,]);
+        $array->add(['foo' => 2,]);
+        $array->add(['foo' => 1,]);
+        $sorted = $array->sort('foo', IArrayObject::SORT_ASC);
+        $this->assertEquals([1, 2, 3,], $sorted->column('foo'));
+        $this->assertEquals([3, 2, 1,], $array->column('foo'));
+        $sorted = $array->sort('foo', IArrayObject::SORT_DESC);
+        $this->assertEquals([3, 2, 1,], $sorted->column('foo'));
+        $this->assertEquals([3, 2, 1,], $array->column('foo'));
+    }
+
+    /**
+     * Исключение при не известном напрмарвлении сортировки
+     */
+    public function testSortOrderException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $array = new ArrayObject();
+        $array->add(['foo' => 3,]);
+        $array->add(['foo' => 2,]);
+        $array->add(['foo' => 1,]);
+        $array->sort('foo', 'unknown');
+    }
+
+    /**
+     * Фильтрация значений массива
+     */
+    public function testFilter(): void
+    {
+        $array = new ArrayObject();
+        $array->add(['foo' => 3,]);
+        $array->add(['foo' => 2,]);
+        $array->add(['foo' => 1,]);
+        $filtered = $array->filter(function ($item) {
+            return $item['foo'] >= 2;
+        });
+        $this->assertEquals([['foo' => 3,], ['foo' => 2,]], $filtered->getArrayCopy());
+        $this->assertEquals([['foo' => 3,], ['foo' => 2,], ['foo' => 1,]], $array->getArrayCopy());
+    }
+
+    /**
+     * Возвращает массив с элементами у которых значение ключа, свойства или метода равно переданному значению
+     */
+    public function testWhere(): void
+    {
+        $array = new ArrayObject();
+        $array->add(['foo' => 3,]);
+        $array->add(['foo' => 2,]);
+        $array->add(['foo' => 1,]);
+        $filtered = $array->where('foo', 2);
+        $this->assertEquals([1 => ['foo' => 2,]], $filtered->getArrayCopy());
+    }
+
+    /**
+     * Вычисление расхождения
+     */
+    public function testDiff(): void
+    {
+        $array1 = new ArrayObject();
+        $array1->add(['foo' => 3,]);
+        $array1->add(['foo' => 2,]);
+        $array1->add(['foo' => 1,]);
+        $array2 = new ArrayObject();
+        $array2->add(['foo' => 4,]);
+        $array2->add(['foo' => 2,]);
+        $array2->add(['foo' => 1,]);
+        $this->assertEquals([['foo' => 3,], ['foo' => 4,]], $array1->diff($array2)->getArrayCopy());
+        $this->assertEquals([['foo' => 3,], ['foo' => 2,], ['foo' => 1,]], $array1->getArrayCopy());
+        $this->assertEquals([['foo' => 4,], ['foo' => 2,], ['foo' => 1,]], $array2->getArrayCopy());
+    }
+
+    /**
+     * Вычисляет пересечение
+     */
+    public function testIntersect(): void
+    {
+        $array1 = new ArrayObject();
+        $array1->add(['foo' => 3,]);
+        $array1->add(['foo' => 2,]);
+        $array1->add(['foo' => 1,]);
+        $array2 = new ArrayObject();
+        $array2->add(['foo' => 4,]);
+        $array2->add(['foo' => 2,]);
+        $array2->add(['foo' => 1,]);
+        $this->assertEquals(
+            [1 => ['foo' => 2,], 2 => ['foo' => 1,]],
+            $array1->intersect($array2)->getArrayCopy()
+        );
+        $this->assertEquals(
+            [['foo' => 3,], ['foo' => 2,], ['foo' => 1,]],
+            $array1->getArrayCopy()
+        );
+        $this->assertEquals(
+            [['foo' => 4,], ['foo' => 2,], ['foo' => 1,]],
+            $array2->getArrayCopy()
+        );
+    }
+
+    /**
+     * Объединяет элементы с элементами переданной и возвращает новый массив
+     */
+    public function testMerge(): void
+    {
+        $array1 = new ArrayObject();
+        $array1->add(['foo' => 1,]);
+        $array2 = new ArrayObject();
+        $array2->add(['foo' => 2,]);
+        $this->assertEquals(
+            [['foo' => 1,], ['foo' => 2,]],
+            $array1->merge($array2)->getArrayCopy()
+        );
+        $this->assertEquals(
+            [['foo' => 1,]],
+            $array1->getArrayCopy()
+        );
+        $this->assertEquals(
+            [['foo' => 2,]],
+            $array2->getArrayCopy()
+        );
+    }
+
+    /**
+     * Сбросить ключи
+     */
+    public function testResetKeys(): void
+    {
+        $array = new ArrayObject();
+        $array->set(1, ['foo' => 1,]);
+        $array->set(2, ['foo' => 2,]);
+        $this->assertEquals([0 => ['foo' => 1,], 1 => ['foo' => 2,]], $array->resetKeys()->getArrayCopy());
+    }
+
+    /**
+     * Итеративно уменьшает к единственному значению, используя callback-функцию
+     */
+    public function testReduce(): void
+    {
+        $array = new ArrayObject([1, 2, 3]);
+        $this->assertEquals(6, $array->reduce(function (?int $sum, int $value) {
+            $sum += $value;
+
+            return $sum;
+        }));
     }
 }

@@ -88,9 +88,11 @@ $valueObject['bar']; // 'barbaz'
 $valueObject->getBar(); // 'barbaz'
 ```
 
-#### Объект-массив с типизацией значений Fi1a\Collection\DataType\TypedValueArray
+### Коллекции
 
-Объект-массив с проверкой типов значений.
+#### Коллекция значений Fi1a\Collection\Collection
+
+Реализует интерфейс Fi1a\Collection\ICollection.
 
 Возможные типы значений:
 
@@ -107,34 +109,10 @@ $valueObject->getBar(); // 'barbaz'
 - object
 - название класса
 
-Пример, в качестве типа boolean:
-
-```php
-use Fi1a\Collection\DataType\TypedValueArray;
-use Fi1a\Collection\Exception\InvalidArgumentException;
-
-$arrayObject = new TypedValueArray('boolean');
-$arrayObject[] = true;
-$arrayObject->count(); // 1
-$arrayObject[] = false;
-$arrayObject->count(); // 2
-try {
-    $arrayObject[] = 10; // throw InvalidArgumentException
-} catch (InvalidArgumentException $exception) {
-
-}
-```
-
-### Коллекции
-
-#### Базовая коллекция значений Fi1a\Collection\Collection
-
-Реализует интерфейс Fi1a\Collection\ICollection.
-
 ```php
 use Fi1a\Collection\Collection;
 
-$collection = new Collection();
+$collection = new Collection('string');
 
 $collection[] = 'foo';
 $collection->add('bar');

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
+use Fi1a\Collection\DataType\IArrayObject;
+
 /**
  * Интерфейс коллекции экземпляров классов
  */
-interface IInstanceCollection extends ICollection
+interface IInstanceCollection extends IArrayObject
 {
     /**
      * Возвращает экземпляр класса элемента коллекции

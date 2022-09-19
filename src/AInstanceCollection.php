@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
+use Fi1a\Collection\DataType\ArrayObject;
+
 /**
  * Абстрактный класс коллекции экземпляров классов
  */
-abstract class AInstanceCollection extends Collection implements IInstanceCollection
+abstract class AInstanceCollection extends ArrayObject implements IInstanceCollection
 {
     /**
      * Конструктор

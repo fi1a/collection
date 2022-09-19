@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection\DataType;
 
-use const FILTER_DEFAULT;
-
 /**
  * Класс реализует доступ по пути к значениям
  */
@@ -191,13 +189,5 @@ class PathAccess extends ArrayObject implements IPathAccess
         }
 
         return (int) $value;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function filter(string $path, $default = null, int $filter = FILTER_DEFAULT, $options = 0)
-    {
-        return filter_var($this->get($path, $default), $filter, $options);
     }
 }
