@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
-use Fi1a\Collection\DataType\ArrayObject;
+use Fi1a\Collection\DataType\MapArrayObject;
 
 /**
  * Коллекция
  */
-class Collection extends ArrayObject implements ICollection
+class Collection extends MapArrayObject implements ICollection
 {
     use TTypedValue;
 

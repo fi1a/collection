@@ -40,6 +40,26 @@ foreach ($arrayObject as $value) {
 count($arrayObject); // 3
 ```
 
+#### Объект Fi1a\Collection\DataType\MapArrayObject, работающий также как и массив
+
+Реализует интерфейс Fi1a\Collection\DataType\IMapArrayObject с методами расширяющими использование.
+
+```php
+use Fi1a\Collection\DataType\MapArrayObject;
+
+$arrayObject = new MapArrayObject();
+
+$arrayObject->add('foo');
+$arrayObject->add('bar');
+$arrayObject->add('baz');
+
+foreach ($arrayObject as $value) {
+    $value; // 'foo', 'bar', 'baz'
+}
+
+$arrayObject->count(); // 3
+```
+
 #### Fi1a\Collection\DataType\PathAccess класс реализует доступ по пути к значениям
 
 Реализует интерфейс Fi1a\Collection\DataType\IPathAccess. Данный класс позволяет получать доступ к ключам массива по пути (foo:bar:baz).
@@ -189,6 +209,25 @@ foreach ($collection as $item) {
 }
 
 count($collection); // 3
+```
+
+#### Коллекция экземпляров классов Fi1a\Collection\DataType\MapArrayObject
+
+Частная реализация коллекции Fi1a\Collection\AInstanceCollection для классов MapArrayObject.
+
+```php
+use Fi1a\Collection\MapArrayObjectCollection;
+use Fi1a\Collection\DataType\MapArrayObject;
+
+$collection = new MapArrayObjectCollection([['foo',],]);
+$collection[] = ['bar',];
+$collection[] = new MapArrayObject(['baz',]);
+
+foreach ($collection as $item) {
+    $item->first(); // 'foo', 'bar', 'baz'
+}
+
+$collection->count(); // 3
 ```
 
 #### Коллекция экземпляров классов Fi1a\Collection\DataType\PathAccess

@@ -84,4 +84,9 @@ interface IQueue extends IArrayObject
      * @return mixed
      */
     public function peekEnd();
+
+    /**
+     * Определяет пустая очередь или нет
+     */
+    public function isEmpty(): bool;
 }

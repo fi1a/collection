@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
-use Fi1a\Collection\DataType\IArrayObject;
+use Fi1a\Collection\DataType\IMapArrayObject;
 
 /**
  * Интерфейс коллекции
  */
-interface ICollection extends IArrayObject
+interface ICollection extends IMapArrayObject
 {
     /**
      * Конструктор

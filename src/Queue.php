@@ -162,4 +162,12 @@ class Queue extends ArrayObject implements IQueue
 
         return $this[$this->endIndex - 1];
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function isEmpty(): bool
+    {
+        return count($this->storage) === 0;
+    }
 }
