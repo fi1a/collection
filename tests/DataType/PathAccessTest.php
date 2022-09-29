@@ -29,6 +29,9 @@ class PathAccessTest extends TestCase
                 'key2' => 'string',
                 'key3' => null,
             ],
+            'key:5' => [
+                'key1' => 'foo',
+            ],
         ];
 
         return [
@@ -79,6 +82,12 @@ class PathAccessTest extends TestCase
                 '',
                 null,
                 null,
+            ],
+            [
+                $data,
+                'key\:5:key1',
+                null,
+                'foo',
             ],
         ];
     }

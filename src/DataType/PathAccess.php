@@ -153,7 +153,32 @@ class PathAccess extends ArrayObject implements IPathAccess
      */
     private function getKeys(string $path): array
     {
-        return explode((string) static::PATH_SEPARATOR, $path);
+        $current = -1;
+        $index = 0;
+        $paths = [];
+        do {
+            $current++;
+            $symbol = mb_substr($path, $current, 1);
+            $prevSymbol = mb_substr($path, $current - 1, 1);
+
+            if ($symbol === (string) static::PATH_SEPARATOR && $prevSymbol !== '\\') {
+                $index++;
+
+                continue;
+            }
+            if (!isset($paths[$index])) {
+                $paths[$index] = '';
+            }
+            if ($symbol === (string) static::PATH_SEPARATOR && $prevSymbol === '\\') {
+                $paths[$index] = mb_substr($paths[$index], 0, -1);
+            }
+            /**
+             * @psalm-suppress PossiblyUndefinedArrayOffset
+             */
+            $paths[$index] .= $symbol;
+        } while ($current < mb_strlen($path));
+
+        return $paths;
     }
 
     /**
