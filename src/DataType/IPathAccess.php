@@ -12,6 +12,38 @@ interface IPathAccess extends IArrayObject
     public const PATH_SEPARATOR = ':';
 
     /**
+     * Возвращает значение по пути
+     *
+     * @param mixed $key
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    public function get($key, $default = null);
+
+    /**
+     * Проверяет наличие значения по пути
+     *
+     * @param mixed $key
+     */
+    public function has($key): bool;
+
+    /**
+     * Установить значение по пути
+     *
+     * @param mixed $key
+     * @param mixed $value
+     */
+    public function set($key, $value): IPathAccess;
+
+    /**
+     * Удалить значение по пути
+     *
+     * @param mixed $key
+     */
+    public function delete($key): IPathAccess;
+
+    /**
      * Возвращает значение с преобразованием к boolean.
      *
      * @param string    $path путь до значения.
