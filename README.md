@@ -3,7 +3,7 @@
 [![Latest Version][badge-release]][packagist]
 [![Software License][badge-license]][license]
 [![PHP Version][badge-php]][php]
-![badge-coverage]
+![Coverage Status][badge-coverage]
 [![Total Downloads][badge-downloads]][downloads]
 
 Пакет fi1a/collection предоставляет классы структур данных и коллекций.
