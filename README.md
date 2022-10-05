@@ -3,7 +3,7 @@
 [![Latest Version][badge-release]][packagist]
 [![Software License][badge-license]][license]
 [![PHP Version][badge-php]][php]
-[![Coverage Status][badge-coverage]][coverage]
+![Coverage Status][badge-coverage]
 [![Total Downloads][badge-downloads]][downloads]
 
 Пакет fi1a/collection предоставляет классы структур данных и коллекций.
@@ -321,11 +321,10 @@ try {
 [badge-release]: https://img.shields.io/packagist/v/fi1a/collection?label=release
 [badge-license]: https://img.shields.io/github/license/fi1a/collection?style=flat-square
 [badge-php]: https://img.shields.io/packagist/php-v/fi1a/collection?style=flat-square
-[badge-coverage]: https://img.shields.io/coveralls/github/fi1a/collection/master.svg?style=flat-square
+[badge-coverage]: https://img.shields.io/badge/coverage-100%25-green
 [badge-downloads]: https://img.shields.io/packagist/dt/fi1a/collection.svg?style=flat-square&colorB=mediumvioletred
 
 [packagist]: https://packagist.org/packages/fi1a/collection
 [license]: https://github.com/fi1a/collection/blob/master/LICENSE
 [php]: https://php.net
-[coverage]: https://coveralls.io/r/fi1a/collection?branch=master
 [downloads]: https://packagist.org/packages/fi1a/collection
