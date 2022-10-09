@@ -546,4 +546,33 @@ trait TMapArrayObject
     {
         return array_reduce($this->storage, $callback, $initial);
     }
+
+    /**
+     * Оборачивает значения и возвращает новую коллекцию
+     *
+     * @return static
+     */
+    public function wraps(string $prefix, ?string $suffix = null)
+    {
+        if (is_null($suffix)) {
+            $suffix = $prefix;
+        }
+        $collection = clone $this;
+        $collection->map(function ($value) use ($prefix, $suffix) {
+            $value = (string) $value;
+
+            return $prefix . $value . $suffix;
+        });
+
+        return $collection;
+    }
+
+    /**
+     * Объединяет элементы в строку
+     */
+    public function join(string $separator): string
+    {
+        /** @psalm-suppress MixedArgumentTypeCoercion */
+        return implode($separator, $this->getArrayCopy());
+    }
 }

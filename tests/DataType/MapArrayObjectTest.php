@@ -476,4 +476,23 @@ class MapArrayObjectTest extends TestCase
             return $sum;
         }));
     }
+
+    /**
+     * Оборачивает значения и возвращает новую коллекцию
+     */
+    public function testWraps(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals(['"1"', '"2"', '"3"'], $array->wraps('"')->getArrayCopy());
+        $this->assertEquals(['"1~', '"2~', '"3~'], $array->wraps('"', '~')->getArrayCopy());
+    }
+
+    /**
+     * Объединяет элементы в строку
+     */
+    public function testJoin(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals('1, 2, 3', $array->join(', '));
+    }
 }

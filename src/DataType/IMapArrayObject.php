@@ -253,4 +253,16 @@ interface IMapArrayObject extends IArrayObject
      * @return mixed
      */
     public function reduce(callable $callback, $initial = null);
+
+    /**
+     * Оборачивает значения и возвращает новую коллекцию
+     *
+     * @return static
+     */
+    public function wraps(string $prefix, ?string $suffix = null);
+
+    /**
+     * Объединяет элементы в строку
+     */
+    public function join(string $separator): string;
 }
