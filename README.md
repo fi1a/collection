@@ -13,7 +13,7 @@
 Установить этот пакет можно как зависимость, используя Composer.
 
 ``` bash
-composer require fi1a/collection
+composer require fi1a/collection ">=1.2.0 <1.3.0"
 ```
 
 **Внимание!** Совместимость версий не гарантируется при переходе major или minor версии.
