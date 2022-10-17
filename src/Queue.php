@@ -13,23 +13,11 @@ use Fi1a\Collection\Exception\EmptyQueueException;
 class Queue extends ArrayObject implements IQueue
 {
     /**
-     * @var int
-     */
-    protected $beginIndex = 0;
-
-    /**
-     * @var int
-     */
-    protected $endIndex = 0;
-
-    /**
      * @inheritDoc
      */
     public function exchangeArray(array $input): void
     {
         parent::exchangeArray(array_values($input));
-        $this->endIndex = $this->count();
-        $this->beginIndex = 0;
     }
 
     /**
@@ -38,7 +26,6 @@ class Queue extends ArrayObject implements IQueue
     public function addBegin($value): bool
     {
         array_unshift($this->storage, $value);
-        $this->endIndex++;
 
         return true;
     }
@@ -86,14 +73,7 @@ class Queue extends ArrayObject implements IQueue
             return null;
         }
 
-        /**
-         * @var mixed $value
-         */
-        $value = $this->offsetGet($this->beginIndex);
-        $this->offsetUnset($this->beginIndex);
-        $this->beginIndex++;
-
-        return $value;
+        return array_shift($this->storage);
     }
 
     /**
@@ -105,14 +85,7 @@ class Queue extends ArrayObject implements IQueue
             return null;
         }
 
-        /**
-         * @var mixed $value
-         */
-        $value = $this->offsetGet($this->endIndex - 1);
-        $this->offsetUnset($this->endIndex - 1);
-        $this->endIndex--;
-
-        return $value;
+        return array_pop($this->storage);
     }
 
     /**
@@ -148,7 +121,7 @@ class Queue extends ArrayObject implements IQueue
             return null;
         }
 
-        return $this[$this->beginIndex];
+        return reset($this->storage);
     }
 
     /**
@@ -160,7 +133,7 @@ class Queue extends ArrayObject implements IQueue
             return null;
         }
 
-        return $this[$this->endIndex - 1];
+        return end($this->storage);
     }
 
     /**
