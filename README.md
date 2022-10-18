@@ -1,4 +1,4 @@
-# Структуры данных и коллекции
+# Структуры данных и коллекции в PHP
 
 [![Latest Version][badge-release]][packagist]
 [![Software License][badge-license]][license]
