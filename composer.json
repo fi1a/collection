@@ -1,7 +1,7 @@
 {
   "name": "fi1a/collection",
   "type": "library",
-  "description": "Структуры данных и коллекции",
+  "description": "Структуры данных и коллекции в PHP",
   "keywords": [],
   "homepage": "https://github.com/fi1a/collection",
   "license": "MIT",
