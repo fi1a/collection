@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection\DataType;
 
+use ErrorException;
 use Fi1a\Unit\Collection\DataType\Fixtures\ValueObject;
 use PHPUnit\Framework\TestCase;
 
@@ -85,5 +86,35 @@ class ValueObjectTest extends TestCase
         $array['fields'][] = 2;
         $array['fields'][] = 3;
         $this->assertEquals([1, 2, 3], $array['fields']);
+    }
+
+    /**
+     * Тестирование __call
+     */
+    public function testCall(): void
+    {
+        $array = new ValueObject();
+        $array->setKey2(2);
+        $this->assertEquals(2, $array->getKey2());
+    }
+
+    /**
+     * Тестирование __call
+     */
+    public function testCallException(): void
+    {
+        $this->expectException(ErrorException::class);
+        $array = new ValueObject();
+        $array->unknown();
+    }
+
+    /**
+     * Доступ к свойствам класса
+     */
+    public function testProperties(): void
+    {
+        $array = new ValueObject();
+        $array->key2 = 2;
+        $this->assertEquals(2, $array->key2);
     }
 }

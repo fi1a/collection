@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection\DataType;
 
+use ErrorException;
+
 /**
  * Класс модели вызова set & get методов при обращении к ключам массива
  */
@@ -175,6 +177,47 @@ class ValueObject extends ArrayObject implements IValueObject
     }
 
     /**
+     * @param mixed[] $arguments
+     *
+     * @return $this|mixed
+     *
+     * @throws ErrorException
+     */
+    public function __call(string $name, array $arguments)
+    {
+        if (mb_substr($name, 0, 3) === 'set') {
+            $this->modelSet(static::humanize(mb_substr($name, 3)), $arguments[0]);
+
+            return $this;
+        }
+        if (mb_substr($name, 0, 3) === 'get') {
+            return $this->modelGet(static::humanize(mb_substr($name, 3)));
+        }
+
+        throw new ErrorException(sprintf('Вызван не поддерживаемый метод "%s"', $name));
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return $this
+     */
+    public function __set(string $property, $value)
+    {
+        $this->modelSet(static::humanize($property), $value);
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function __get(string $property)
+    {
+        return $this->modelGet(static::humanize($property));
+    }
+
+    /**
      * Преобразует строку из ("string_helper" или "string.helper" или "string-helper") в "StringHelper"
      *
      * @param string $value значение для преобразования
@@ -187,5 +230,23 @@ class ValueObject extends ArrayObject implements IValueObject
             }, $value . ' '),
             ' ' . $delimiter
         );
+    }
+
+    /**
+     * Преобразует строку из "StringHelper" в "string_helper"
+     *
+     * @param string $value     значение для преобразования
+     * @param string $delimiter разделитель между словами
+     */
+    private static function humanize(string $value, string $delimiter = '_'): string
+    {
+        $result = mb_strtolower(preg_replace('/(?<=\w)([A-Z])/m', '_\\1', $value));
+        $search = '\\';
+        /** @psalm-suppress InvalidLiteralArgument */
+        if (strpos($search, $result) === false) {
+            $search = '_';
+        }
+
+        return str_replace($search, $delimiter, $result);
     }
 }
