@@ -12,13 +12,6 @@ use Fi1a\Collection\DataType\IMapArrayObject;
 interface ICollection extends IMapArrayObject
 {
     /**
-     * Конструктор
-     *
-     * @param mixed[]|null $data
-     */
-    public function __construct(string $type = 'mixed', ?array $data = null);
-
-    /**
      * Возвращает объявленный тип значений
      */
     public function getType(): string;
