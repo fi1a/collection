@@ -296,7 +296,7 @@ trait TMapArrayObject
     public function filter(callable $callback)
     {
         $collection = clone $this;
-        $collection->exchangeArray(array_filter($this->storage, $callback));
+        $collection->exchangeArray(ArrayHelper::filter($this->storage, $callback));
 
         return $collection;
     }

@@ -377,6 +377,19 @@ class ArrayHelper
     }
 
     /**
+     * Возвращает отфильтрованную коллекцию
+     *
+     * @param mixed[]                          $array
+     * @param callable(mixed, mixed=):scalar $callback функция для фильтрации
+     *
+     * @return mixed[]
+     */
+    public static function filter(array $array, callable $callback): array
+    {
+        return array_filter($array, $callback);
+    }
+
+    /**
      * Извлекает значение из массива или объекта
      *
      * @param mixed  $object значение
