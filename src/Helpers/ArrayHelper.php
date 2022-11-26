@@ -243,4 +243,24 @@ class ArrayHelper
 
         return $prev;
     }
+
+    /**
+     * Заменяет значение элемента по ключу, только если текущее значение равно $oldValue.
+     * Если элемент заменен, возвращает true.
+     *
+     * @param mixed[]         $array
+     * @param string|int|null $key
+     * @param mixed           $oldValue
+     * @param mixed           $newValue
+     */
+    public static function replaceIf(array &$array, $key, $oldValue, $newValue): bool
+    {
+        if (static::get($array, $key) === $oldValue) {
+            $array = static::set($array, $key, $newValue);
+
+            return true;
+        }
+
+        return false;
+    }
 }

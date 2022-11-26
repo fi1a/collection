@@ -183,13 +183,7 @@ trait TMapArrayObject
      */
     public function replaceIf($key, $oldValue, $newValue): bool
     {
-        if ($this->get($key) === $oldValue) {
-            $this->set($key, $newValue);
-
-            return true;
-        }
-
-        return false;
+        return ArrayHelper::replaceIf($this->storage, $key, $oldValue, $newValue);
     }
 
     /**
