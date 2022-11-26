@@ -37,4 +37,25 @@ class ArrayHelper
 
         return current($array);
     }
+
+    /**
+     * Возвращает последний элемент
+     *
+     * @param mixed[] $array
+     *
+     * @return mixed
+     */
+    public static function last(array $array)
+    {
+        if (static::isEmpty($array)) {
+            throw new OutOfBoundsException('Can\'t determine last item. Array is empty');
+        }
+        /**
+         * @var mixed $value
+         */
+        $value = end($array);
+        reset($array);
+
+        return $value;
+    }
 }

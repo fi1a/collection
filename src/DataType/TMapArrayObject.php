@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection\DataType;
 
-use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
 use Fi1a\Collection\Exception\ExtractValueException;
 use Fi1a\Collection\Exception\InvalidArgumentException;
 use Fi1a\Collection\Helpers\ArrayHelper;
@@ -39,16 +38,7 @@ trait TMapArrayObject
      */
     public function last()
     {
-        if ($this->isEmpty()) {
-            throw new OutOfBoundsException('Can\'t determine last item. Array is empty');
-        }
-        /**
-         * @var mixed
-         */
-        $value = end($this->storage);
-        reset($this->storage);
-
-        return $value;
+        return ArrayHelper::last($this->storage);
     }
 
     /**
