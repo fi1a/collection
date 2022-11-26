@@ -81,4 +81,19 @@ class ArrayHelper
     {
         return array_keys($array);
     }
+
+    /**
+     * Есть ли элемент с таким ключем
+     *
+     * @param mixed[]           $array
+     * @param string|int|null $key
+     */
+    public static function has(array $array, $key): bool
+    {
+        if (is_null($key)) {
+            $key = (string) $key;
+        }
+
+        return array_key_exists($key, $array);
+    }
 }

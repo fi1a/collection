@@ -80,7 +80,7 @@ trait TMapArrayObject
      */
     public function has($key): bool
     {
-        return $this->offsetExists($key);
+        return ArrayHelper::has($this->storage, $key);
     }
 
     /**
