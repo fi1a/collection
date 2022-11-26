@@ -221,4 +221,26 @@ class ArrayHelper
 
         return $prev;
     }
+
+    /**
+     * Заменяет значение элемента по ключу, только если есть значение. Возвращает предыдущее значение
+     *
+     * @param mixed[]         $array
+     * @param string|int|null $key
+     * @param mixed           $value
+     *
+     * @return mixed
+     */
+    public static function replace(array &$array, $key, $value)
+    {
+        /**
+         * @var mixed $prev
+         */
+        $prev = static::get($array, $key);
+        if (static::has($array, $key)) {
+            $array = static::set($array, $key, $value);
+        }
+
+        return $prev;
+    }
 }

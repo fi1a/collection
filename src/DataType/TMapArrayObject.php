@@ -170,15 +170,7 @@ trait TMapArrayObject
      */
     public function replace($key, $value)
     {
-        /**
-         * @var mixed $prev
-         */
-        $prev = $this->get($key);
-        if ($this->has($key)) {
-            $this->set($key, $value);
-        }
-
-        return $prev;
+        return ArrayHelper::replace($this->storage, $key, $value);
     }
 
     /**
