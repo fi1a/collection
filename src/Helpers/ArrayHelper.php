@@ -96,4 +96,25 @@ class ArrayHelper
 
         return array_key_exists($key, $array);
     }
+
+    /**
+     * Возвращает элемент по ключу
+     *
+     * @param mixed[]         $array
+     * @param string|int|null $key     ключ
+     * @param mixed           $default значение по умолчанию, возвращается при отсутствии ключа
+     *
+     * @return mixed
+     */
+    public static function get(array $array, $key, $default = null)
+    {
+        if (!static::has($array, $key)) {
+            return $default;
+        }
+        if (is_null($key)) {
+            $key = (string) $key;
+        }
+
+        return $array[$key];
+    }
 }

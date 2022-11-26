@@ -93,14 +93,7 @@ trait TMapArrayObject
      */
     public function get($key, $default = null)
     {
-        if (!$this->has($key)) {
-            return $default;
-        }
-        if (is_null($key)) {
-            $key = (string) $key;
-        }
-
-        return $this[$key];
+        return ArrayHelper::get($this->storage, $key, $default);
     }
 
     /**
