@@ -69,4 +69,16 @@ class ArrayHelper
     {
         return in_array($value, $array, true);
     }
+
+    /**
+     * Возвращает ключи массива
+     *
+     * @param mixed[] $array
+     *
+     * @return mixed[]
+     */
+    public static function keys(array $array): array
+    {
+        return array_keys($array);
+    }
 }

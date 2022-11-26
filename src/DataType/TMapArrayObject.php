@@ -70,7 +70,7 @@ trait TMapArrayObject
      */
     public function keys(): array
     {
-        return array_keys($this->storage);
+        return ArrayHelper::keys($this->storage);
     }
 
     /**
