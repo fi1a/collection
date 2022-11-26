@@ -566,6 +566,37 @@ class ArrayHelper
     }
 
     /**
+     * Переключает значения
+     *
+     * @param mixed[] $array
+     * @param string|int|null $key
+     * @param mixed $firstValue
+     * @param mixed $secondValue
+     *
+     * @return mixed[]
+     */
+    public static function toggle(array $array, $key, $firstValue, $secondValue): array
+    {
+        if (is_null($key)) {
+            $key = (string) $key;
+        }
+        if ($array[$key] === $firstValue) {
+            /**
+             * @var mixed
+             */
+            $array[$key] = $secondValue;
+
+            return $array;
+        }
+        /**
+         * @var mixed
+         */
+        $array[$key] = $firstValue;
+
+        return $array;
+    }
+
+    /**
      * Извлекает значение из массива или объекта
      *
      * @param mixed  $object значение

@@ -528,4 +528,22 @@ class MapArrayObjectTest extends TestCase
         $array = new MapArrayObject([]);
         $this->assertFalse($array->lastKey());
     }
+
+    /**
+     * Переключает значения
+     */
+    public function testToggle(): void
+    {
+        $array = new MapArrayObject(['foo' => 'foo']);
+        $array->toggle('foo', 'foo', 'bar');
+        $this->assertEquals(['foo' => 'bar'], $array->getArrayCopy());
+        $array->toggle('foo', 'foo', 'bar');
+        $this->assertEquals(['foo' => 'foo'], $array->getArrayCopy());
+
+        $array = new MapArrayObject(['' => 'foo']);
+        $array->toggle(null, 'foo', 'bar');
+        $this->assertEquals(['' => 'bar'], $array->getArrayCopy());
+        $array->toggle(null, 'foo', 'bar');
+        $this->assertEquals(['' => 'foo'], $array->getArrayCopy());
+    }
 }

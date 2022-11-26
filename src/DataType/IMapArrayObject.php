@@ -282,4 +282,15 @@ interface IMapArrayObject extends IArrayObject
      * @return string|int|false
      */
     public function lastKey();
+
+    /**
+     * Переключает значения
+     *
+     * @param string|int|null $key
+     * @param mixed           $firstValue
+     * @param mixed           $secondValue
+     *
+     * @return $this
+     */
+    public function toggle($key, $firstValue, $secondValue);
 }

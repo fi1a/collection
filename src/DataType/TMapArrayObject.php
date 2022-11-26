@@ -433,6 +433,22 @@ trait TMapArrayObject
     }
 
     /**
+     * Переключает значения
+     *
+     * @param string|int|null $key
+     * @param mixed           $firstValue
+     * @param mixed           $secondValue
+     *
+     * @return $this
+     */
+    public function toggle($key, $firstValue, $secondValue)
+    {
+        $this->storage = ArrayHelper::toggle($this->storage, $key, $firstValue, $secondValue);
+
+        return $this;
+    }
+
+    /**
      * @deprecated
      *
      * Проверяет, присутствует ли в коллекции значение
