@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Fi1a\Collection\Helpers;
 
 use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
+use Fi1a\Collection\DataType\IArrayObject;
+use Fi1a\Collection\Exception\ExtractValueException;
 
 /**
  * Хелпер с методами для массива
@@ -303,5 +305,58 @@ class ArrayHelper
         }
 
         return $array;
+    }
+
+    /**
+     * Возвращает значения переданного ключа, свойства или метода
+     *
+     * @param mixed[]  $array
+     * @param string $name ключ, свойство или метод
+     *
+     * @return mixed[]
+     *
+     * @throws ExtractValueException
+     */
+    public static function column(array $array, string $name): array
+    {
+        $values = [];
+        /**
+         * @var mixed $value
+         */
+        foreach ($array as $value) {
+            /**
+             * @var mixed
+             */
+            $values[] = static::extractValue($value, $name);
+        }
+
+        return $values;
+    }
+
+    /**
+     * Извлекает значение из массива или объекта
+     *
+     * @param mixed  $object значение
+     * @param string $name   название ключа, свойства или метода
+     *
+     * @return mixed
+     *
+     * @throws ExtractValueException
+     */
+    public static function extractValue($object, string $name)
+    {
+        if (is_array($object) || $object instanceof IArrayObject) {
+            return $object[$name];
+        }
+        if (is_object($object)) {
+            if (property_exists($object, $name)) {
+                return $object->$name;
+            }
+            if (method_exists($object, $name)) {
+                return $object->{$name}();
+            }
+        }
+
+        throw new ExtractValueException(sprintf('Name of column "%s" not found', $name));
     }
 }

@@ -240,18 +240,7 @@ trait TMapArrayObject
      */
     public function column(string $name): array
     {
-        $values = [];
-        /**
-         * @var mixed $value
-         */
-        foreach ($this as $value) {
-            /**
-             * @var mixed
-             */
-            $values[] = $this->extractValue($value, $name);
-        }
-
-        return $values;
+        return ArrayHelper::column($this->storage, $name);
     }
 
     /**
