@@ -371,7 +371,7 @@ trait TMapArrayObject
      */
     public function reduce(callable $callback, $initial = null)
     {
-        return array_reduce($this->storage, $callback, $initial);
+        return ArrayHelper::reduce($this->storage, $callback, $initial);
     }
 
     /**

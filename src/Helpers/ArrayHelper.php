@@ -475,6 +475,20 @@ class ArrayHelper
     }
 
     /**
+     * Итеративно уменьшает коллекцию к единственному значению, используя callback-функцию
+     *
+     * @param mixed[]                      $array
+     * @param callable(mixed, mixed):mixed $callback
+     * @param mixed                        $initial
+     *
+     * @return mixed
+     */
+    public static function reduce(array $array, callable $callback, $initial = null)
+    {
+        return array_reduce($array, $callback, $initial);
+    }
+
+    /**
      * Извлекает значение из массива или объекта
      *
      * @param mixed  $object значение
