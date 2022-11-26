@@ -463,6 +463,18 @@ class ArrayHelper
     }
 
     /**
+     * Сбросить ключи коллекции
+     *
+     * @param mixed[] $array
+     *
+     * @return mixed[]
+     */
+    public static function resetKeys(array $array): array
+    {
+        return array_values($array);
+    }
+
+    /**
      * Извлекает значение из массива или объекта
      *
      * @param mixed  $object значение

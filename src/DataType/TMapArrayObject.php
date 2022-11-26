@@ -356,7 +356,7 @@ trait TMapArrayObject
      */
     public function resetKeys()
     {
-        $this->storage = array_values($this->storage);
+        $this->storage = ArrayHelper::resetKeys($this->storage);
 
         return $this;
     }
