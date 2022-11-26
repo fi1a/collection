@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Fi1a\Collection\Helpers;
+
+use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
+
+/**
+ * Хелпер с методами для массива
+ */
+class ArrayHelper
+{
+    /**
+     * Определяет пустой массив или нет
+     *
+     * @param mixed[] $array
+     */
+    public static function isEmpty(array $array): bool
+    {
+        return count($array) === 0;
+    }
+
+    /**
+     * Возвращает первый элемент
+     *
+     * @param mixed[] $array
+     *
+     * @return mixed
+     */
+    public static function first(array $array)
+    {
+        if (static::isEmpty($array)) {
+            throw new OutOfBoundsException('Can\'t determine first item. Array is empty');
+        }
+        reset($array);
+
+        return current($array);
+    }
+}

@@ -7,6 +7,7 @@ namespace Fi1a\Collection\DataType;
 use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
 use Fi1a\Collection\Exception\ExtractValueException;
 use Fi1a\Collection\Exception\InvalidArgumentException;
+use Fi1a\Collection\Helpers\ArrayHelper;
 
 /**
  * Реализует интерфейсы \ArrayAccess, \Countable
@@ -18,7 +19,7 @@ trait TMapArrayObject
      */
     public function isEmpty(): bool
     {
-        return count($this->storage) === 0;
+        return ArrayHelper::isEmpty($this->storage);
     }
 
     /**
@@ -28,12 +29,7 @@ trait TMapArrayObject
      */
     public function first()
     {
-        if ($this->isEmpty()) {
-            throw new OutOfBoundsException('Can\'t determine first item. Array is empty');
-        }
-        reset($this->storage);
-
-        return current($this->storage);
+        return ArrayHelper::first($this->storage);
     }
 
     /**
