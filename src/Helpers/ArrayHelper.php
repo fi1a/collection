@@ -390,6 +390,26 @@ class ArrayHelper
     }
 
     /**
+     * Возвразает коллекцию с элементами у которых значение ключа, свойства или метода равно переданному значению
+     *
+     * @param mixed[]  $array
+     * @param string $name  ключ, свойство или метод
+     * @param mixed  $value значение для сравнения
+     *
+     * @return mixed[]
+     */
+    public static function where(array $array, string $name, $value): array
+    {
+        $filter = /**
+         * @param mixed $item
+         */function ($item) use ($name, $value): bool {
+            return $value === static::extractValue($item, $name);
+};
+
+        return static::filter($array, $filter);
+    }
+
+    /**
      * Извлекает значение из массива или объекта
      *
      * @param mixed  $object значение

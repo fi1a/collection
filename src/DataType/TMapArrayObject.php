@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection\DataType;
 
-use Fi1a\Collection\Exception\ExtractValueException;
 use Fi1a\Collection\Helpers\ArrayHelper;
 
 /**
@@ -243,33 +242,6 @@ trait TMapArrayObject
     }
 
     /**
-     * Извлекает значение из массива или объекта
-     *
-     * @param mixed  $object значение
-     * @param string $name   название ключа, свойства или метода
-     *
-     * @return mixed
-     *
-     * @throws ExtractValueException
-     */
-    protected function extractValue($object, string $name)
-    {
-        if (is_array($object) || $object instanceof IArrayObject) {
-            return $object[$name];
-        }
-        if (is_object($object)) {
-            if (property_exists($object, $name)) {
-                return $object->$name;
-            }
-            if (method_exists($object, $name)) {
-                return $object->{$name}();
-            }
-        }
-
-        throw new ExtractValueException(sprintf('Name of column "%s" not found', $name));
-    }
-
-    /**
      * Сортировка элементов коллекции по значениям переданного ключа, свойства или метода
      *
      * @param string $name ключ, свойство или метод
@@ -311,13 +283,10 @@ trait TMapArrayObject
      */
     public function where(string $name, $value)
     {
-        $filter = /**
-         * @param mixed $item
-         */function ($item) use ($name, $value): bool {
-            return $value === $this->extractValue($item, $name);
-};
+        $collection = clone $this;
+        $collection->exchangeArray(ArrayHelper::where($this->storage, $name, $value));
 
-        return $this->filter($filter);
+        return $collection;
     }
 
     /**
