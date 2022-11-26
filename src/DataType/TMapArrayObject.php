@@ -399,6 +399,20 @@ trait TMapArrayObject
     }
 
     /**
+     * Вставить значения
+     *
+     * @param mixed[] $values
+     *
+     * @return $this
+     */
+    public function insert(int $index, array $values)
+    {
+        $this->storage = ArrayHelper::insert($this->storage, $index, $values);
+
+        return $this;
+    }
+
+    /**
      * @deprecated
      *
      * Проверяет, присутствует ли в коллекции значение

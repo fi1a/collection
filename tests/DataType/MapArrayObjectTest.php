@@ -480,4 +480,22 @@ class MapArrayObjectTest extends TestCase
         $array = new MapArrayObject([1, 2, 3]);
         $this->assertEquals('1, 2, 3', $array->join(', '));
     }
+
+    /**
+     * Вставить значения
+     */
+    public function testInsert(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $array->insert(1, [4, 5]);
+        $this->assertEquals([1, 4, 5, 2, 3], $array->getArrayCopy());
+
+        $array = new MapArrayObject([1, 2, 3]);
+        $array->insert(4, [4, 5]);
+        $this->assertEquals([1, 2, 3, 4, 5,], $array->getArrayCopy());
+
+        $array = new MapArrayObject([1, 2, 3]);
+        $array->insert(0, [4, 5]);
+        $this->assertEquals([4, 5, 1, 2, 3,], $array->getArrayCopy());
+    }
 }

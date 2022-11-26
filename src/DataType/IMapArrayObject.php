@@ -259,4 +259,13 @@ interface IMapArrayObject extends IArrayObject
      * Объединяет элементы в строку
      */
     public function join(string $separator): string;
+
+    /**
+     * Вставить значения
+     *
+     * @param mixed[] $values
+     *
+     * @return $this
+     */
+    public function insert(int $index, array $values);
 }

@@ -463,7 +463,7 @@ class ArrayHelper
     }
 
     /**
-     * Сбросить ключи коллекции
+     * Сбросить ключи
      *
      * @param mixed[] $array
      *
@@ -489,7 +489,7 @@ class ArrayHelper
     }
 
     /**
-     * Оборачивает значения и возвращает новую коллекцию
+     * Оборачивает значения
      *
      * @param mixed[]     $array
      *
@@ -517,6 +517,23 @@ class ArrayHelper
     {
         /** @psalm-suppress MixedArgumentTypeCoercion */
         return implode($separator, $array);
+    }
+
+    /**
+     * Вставить значения
+     *
+     * @param mixed[] $array
+     * @param mixed[] $values
+     *
+     * @return mixed[]
+     */
+    public static function insert(array $array, int $index, array $values): array
+    {
+        return array_merge(
+            array_slice($array, 0, $index),
+            $values,
+            array_slice($array, $index),
+        );
     }
 
     /**
