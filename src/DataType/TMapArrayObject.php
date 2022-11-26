@@ -144,13 +144,7 @@ trait TMapArrayObject
      */
     public function put($key, $value)
     {
-        /**
-         * @var mixed $prev
-         */
-        $prev = $this->get($key);
-        $this->set($key, $value);
-
-        return $prev;
+        return ArrayHelper::put($this->storage, $key, $value);
     }
 
     /**

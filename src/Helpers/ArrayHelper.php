@@ -179,4 +179,24 @@ class ArrayHelper
 
         return false;
     }
+
+    /**
+     * Устанавливает значение по ключу, если значение уже есть в массиве, возвращает его
+     *
+     * @param mixed[]         $array
+     * @param string|int|null $key
+     * @param mixed           $value
+     *
+     * @return mixed
+     */
+    public static function put(array &$array, $key, $value)
+    {
+        /**
+         * @var mixed $prev
+         */
+        $prev = static::get($array, $key);
+        $array = static::set($array, $key, $value);
+
+        return $prev;
+    }
 }
