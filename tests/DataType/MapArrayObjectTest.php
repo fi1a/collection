@@ -300,21 +300,6 @@ class MapArrayObjectTest extends TestCase
     }
 
     /**
-     * Тестирование метода contains массива
-     */
-    public function testContains(): void
-    {
-        $array = new MapArrayObject();
-        $array->add(1);
-        $array->add(2);
-        $array->add(3);
-        $this->assertTrue($array->contains(1));
-        $this->assertTrue($array->contains(2));
-        $this->assertTrue($array->contains(3));
-        $this->assertFalse($array->contains(4));
-    }
-
-    /**
      * Тестирование метода column массива
      */
     public function testColumn(): void

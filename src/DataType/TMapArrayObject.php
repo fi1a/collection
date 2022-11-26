@@ -58,9 +58,9 @@ trait TMapArrayObject
      *
      * @param mixed $value
      */
-    public function hasValue($value): bool
+    public function hasValue($value, bool $strict = true): bool
     {
-        return ArrayHelper::hasValue($this->storage, $value);
+        return ArrayHelper::hasValue($this->storage, $value, $strict);
     }
 
     /**
@@ -229,17 +229,6 @@ trait TMapArrayObject
         $this->storage = ArrayHelper::map($this->storage, $callback);
 
         return $this;
-    }
-
-    /**
-     * Проверяет, присутствует ли в коллекции значение
-     *
-     * @param mixed $value значение
-     * @param bool $strict если true, также проверяет типы значений
-     */
-    public function contains($value, bool $strict = true): bool
-    {
-        return in_array($value, $this->storage, $strict);
     }
 
     /**

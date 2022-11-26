@@ -165,14 +165,6 @@ interface IMapArrayObject extends IArrayObject
     public function map(callable $callback);
 
     /**
-     * Проверяет, присутствует ли в коллекции значение
-     *
-     * @param mixed $value значение
-     * @param bool $strict если true, также проверяет типы значений
-     */
-    public function contains($value, bool $strict = true): bool;
-
-    /**
      * Возвращает значения переданного ключа, свойства или метода
      *
      * @param string $name ключ, свойство или метод

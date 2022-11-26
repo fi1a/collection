@@ -71,16 +71,16 @@ class CollectionTest extends TestCase
     /**
      * Тестирование метода contains коллекции
      */
-    public function testContains(): void
+    public function testHasValue(): void
     {
         $collection = new Collection('int');
         $collection->add(1);
         $collection->add(2);
         $collection->add(3);
-        $this->assertTrue($collection->contains(1));
-        $this->assertTrue($collection->contains(2));
-        $this->assertTrue($collection->contains(3));
-        $this->assertFalse($collection->contains(4));
+        $this->assertTrue($collection->hasValue(1));
+        $this->assertTrue($collection->hasValue(2));
+        $this->assertTrue($collection->hasValue(3));
+        $this->assertFalse($collection->hasValue(4));
     }
 
     /**
