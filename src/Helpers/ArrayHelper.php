@@ -117,4 +117,24 @@ class ArrayHelper
 
         return $array[$key];
     }
+
+    /**
+     * Устанавливает значение по ключу
+     *
+     * @param mixed[]         $array
+     * @param string|int|null $key   ключ
+     * @param mixed           $value устанавливаемое значение
+     *
+     * @return mixed[]
+     */
+    public static function set(array $array, $key, $value): array
+    {
+        if (is_null($key)) {
+            $key = (string) $key;
+        }
+        /** @psalm-suppress MixedAssignment */
+        $array[$key] = $value;
+
+        return $array;
+    }
 }

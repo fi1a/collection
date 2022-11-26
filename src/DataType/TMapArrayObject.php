@@ -106,10 +106,7 @@ trait TMapArrayObject
      */
     public function set($key, $value)
     {
-        if (is_null($key)) {
-            $key = (string) $key;
-        }
-        $this->storage[$key] = $value;
+        $this->storage = ArrayHelper::set($this->storage, $key, $value);
 
         return $this;
     }
