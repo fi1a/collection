@@ -301,7 +301,7 @@ trait TMapArrayObject
         $cloneCollection = clone $this;
         $cloneCollection->exchangeArray(
             ArrayHelper::diff(
-                $this->getArrayCopy(),
+                $this->storage,
                 $collection instanceof IArrayObject ? $collection->getArrayCopy() : $collection
             )
         );
@@ -321,7 +321,7 @@ trait TMapArrayObject
         $cloneCollection = clone $this;
         $cloneCollection->exchangeArray(
             ArrayHelper::intersect(
-                $this->getArrayCopy(),
+                $this->storage,
                 $collection instanceof IArrayObject ? $collection->getArrayCopy() : $collection
             )
         );
@@ -341,7 +341,7 @@ trait TMapArrayObject
         $cloneCollection = clone $this;
         $cloneCollection->exchangeArray(
             array_merge(
-                $this->getArrayCopy(),
+                $this->storage,
                 $collection instanceof IArrayObject ? $collection->getArrayCopy() : $collection
             )
         );
@@ -395,7 +395,7 @@ trait TMapArrayObject
     public function join(string $separator): string
     {
         /** @psalm-suppress MixedArgumentTypeCoercion */
-        return implode($separator, $this->getArrayCopy());
+        return ArrayHelper::join($this->storage, $separator);
     }
 
     /**

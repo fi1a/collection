@@ -509,6 +509,17 @@ class ArrayHelper
     }
 
     /**
+     * Объединяет элементы в строку
+     *
+     * @param mixed[]  $array
+     */
+    public static function join(array $array, string $separator): string
+    {
+        /** @psalm-suppress MixedArgumentTypeCoercion */
+        return implode($separator, $array);
+    }
+
+    /**
      * Извлекает значение из массива или объекта
      *
      * @param mixed  $object значение
