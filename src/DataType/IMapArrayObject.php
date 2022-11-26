@@ -207,11 +207,11 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
      *
-     * @param IArrayObject $collection коллекция для вычисления расхождения
+     * @param IArrayObject|mixed[] $collection коллекция для вычисления расхождения
      *
      * @return static
      */
-    public function diff(IArrayObject $collection);
+    public function diff($collection);
 
     /**
      * Возвращает новую коллекцию с пересечением элементов текущей коллекции с переданной

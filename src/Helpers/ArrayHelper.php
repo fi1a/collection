@@ -410,6 +410,34 @@ class ArrayHelper
     }
 
     /**
+     * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
+     *
+     * @param mixed[] $array
+     * @param mixed[] $diff
+     *
+     * @return mixed[]
+     */
+    public static function diff(array $array, array $diff): array
+    {
+        $comparator = /**
+         * @param mixed $a
+         * @param mixed $b
+         */function ($a, $b): int {
+    if (is_object($a) && is_object($b)) {
+        $a = spl_object_id($a);
+        $b = spl_object_id($b);
+    }
+
+            return $a === $b ? 0 : ($a < $b ? 1 : -1);
+};
+
+        $diff1 = array_udiff($array, $diff, $comparator);
+        $diff2 = array_udiff($diff, $array, $comparator);
+
+        return array_merge($diff1, $diff2);
+    }
+
+    /**
      * Извлекает значение из массива или объекта
      *
      * @param mixed  $object значение
@@ -419,7 +447,7 @@ class ArrayHelper
      *
      * @throws ExtractValueException
      */
-    public static function extractValue($object, string $name)
+    private static function extractValue($object, string $name)
     {
         if (is_array($object) || $object instanceof IArrayObject) {
             return $object[$name];

@@ -292,28 +292,19 @@ trait TMapArrayObject
     /**
      * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
      *
-     * @param IArrayObject $collection коллекция для вычисления расхождения
+     * @param IArrayObject|mixed[] $collection коллекция для вычисления расхождения
      *
      * @return static
      */
-    public function diff(IArrayObject $collection)
+    public function diff($collection)
     {
-        $comparator = /**
-         * @param mixed $a
-         * @param mixed $b
-         */function ($a, $b): int {
-    if (is_object($a) && is_object($b)) {
-        $a = spl_object_id($a);
-        $b = spl_object_id($b);
-    }
-
-            return $a === $b ? 0 : ($a < $b ? 1 : -1);
-};
-
-        $diff1 = array_udiff($this->getArrayCopy(), $collection->getArrayCopy(), $comparator);
-        $diff2 = array_udiff($collection->getArrayCopy(), $this->getArrayCopy(), $comparator);
         $cloneCollection = clone $this;
-        $cloneCollection->exchangeArray(array_merge($diff1, $diff2));
+        $cloneCollection->exchangeArray(
+            ArrayHelper::diff(
+                $this->getArrayCopy(),
+                $collection instanceof IArrayObject ? $collection->getArrayCopy() : $collection
+            )
+        );
 
         return $cloneCollection;
     }
