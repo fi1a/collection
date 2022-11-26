@@ -225,11 +225,11 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Объединяет элементы текущей коллекции с элементами переданной и возвращает новую коллекцию
      *
-     * @param IArrayObject $collection коллекция для объединения
+     * @param IArrayObject|mixed[] $collection коллекция для объединения
      *
      * @return static
      */
-    public function merge(IArrayObject $collection);
+    public function merge($collection);
 
     /**
      * Сбросить ключи коллекции
