@@ -161,4 +161,22 @@ class ArrayHelper
 
         return $prev;
     }
+
+    /**
+     * Удаляет элемент по ключу, если значение равно переданному. Если элемент удален, возвращает true.
+     *
+     * @param mixed[]         $array
+     * @param string|int|null $key ключ
+     * @param mixed           $value
+     */
+    public static function deleteIf(array &$array, $key, $value): bool
+    {
+        if (static::get($array, $key) === $value) {
+            static::delete($array, $key);
+
+            return true;
+        }
+
+        return false;
+    }
 }

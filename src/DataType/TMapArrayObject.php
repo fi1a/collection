@@ -131,13 +131,7 @@ trait TMapArrayObject
      */
     public function deleteIf($key, $value): bool
     {
-        if ($this->get($key) === $value) {
-            $this->delete($key);
-
-            return true;
-        }
-
-        return false;
+        return ArrayHelper::deleteIf($this->storage, $key, $value);
     }
 
     /**
