@@ -216,11 +216,11 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Возвращает новую коллекцию с пересечением элементов текущей коллекции с переданной
      *
-     * @param IArrayObject $collection коллекция для вычисления пересечения
+     * @param IArrayObject|mixed[] $collection коллекция для вычисления пересечения
      *
      * @return static
      */
-    public function intersect(IArrayObject $collection);
+    public function intersect($collection);
 
     /**
      * Объединяет элементы текущей коллекции с элементами переданной и возвращает новую коллекцию

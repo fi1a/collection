@@ -312,29 +312,19 @@ trait TMapArrayObject
     /**
      * Возвращает новую коллекцию с пересечением элементов текущей коллекции с переданной
      *
-     * @param IArrayObject $collection коллекция для вычисления пересечения
+     * @param IArrayObject|mixed[] $collection коллекция для вычисления пересечения
      *
      * @return static
      */
-    public function intersect(IArrayObject $collection)
+    public function intersect($collection)
     {
-        $function = /**
-         * @param mixed $a
-         * @param mixed $b
-         */function ($a, $b): int {
-    if (is_object($a) && is_object($b)) {
-        $a = spl_object_id($a);
-        $b = spl_object_id($b);
-    }
-
-            return $a === $b ? 0 : ($a < $b ? 1 : -1);
-};
         $cloneCollection = clone $this;
-        $cloneCollection->exchangeArray(array_uintersect(
-            $this->getArrayCopy(),
-            $collection->getArrayCopy(),
-            $function
-        ));
+        $cloneCollection->exchangeArray(
+            ArrayHelper::intersect(
+                $this->getArrayCopy(),
+                $collection instanceof IArrayObject ? $collection->getArrayCopy() : $collection
+            )
+        );
 
         return $cloneCollection;
     }

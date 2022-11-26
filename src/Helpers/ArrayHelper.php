@@ -413,11 +413,11 @@ class ArrayHelper
      * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
      *
      * @param mixed[] $array
-     * @param mixed[] $diff
+     * @param mixed[] $collection
      *
      * @return mixed[]
      */
-    public static function diff(array $array, array $diff): array
+    public static function diff(array $array, array $collection): array
     {
         $comparator = /**
          * @param mixed $a
@@ -431,10 +431,35 @@ class ArrayHelper
             return $a === $b ? 0 : ($a < $b ? 1 : -1);
 };
 
-        $diff1 = array_udiff($array, $diff, $comparator);
-        $diff2 = array_udiff($diff, $array, $comparator);
+        $diff1 = array_udiff($array, $collection, $comparator);
+        $diff2 = array_udiff($collection, $array, $comparator);
 
         return array_merge($diff1, $diff2);
+    }
+
+    /**
+     * Возвращает новую коллекцию с пересечением элементов текущей коллекции с переданной
+     *
+     * @param mixed[] $array
+     * @param mixed[] $collection коллекция для вычисления пересечения
+     *
+     * @return mixed[]
+     */
+    public static function intersect(array $array, array $collection): array
+    {
+        $function = /**
+         * @param mixed $a
+         * @param mixed $b
+         */function ($a, $b): int {
+    if (is_object($a) && is_object($b)) {
+        $a = spl_object_id($a);
+        $b = spl_object_id($b);
+    }
+
+            return $a === $b ? 0 : ($a < $b ? 1 : -1);
+};
+
+        return array_uintersect($array, $collection, $function);
     }
 
     /**
