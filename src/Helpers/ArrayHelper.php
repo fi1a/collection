@@ -199,4 +199,26 @@ class ArrayHelper
 
         return $prev;
     }
+
+    /**
+     * Устанавливает значение по ключу, если его нет. Возвращает предыдущее значение
+     *
+     * @param mixed[]         $array
+     * @param string|int|null $key
+     * @param mixed           $value
+     *
+     * @return mixed
+     */
+    public static function putIfAbsent(array &$array, $key, $value)
+    {
+        /**
+         * @var mixed $prev
+         */
+        $prev = static::get($array, $key);
+        if (is_null($prev)) {
+            $array = static::set($array, $key, $value);
+        }
+
+        return $prev;
+    }
 }

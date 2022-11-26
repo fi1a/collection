@@ -157,15 +157,7 @@ trait TMapArrayObject
      */
     public function putIfAbsent($key, $value)
     {
-        /**
-         * @var mixed $prev
-         */
-        $prev = $this->get($key);
-        if (is_null($prev)) {
-            $this->set($key, $value);
-        }
-
-        return $prev;
+        return ArrayHelper::putIfAbsent($this->storage, $key, $value);
     }
 
     /**
