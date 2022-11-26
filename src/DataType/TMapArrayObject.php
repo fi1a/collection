@@ -381,15 +381,10 @@ trait TMapArrayObject
      */
     public function wraps(string $prefix, ?string $suffix = null)
     {
-        if (is_null($suffix)) {
-            $suffix = $prefix;
-        }
         $collection = clone $this;
-        $collection->map(function ($value) use ($prefix, $suffix) {
-            $value = (string) $value;
-
-            return $prefix . $value . $suffix;
-        });
+        $collection->exchangeArray(
+            ArrayHelper::wraps($collection->getArrayCopy(), $prefix, $suffix)
+        );
 
         return $collection;
     }

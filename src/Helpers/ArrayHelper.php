@@ -489,6 +489,26 @@ class ArrayHelper
     }
 
     /**
+     * Оборачивает значения и возвращает новую коллекцию
+     *
+     * @param mixed[]     $array
+     *
+     * @return mixed[]
+     */
+    public static function wraps(array $array, string $prefix, ?string $suffix = null): array
+    {
+        if (is_null($suffix)) {
+            $suffix = $prefix;
+        }
+
+        return static::map($array, function ($value) use ($prefix, $suffix) {
+            $value = (string) $value;
+
+            return $prefix . $value . $suffix;
+        });
+    }
+
+    /**
      * Извлекает значение из массива или объекта
      *
      * @param mixed  $object значение
