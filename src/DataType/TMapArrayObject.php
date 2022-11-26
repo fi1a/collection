@@ -226,16 +226,7 @@ trait TMapArrayObject
      */
     public function map(callable $callback)
     {
-        /**
-         * @var string|int $index
-         * @var mixed $value
-         */
-        foreach ($this as $index => $value) {
-            /**
-             * @var mixed
-             */
-            $this[$index] = call_user_func($callback, $value, $index);
-        }
+        $this->storage = ArrayHelper::map($this->storage, $callback);
 
         return $this;
     }

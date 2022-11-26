@@ -280,4 +280,28 @@ class ArrayHelper
             call_user_func($callback, $value, $index);
         }
     }
+
+    /**
+     * Вызывает функцию, передавая ключ и значение из коллекции и заменяет элемент результатом
+     *
+     * @param mixed[]                        $array
+     * @param callable(mixed, mixed):mixed $callback функция, принимающая ключ и значение из коллекции
+     *
+     * @return mixed[]
+     */
+    public static function map(array $array, callable $callback): array
+    {
+        /**
+         * @var string|int $index
+         * @var mixed $value
+         */
+        foreach ($array as $index => $value) {
+            /**
+             * @var mixed
+             */
+            $array[$index] = call_user_func($callback, $value, $index);
+        }
+
+        return $array;
+    }
 }
