@@ -120,18 +120,7 @@ trait TMapArrayObject
      */
     public function delete($key)
     {
-        /**
-         * @var mixed $prev
-         */
-        $prev = $this->get($key);
-        if ($this->has($key)) {
-            if (is_null($key)) {
-                $key = (string) $key;
-            }
-            unset($this[$key]);
-        }
-
-        return $prev;
+        return ArrayHelper::delete($this->storage, $key);
     }
 
     /**

@@ -137,4 +137,28 @@ class ArrayHelper
 
         return $array;
     }
+
+    /**
+     * Удаляет элемент по ключу, возвращает удаленное значение
+     *
+     * @param mixed[]         $array
+     * @param string|int|null $key ключ
+     *
+     * @return mixed
+     */
+    public static function delete(array &$array, $key)
+    {
+        /**
+         * @var mixed $prev
+         */
+        $prev = static::get($array, $key);
+        if (static::has($array, $key)) {
+            if (is_null($key)) {
+                $key = (string) $key;
+            }
+            unset($array[$key]);
+        }
+
+        return $prev;
+    }
 }
