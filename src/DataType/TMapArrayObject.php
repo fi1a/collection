@@ -212,13 +212,7 @@ trait TMapArrayObject
      */
     public function each(callable $callback)
     {
-        /**
-         * @var string|int $index
-         * @var mixed $value
-         */
-        foreach ($this as $index => $value) {
-            call_user_func($callback, $value, $index);
-        }
+        ArrayHelper::each($this->storage, $callback);
 
         return $this;
     }

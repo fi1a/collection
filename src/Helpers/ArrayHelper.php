@@ -263,4 +263,21 @@ class ArrayHelper
 
         return false;
     }
+
+    /**
+     * Вызывает функцию, передавая ключ и значение из коллекции
+     *
+     * @param mixed[]                     $array
+     * @param callable(mixed, mixed):void $callback функция, принимающая ключ и значение из коллекции
+     */
+    public static function each(array $array, callable $callback): void
+    {
+        /**
+         * @var string|int $index
+         * @var mixed $value
+         */
+        foreach ($array as $index => $value) {
+            call_user_func($callback, $value, $index);
+        }
+    }
 }
