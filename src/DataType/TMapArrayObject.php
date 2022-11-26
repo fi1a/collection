@@ -413,6 +413,16 @@ trait TMapArrayObject
     }
 
     /**
+     * Возвращает ключ первого элемента
+     *
+     * @return string|int|null
+     */
+    public function firstKey()
+    {
+        return ArrayHelper::firstKey($this->storage);
+    }
+
+    /**
      * @deprecated
      *
      * Проверяет, присутствует ли в коллекции значение

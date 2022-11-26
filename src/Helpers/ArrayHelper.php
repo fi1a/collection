@@ -537,6 +537,21 @@ class ArrayHelper
     }
 
     /**
+     * Возвращает ключ первого элемента
+     *
+     * @param mixed[] $array
+     *
+     * @return string|int|null
+     */
+    public static function firstKey(array $array)
+    {
+        $keys = array_keys($array);
+        reset($keys);
+
+        return current($keys);
+    }
+
+    /**
      * Извлекает значение из массива или объекта
      *
      * @param mixed  $object значение

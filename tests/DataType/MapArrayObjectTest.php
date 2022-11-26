@@ -498,4 +498,16 @@ class MapArrayObjectTest extends TestCase
         $array->insert(0, [4, 5]);
         $this->assertEquals([4, 5, 1, 2, 3,], $array->getArrayCopy());
     }
+
+    /**
+     * Возвращает ключ первого элемента
+     */
+    public function testFirstKey(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals(0, $array->firstKey());
+
+        $array = new MapArrayObject(['foo' => 'foo', 'bar' => 'bar']);
+        $this->assertEquals('foo', $array->firstKey());
+    }
 }

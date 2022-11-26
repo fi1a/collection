@@ -268,4 +268,11 @@ interface IMapArrayObject extends IArrayObject
      * @return $this
      */
     public function insert(int $index, array $values);
+
+    /**
+     * Возвращает ключ первого элемента
+     *
+     * @return string|int|null
+     */
+    public function firstKey();
 }
