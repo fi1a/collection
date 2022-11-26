@@ -397,4 +397,17 @@ trait TMapArrayObject
         /** @psalm-suppress MixedArgumentTypeCoercion */
         return implode($separator, $this->getArrayCopy());
     }
+
+    /**
+     * @deprecated
+     *
+     * Проверяет, присутствует ли в коллекции значение
+     *
+     * @param mixed $value значение
+     * @param bool $strict если true, также проверяет типы значений
+     */
+    public function contains($value, bool $strict = true): bool
+    {
+        return $this->hasValue($value, $strict);
+    }
 }
