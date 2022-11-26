@@ -60,7 +60,7 @@ trait TMapArrayObject
      */
     public function hasValue($value): bool
     {
-        return in_array($value, $this->storage, true);
+        return ArrayHelper::hasValue($this->storage, $value);
     }
 
     /**

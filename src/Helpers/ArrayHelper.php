@@ -58,4 +58,15 @@ class ArrayHelper
 
         return $value;
     }
+
+    /**
+     * Проверяет, присутствует ли в массиве указанное значение
+     *
+     * @param mixed[] $array
+     * @param mixed $value
+     */
+    public static function hasValue(array $array, $value): bool
+    {
+        return in_array($value, $array, true);
+    }
 }
