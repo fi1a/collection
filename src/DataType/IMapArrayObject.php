@@ -272,7 +272,14 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Возвращает ключ первого элемента
      *
-     * @return string|int|null
+     * @return string|int|false
      */
     public function firstKey();
+
+    /**
+     * Возвращает ключ последнего элемента
+     *
+     * @return string|int|false
+     */
+    public function lastKey();
 }

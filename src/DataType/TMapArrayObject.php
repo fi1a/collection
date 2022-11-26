@@ -415,11 +415,21 @@ trait TMapArrayObject
     /**
      * Возвращает ключ первого элемента
      *
-     * @return string|int|null
+     * @return string|int|false
      */
     public function firstKey()
     {
         return ArrayHelper::firstKey($this->storage);
+    }
+
+    /**
+     * Возвращает ключ последнего элемента
+     *
+     * @return string|int|false
+     */
+    public function lastKey()
+    {
+        return ArrayHelper::lastKey($this->storage);
     }
 
     /**

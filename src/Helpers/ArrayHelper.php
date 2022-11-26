@@ -541,7 +541,7 @@ class ArrayHelper
      *
      * @param mixed[] $array
      *
-     * @return string|int|null
+     * @return string|int|false
      */
     public static function firstKey(array $array)
     {
@@ -549,6 +549,20 @@ class ArrayHelper
         reset($keys);
 
         return current($keys);
+    }
+
+    /**
+     * Возвращает ключ последнего элемента
+     *
+     * @param mixed[] $array
+     *
+     * @return string|int|false
+     */
+    public static function lastKey(array $array)
+    {
+        $keys = array_keys($array);
+
+        return end($keys);
     }
 
     /**

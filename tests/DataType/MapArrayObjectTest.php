@@ -509,5 +509,23 @@ class MapArrayObjectTest extends TestCase
 
         $array = new MapArrayObject(['foo' => 'foo', 'bar' => 'bar']);
         $this->assertEquals('foo', $array->firstKey());
+
+        $array = new MapArrayObject([]);
+        $this->assertFalse($array->firstKey());
+    }
+
+    /**
+     * Возвращает ключ последнего элемента
+     */
+    public function testLastKey(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals(2, $array->lastKey());
+
+        $array = new MapArrayObject(['foo' => 'foo', 'bar' => 'bar']);
+        $this->assertEquals('bar', $array->lastKey());
+
+        $array = new MapArrayObject([]);
+        $this->assertFalse($array->lastKey());
     }
 }
