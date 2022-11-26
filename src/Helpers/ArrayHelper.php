@@ -7,12 +7,17 @@ namespace Fi1a\Collection\Helpers;
 use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
 use Fi1a\Collection\DataType\IArrayObject;
 use Fi1a\Collection\Exception\ExtractValueException;
+use Fi1a\Collection\Exception\InvalidArgumentException;
 
 /**
  * Хелпер с методами для массива
  */
 class ArrayHelper
 {
+    public const SORT_ASC = 'asc';
+
+    public const SORT_DESC = 'desc';
+
     /**
      * Определяет пустой массив или нет
      *
@@ -331,6 +336,44 @@ class ArrayHelper
         }
 
         return $values;
+    }
+
+    /**
+     * Сортировка элементов коллекции по значениям переданного ключа, свойства или метода
+     *
+     * @param mixed[]  $array
+     * @param string $name  ключ, свойство или метод
+     * @param string $order направление сортировки
+     *
+     * @return mixed[]
+     *
+     * @throws ExtractValueException
+     */
+    public static function sort(array $array, string $name, string $order = self::SORT_ASC): array
+    {
+        if (!in_array($order, [self::SORT_ASC, self::SORT_DESC], true)) {
+            throw new InvalidArgumentException('Invalid order: ' . $order);
+        }
+        $sort = /**
+         * @param mixed $a
+         * @param mixed $b
+         *
+         * @return int
+         */function ($a, $b) use ($name, $order): int {
+            /**
+             * @var mixed
+             */
+            $aValue = static::extractValue($a, $name);
+            /**
+             * @var mixed
+             */
+            $bValue = static::extractValue($b, $name);
+
+            return ($aValue <=> $bValue) * ($order === self::SORT_DESC ? -1 : 1);
+};
+        uasort($array, $sort);
+
+        return $array;
     }
 
     /**

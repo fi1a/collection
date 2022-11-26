@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Fi1a\Collection\DataType;
 
 use Fi1a\Collection\Exception\ExtractValueException;
-use Fi1a\Collection\Exception\InvalidArgumentException;
 use Fi1a\Collection\Helpers\ArrayHelper;
 
 /**
@@ -280,28 +279,7 @@ trait TMapArrayObject
      */
     public function sort(string $name, string $order = self::SORT_ASC)
     {
-        if (!in_array($order, [self::SORT_ASC, self::SORT_DESC], true)) {
-            throw new InvalidArgumentException('Invalid order: ' . $order);
-        }
-        $values = $this->getArrayCopy();
-        $sort = /**
-         * @param mixed $a
-         * @param mixed $b
-         *
-         * @return int
-         */function ($a, $b) use ($name, $order): int {
-            /**
-             * @var mixed
-             */
-            $aValue = $this->extractValue($a, $name);
-            /**
-             * @var mixed
-             */
-            $bValue = $this->extractValue($b, $name);
-
-            return ($aValue <=> $bValue) * ($order === self::SORT_DESC ? -1 : 1);
-};
-        uasort($values, $sort);
+        $values = ArrayHelper::sort($this->storage, $name, $order);
         $collection = clone $this;
         $collection->exchangeArray($values);
 

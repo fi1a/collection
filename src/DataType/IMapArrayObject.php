@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection\DataType;
 
+use Fi1a\Collection\Helpers\ArrayHelper;
+
 /**
  * Интерфейс IMapArrayObject
  */
 interface IMapArrayObject extends IArrayObject
 {
-    public const SORT_ASC = 'asc';
+    public const SORT_ASC = ArrayHelper::SORT_ASC;
 
-    public const SORT_DESC = 'desc';
+    public const SORT_DESC = ArrayHelper::SORT_DESC;
 
     /**
      * Определяет пустой массив или нет
