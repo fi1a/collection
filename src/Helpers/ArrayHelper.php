@@ -746,7 +746,7 @@ class ArrayHelper
      *
      * @return mixed
      */
-    public static function find(array $array, callable $condition)
+    public static function findValue(array $array, callable $condition)
     {
         /** @psalm-suppress MixedAssignment */
         foreach ($array as $index => $value) {
@@ -767,9 +767,9 @@ class ArrayHelper
      *
      * @return mixed
      */
-    public static function findLast(array $array, callable $condition)
+    public static function findLastValue(array $array, callable $condition)
     {
-        return static::find(array_reverse($array), $condition);
+        return static::findValue(array_reverse($array), $condition);
     }
 
     /**

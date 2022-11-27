@@ -535,9 +535,9 @@ trait TMapArrayObject
      *
      * @return mixed
      */
-    public function find(callable $condition)
+    public function findValue(callable $condition)
     {
-        return ArrayHelper::find($this->storage, $condition);
+        return ArrayHelper::findValue($this->storage, $condition);
     }
 
     /**
@@ -548,9 +548,9 @@ trait TMapArrayObject
      *
      * @return mixed
      */
-    public function findLast(callable $condition)
+    public function findLastValue(callable $condition)
     {
-        return ArrayHelper::findLast($this->storage, $condition);
+        return ArrayHelper::findLastValue($this->storage, $condition);
     }
 
     /**

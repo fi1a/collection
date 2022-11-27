@@ -645,13 +645,13 @@ class MapArrayObjectTest extends TestCase
      * Возвращает первый элемент, который удовлетворяет условию $condition,
      * возвращает false, если такого элемента не существует
      */
-    public function testFind(): void
+    public function testFindValue(): void
     {
         $array = new MapArrayObject([1, 2, 3]);
-        $this->assertEquals(2, $array->find(function ($value, $index) {
+        $this->assertEquals(2, $array->findValue(function ($value, $index) {
             return $value > 1;
         }));
-        $this->assertFalse($array->find(function ($value, $index) {
+        $this->assertFalse($array->findValue(function ($value, $index) {
             return $value > 3;
         }));
     }
@@ -660,13 +660,13 @@ class MapArrayObjectTest extends TestCase
      * Возвращает последний элемент, который удовлетворяет условию $condition,
      * возвращает false, если такого элемента не существует
      */
-    public function testFindLast(): void
+    public function testFindLastValue(): void
     {
         $array = new MapArrayObject([3, 2, 1]);
-        $this->assertEquals(1, $array->findLast(function ($value, $index) {
+        $this->assertEquals(1, $array->findLastValue(function ($value, $index) {
             return $value < 3;
         }));
-        $this->assertFalse($array->findLast(function ($value, $index) {
+        $this->assertFalse($array->findLastValue(function ($value, $index) {
             return $value > 3;
         }));
     }

@@ -351,7 +351,7 @@ interface IMapArrayObject extends IArrayObject
      *
      * @return mixed
      */
-    public function find(callable $condition);
+    public function findValue(callable $condition);
 
     /**
      * Возвращает последний элемент, который удовлетворяет условию $condition,
@@ -361,7 +361,7 @@ interface IMapArrayObject extends IArrayObject
      *
      * @return mixed
      */
-    public function findLast(callable $condition);
+    public function findLastValue(callable $condition);
 
     /**
      * Возвращает первый ключ элемента, который удовлетворяет условию $condition,
