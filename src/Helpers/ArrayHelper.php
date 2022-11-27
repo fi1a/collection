@@ -720,4 +720,20 @@ class ArrayHelper
 
         return array_slice($array, $count);
     }
+
+    /**
+     * Возвращает массив, опуская заданное количество элементов с конца
+     *
+     * @param mixed[] $array
+     *
+     * @return mixed[]
+     */
+    public static function dropRight(array $array, int $count): array
+    {
+        if ($count <= 0) {
+            throw new InvalidArgumentException('Количество должно быть больше 0');
+        }
+
+        return array_slice($array, 0, -1 * $count);
+    }
 }

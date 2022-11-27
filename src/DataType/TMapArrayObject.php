@@ -515,6 +515,19 @@ trait TMapArrayObject
     }
 
     /**
+     * Возвращает коллекцию, опуская заданное количество элементов с конца
+     *
+     * @return static
+     */
+    public function dropRight(int $count)
+    {
+        $collection = clone $this;
+        $collection->exchangeArray(ArrayHelper::dropRight($this->storage, $count));
+
+        return $collection;
+    }
+
+    /**
      * @deprecated
      *
      * Проверяет, присутствует ли в коллекции значение
