@@ -784,9 +784,32 @@ class ArrayHelper
     public static function findKey(array $array, callable $condition)
     {
         /** @psalm-suppress MixedAssignment */
-        foreach ($array as $index => $value) {
-            if ($condition($value, $index) === true) {
-                return $index;
+        foreach ($array as $key => $value) {
+            if ($condition($value, $key) === true) {
+                return $key;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Возвращает последний ключ элемента, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param mixed[] $array
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public static function findLastKey(array $array, callable $condition)
+    {
+        $keys = array_reverse(array_keys($array));
+        foreach ($keys as $key) {
+            /** @psalm-suppress MixedAssignment */
+            $value = $array[$key];
+            if ($condition($value, $key) === true) {
+                return $key;
             }
         }
 
