@@ -99,8 +99,8 @@ $arrayObject->count(); // 3
 | with(callable $condition)                          | Возвращает коллекцию с элементами удовлетворяющими условию                                                                         |
 | drop(int $count)                                   | Возвращает коллекцию, опуская заданное количество элементов с начала                                                               |
 | dropRight(int $count)                              | Возвращает коллекцию, опуская заданное количество элементов с конца                                                                |
-| find(callable $condition)                          | Возвращает первый элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует          |
-| findLast(callable $condition)                      | Возвращает последний элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует       |
+| findValue(callable $condition)                     | Возвращает первый элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует          |
+| findLastValue(callable $condition)                 | Возвращает последний элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует       |
 | findKey(callable $condition)                       | Возвращает первый ключ элемента, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует    |
 | findLastKey(callable $condition)                   | Возвращает последний ключ элемента, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует |
 | mapAndColumn($map, $column = null)                 | Возвращает новый массив с переданным ключем и колонкой                                                                             |
@@ -197,8 +197,8 @@ $valueObject->getBar(); // 'barbaz'
 | with(array $array, callable $condition): array                          | Возвращает массив с элементами удовлетворяющими условию                                                                            |
 | drop(array $array, int $count): array                                   | Возвращает массив, опуская заданное количество элементов с начала                                                                  |
 | dropRight(array $array, int $count): array                              | Возвращает массив, опуская заданное количество элементов с конца                                                                   |
-| find(array $array, callable $condition)                                 | Возвращает первый элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует          |
-| findLast(array $array, callable $condition)                             | Возвращает последний элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует       |
+| findValue(array $array, callable $condition)                            | Возвращает первый элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует          |
+| findLastValue(array $array, callable $condition)                        | Возвращает последний элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует       |
 | findKey(array $array, callable $condition)                              | Возвращает первый ключ элемента, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует    |
 | findLastKey(array $array, callable $condition)                          | Возвращает последний ключ элемента, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует |
 | mapAndColumn(array $array, $map, $column = null): array                 | Возвращает новый массив с переданным ключем и колонкой                                                                             |
