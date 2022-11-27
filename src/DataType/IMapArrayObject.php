@@ -362,4 +362,14 @@ interface IMapArrayObject extends IArrayObject
      * @return mixed
      */
     public function findLast(callable $condition);
+
+    /**
+     * Возвращает первый ключ элемента, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public function findKey(callable $condition);
 }

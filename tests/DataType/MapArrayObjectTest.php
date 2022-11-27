@@ -670,4 +670,19 @@ class MapArrayObjectTest extends TestCase
             return $value > 3;
         }));
     }
+
+    /**
+     * Возвращает первый ключ элемента, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     */
+    public function testFindKey(): void
+    {
+        $array = new MapArrayObject(['foo' => 1, 'bar' => 2, 'baz' => 3]);
+        $this->assertEquals('bar', $array->findKey(function ($value, $index) {
+            return $value > 1;
+        }));
+        $this->assertFalse($array->findKey(function ($value, $index) {
+            return $value > 3;
+        }));
+    }
 }

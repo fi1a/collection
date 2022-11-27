@@ -771,4 +771,25 @@ class ArrayHelper
     {
         return static::find(array_reverse($array), $condition);
     }
+
+    /**
+     * Возвращает первый ключ элемента, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param mixed[] $array
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public static function findKey(array $array, callable $condition)
+    {
+        /** @psalm-suppress MixedAssignment */
+        foreach ($array as $index => $value) {
+            if ($condition($value, $index) === true) {
+                return $index;
+            }
+        }
+
+        return false;
+    }
 }
