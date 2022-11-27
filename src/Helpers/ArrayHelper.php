@@ -489,6 +489,20 @@ class ArrayHelper
     }
 
     /**
+     * Итеративно уменьшает коллекцию к единственному значению  в обратном порядке, используя callback-функцию
+     *
+     * @param mixed[]                      $array
+     * @param callable(mixed, mixed):mixed $callback
+     * @param mixed $initial
+     *
+     * @return mixed
+     */
+    public static function reduceRight(array $array, callable $callback, $initial = null)
+    {
+        return static::reduce(array_reverse($array), $callback, $initial);
+    }
+
+    /**
      * Оборачивает значения
      *
      * @param mixed[]     $array

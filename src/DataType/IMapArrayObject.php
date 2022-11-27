@@ -249,6 +249,16 @@ interface IMapArrayObject extends IArrayObject
     public function reduce(callable $callback, $initial = null);
 
     /**
+     * Итеративно уменьшает коллекцию к единственному значению  в обратном порядке, используя callback-функцию
+     *
+     * @param callable(mixed, mixed):mixed $callback
+     * @param mixed $initial
+     *
+     * @return mixed
+     */
+    public function reduceRight(callable $callback, $initial = null);
+
+    /**
      * Оборачивает значения и возвращает новую коллекцию
      *
      * @return static

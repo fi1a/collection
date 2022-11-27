@@ -463,6 +463,19 @@ class MapArrayObjectTest extends TestCase
     }
 
     /**
+     * Итеративно уменьшает коллекцию к единственному значению  в обратном порядке, используя callback-функцию
+     */
+    public function testReduceRight(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals('321', $array->reduceRight(function (?string $sum, int $value) {
+            $sum .= $value;
+
+            return $sum;
+        }));
+    }
+
+    /**
      * Оборачивает значения и возвращает новую коллекцию
      */
     public function testWraps(): void
