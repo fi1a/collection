@@ -302,7 +302,7 @@ interface IMapArrayObject extends IArrayObject
      *
      * @return $this
      */
-    public function toggle($key, $firstValue, $secondValue);
+    public function toggleValue($key, $firstValue, $secondValue);
 
     /**
      * Возвращает true, если все элементы удовлетворяют условию

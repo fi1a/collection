@@ -589,7 +589,7 @@ class ArrayHelper
      *
      * @return mixed[]
      */
-    public static function toggle(array $array, $key, $firstValue, $secondValue): array
+    public static function toggleValue(array $array, $key, $firstValue, $secondValue): array
     {
         if (is_null($key)) {
             $key = (string) $key;

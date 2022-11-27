@@ -454,9 +454,9 @@ trait TMapArrayObject
      *
      * @return $this
      */
-    public function toggle($key, $firstValue, $secondValue)
+    public function toggleValue($key, $firstValue, $secondValue)
     {
-        $this->storage = ArrayHelper::toggle($this->storage, $key, $firstValue, $secondValue);
+        $this->storage = ArrayHelper::toggleValue($this->storage, $key, $firstValue, $secondValue);
 
         return $this;
     }

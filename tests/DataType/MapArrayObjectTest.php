@@ -545,18 +545,18 @@ class MapArrayObjectTest extends TestCase
     /**
      * Переключает значения
      */
-    public function testToggle(): void
+    public function testToggleValue(): void
     {
         $array = new MapArrayObject(['foo' => 'foo']);
-        $array->toggle('foo', 'foo', 'bar');
+        $array->toggleValue('foo', 'foo', 'bar');
         $this->assertEquals(['foo' => 'bar'], $array->getArrayCopy());
-        $array->toggle('foo', 'foo', 'bar');
+        $array->toggleValue('foo', 'foo', 'bar');
         $this->assertEquals(['foo' => 'foo'], $array->getArrayCopy());
 
         $array = new MapArrayObject(['' => 'foo']);
-        $array->toggle(null, 'foo', 'bar');
+        $array->toggleValue(null, 'foo', 'bar');
         $this->assertEquals(['' => 'bar'], $array->getArrayCopy());
-        $array->toggle(null, 'foo', 'bar');
+        $array->toggleValue(null, 'foo', 'bar');
         $this->assertEquals(['' => 'foo'], $array->getArrayCopy());
     }
 

@@ -93,7 +93,7 @@ $arrayObject->count(); // 3
 | insert(int $index, array $values)                  | Вставить значения                                                                                                                  |
 | firstKey()                                         | Возвращает ключ первого элемента                                                                                                   |
 | lastKey()                                          | Возвращает ключ последнего элемента                                                                                                |
-| toggle($key, $firstValue, $secondValue)            | Переключает значения                                                                                                               |
+| toggleValue($key, $firstValue, $secondValue)       | Переключает значения                                                                                                               |
 | every(callable $condition): bool                   | Возвращает true, если все элементы удовлетворяют условию                                                                           |
 | without(callable $condition)                       | Возвращает коллекцию без элементов удовлетворяющих условию                                                                         |
 | with(callable $condition)                          | Возвращает коллекцию с элементами удовлетворяющими условию                                                                         |
@@ -191,7 +191,7 @@ $valueObject->getBar(); // 'barbaz'
 | insert(array $array, int $index, array $values): array                  | Вставить значения                                                                                                                  |
 | firstKey(array $array)                                                  | Возвращает ключ первого элемента                                                                                                   |
 | lastKey(array $array)                                                   | Возвращает ключ последнего элемента                                                                                                |
-| toggle(array $array, $key, $firstValue, $secondValue): array            | Переключает значения                                                                                                               |
+| toggleValue(array $array, $key, $firstValue, $secondValue): array       | Переключает значения                                                                                                               |
 | every(array $array, callable $condition): bool                          | Возвращает true, если все элементы удовлетворяют условию                                                                           |
 | without(array $array, callable $condition): array                       | Возвращает массив без элементов удовлетворяющих условию                                                                            |
 | with(array $array, callable $condition): array                          | Возвращает массив с элементами удовлетворяющими условию                                                                            |
