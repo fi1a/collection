@@ -472,6 +472,21 @@ trait TMapArrayObject
     }
 
     /**
+     * Удаляет все элементы удовлетворяющие условию
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return static
+     */
+    public function without(callable $condition)
+    {
+        $collection = clone $this;
+        $collection->exchangeArray(ArrayHelper::without($this->storage, $condition));
+
+        return $collection;
+    }
+
+    /**
      * @deprecated
      *
      * Проверяет, присутствует ли в коллекции значение

@@ -658,4 +658,27 @@ class ArrayHelper
 
         return $result;
     }
+
+    /**
+     * Удаляет все элементы удовлетворяющие условию
+     *
+     * @param mixed[]                           $array
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed[]
+     */
+    public static function without(array $array, callable $condition): array
+    {
+        $result = [];
+        /** @psalm-suppress MixedAssignment */
+        foreach ($array as $index => $value) {
+            if ($condition($value, $index) === false) {
+                $result[$index] = $value;
+
+                break;
+            }
+        }
+
+        return $result;
+    }
 }

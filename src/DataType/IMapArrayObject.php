@@ -310,4 +310,13 @@ interface IMapArrayObject extends IArrayObject
      * @param callable(mixed, string|int): bool $condition
      */
     public function every(callable $condition): bool;
+
+    /**
+     * Удаляет все элементы удовлетворяющие условию
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return static
+     */
+    public function without(callable $condition);
 }

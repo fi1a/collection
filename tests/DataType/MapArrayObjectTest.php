@@ -575,4 +575,17 @@ class MapArrayObjectTest extends TestCase
             return $value > 2;
         }));
     }
+
+    /**
+     * Удаляет все элементы удовлетворяющие условию
+     */
+    public function testWithout(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $without = $array->without(function (int $value, $index) {
+            return $value > 2;
+        });
+
+        $this->assertEquals([1], $without->getArrayCopy());
+    }
 }
