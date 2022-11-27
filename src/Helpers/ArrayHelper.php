@@ -757,4 +757,18 @@ class ArrayHelper
 
         return false;
     }
+
+    /**
+     * Возвращает последний элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param mixed[] $array
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public static function findLast(array $array, callable $condition)
+    {
+        return static::find(array_reverse($array), $condition);
+    }
 }

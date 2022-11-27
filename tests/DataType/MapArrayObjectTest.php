@@ -655,4 +655,19 @@ class MapArrayObjectTest extends TestCase
             return $value > 3;
         }));
     }
+
+    /**
+     * Возвращает последний элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     */
+    public function testFindLast(): void
+    {
+        $array = new MapArrayObject([3, 2, 1]);
+        $this->assertEquals(1, $array->findLast(function ($value, $index) {
+            return $value < 3;
+        }));
+        $this->assertFalse($array->findLast(function ($value, $index) {
+            return $value > 3;
+        }));
+    }
 }

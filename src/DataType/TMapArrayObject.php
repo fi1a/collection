@@ -541,6 +541,19 @@ trait TMapArrayObject
     }
 
     /**
+     * Возвращает последний элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public function findLast(callable $condition)
+    {
+        return ArrayHelper::findLast($this->storage, $condition);
+    }
+
+    /**
      * @deprecated
      *
      * Проверяет, присутствует ли в коллекции значение
