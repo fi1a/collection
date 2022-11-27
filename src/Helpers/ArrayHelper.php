@@ -815,4 +815,39 @@ class ArrayHelper
 
         return false;
     }
+
+    /**
+     * Возвращает новый массив с переданным ключем и колонкой
+     *
+     * @param mixed|mixed[][]|mixed[] $array
+     * @param array-key $map
+     * @param array-key  $column
+     *
+     * @return mixed[]
+     *
+     * @psalm-suppress MixedAssignment
+     */
+    public static function mapAndColumn(array $array, $map, $column = null): array
+    {
+        $result = [];
+        foreach ($array as $value) {
+            if (!is_array($value)) {
+                continue;
+            }
+            /**
+             * @var array-key $key
+             */
+            $key = $value[$map] ?? '';
+            $set = $value;
+            if (!is_null($column)) {
+                $set = null;
+                if (isset($value[$column])) {
+                    $set = $value[$column];
+                }
+            }
+            $result[$key] = $set;
+        }
+
+        return $result;
+    }
 }

@@ -13,7 +13,7 @@ use Traversable;
 trait TArrayObject
 {
     /**
-     * @var array
+     * @var mixed[]|mixed[][]
      */
     protected $storage = [];
 

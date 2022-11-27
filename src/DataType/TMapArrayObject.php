@@ -591,4 +591,20 @@ trait TMapArrayObject
     {
         return $this->hasValue($value, $strict);
     }
+
+    /**
+     * Возвращает новый массив с переданным ключем и колонкой
+     *
+     * @param string|int $map
+     * @param string|int|null $column
+     *
+     * @return static
+     */
+    public function mapAndColumn($map, $column = null)
+    {
+        $collection = clone $this;
+        $collection->exchangeArray(ArrayHelper::mapAndColumn($this->storage, $map, $column));
+
+        return $collection;
+    }
 }

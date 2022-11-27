@@ -103,7 +103,7 @@ $arrayObject->count(); // 3
 | findLast(callable $condition)                      | Возвращает последний элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует       |
 | findKey(callable $condition)                       | Возвращает первый ключ элемента, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует    |
 | findLastKey(callable $condition)                   | Возвращает последний ключ элемента, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует |
-
+| mapAndColumn($map, $column = null)                 | Возвращает новый массив с переданным ключем и колонкой                                                                             |
 
 #### Fi1a\Collection\DataType\PathAccess класс реализует доступ по пути к значениям
 
@@ -201,6 +201,7 @@ $valueObject->getBar(); // 'barbaz'
 | findLast(array $array, callable $condition)                             | Возвращает последний элемент, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует       |
 | findKey(array $array, callable $condition)                              | Возвращает первый ключ элемента, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует    |
 | findLastKey(array $array, callable $condition)                          | Возвращает последний ключ элемента, который удовлетворяет условию $condition, возвращает false, если такого элемента не существует |
+| mapAndColumn(array $array, $map, $column = null): array                 | Возвращает новый массив с переданным ключем и колонкой                                                                             |
 
 ### Коллекции
 

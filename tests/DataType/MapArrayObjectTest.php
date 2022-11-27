@@ -708,4 +708,51 @@ class MapArrayObjectTest extends TestCase
             return $value > 1;
         }));
     }
+
+    /**
+     * Возвращает новый массив с переданным ключем и колонкой
+     */
+    public function testMapAndColumn(): void
+    {
+        $array = new MapArrayObject([
+            [
+                'key' => 'foo',
+                'value' => 'value1',
+            ],
+            [
+                'key' => 'bar',
+                'value' => 'value2',
+            ],
+            [
+                'key' => 'baz',
+                'value' => 'value3',
+            ],
+            'qux',
+        ]);
+        $this->assertEquals(
+            [
+                'foo' => 'value1',
+                'bar' => 'value2',
+                'baz' => 'value3',
+            ],
+            $array->mapAndColumn('key', 'value')->getArrayCopy()
+        );
+        $this->assertEquals(
+            [
+                'foo' => [
+                    'key' => 'foo',
+                    'value' => 'value1',
+                ],
+                'bar' => [
+                    'key' => 'bar',
+                    'value' => 'value2',
+                ],
+                'baz' => [
+                    'key' => 'baz',
+                    'value' => 'value3',
+                ],
+            ],
+            $array->mapAndColumn('key')->getArrayCopy()
+        );
+    }
 }

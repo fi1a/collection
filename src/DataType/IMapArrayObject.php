@@ -382,4 +382,14 @@ interface IMapArrayObject extends IArrayObject
      * @return mixed
      */
     public function findLastKey(callable $condition);
+
+    /**
+     * Возвращает новый массив с переданным ключем и колонкой
+     *
+     * @param string|int     $map
+     * @param string|int|null $column
+     *
+     * @return static
+     */
+    public function mapAndColumn($map, $column = null);
 }
