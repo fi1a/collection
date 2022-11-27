@@ -640,4 +640,19 @@ class MapArrayObjectTest extends TestCase
         $array = new MapArrayObject([1, 2, 3]);
         $array->dropRight(0);
     }
+
+    /**
+     * Возвращает первый элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     */
+    public function testFind(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals(2, $array->find(function ($value, $index) {
+            return $value > 1;
+        }));
+        $this->assertFalse($array->find(function ($value, $index) {
+            return $value > 3;
+        }));
+    }
 }

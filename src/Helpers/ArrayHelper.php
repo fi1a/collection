@@ -736,4 +736,25 @@ class ArrayHelper
 
         return array_slice($array, 0, -1 * $count);
     }
+
+    /**
+     * Возвращает первый элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param mixed[] $array
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public static function find(array $array, callable $condition)
+    {
+        /** @psalm-suppress MixedAssignment */
+        foreach ($array as $index => $value) {
+            if ($condition($value, $index) === true) {
+                return $value;
+            }
+        }
+
+        return false;
+    }
 }

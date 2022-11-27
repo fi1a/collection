@@ -342,4 +342,14 @@ interface IMapArrayObject extends IArrayObject
      * @return static
      */
     public function dropRight(int $count);
+
+    /**
+     * Возвращает первый элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public function find(callable $condition);
 }
