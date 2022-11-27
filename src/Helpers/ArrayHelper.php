@@ -660,7 +660,7 @@ class ArrayHelper
     }
 
     /**
-     * Возвращает коллекцию без элементов удовлетворяющих условию
+     * Возвращает массив без элементов удовлетворяющих условию
      *
      * @param mixed[]                           $array
      * @param callable(mixed, string|int): bool $condition
@@ -683,7 +683,7 @@ class ArrayHelper
     }
 
     /**
-     * Возвращает коллекцию с элементами удовлетворяющими условию
+     * Возвращает массив с элементами удовлетворяющими условию
      *
      * @param mixed[]                           $array
      * @param callable(mixed, string|int): bool $condition
@@ -703,5 +703,21 @@ class ArrayHelper
         }
 
         return $result;
+    }
+
+    /**
+     * Возвращает массив, опуская заданное количество элементов с начала
+     *
+     * @param mixed[] $array
+     *
+     * @return mixed[]
+     */
+    public static function drop(array $array, int $count): array
+    {
+        if ($count <= 0) {
+            throw new InvalidArgumentException('Количество должно быть больше 0');
+        }
+
+        return array_slice($array, $count);
     }
 }

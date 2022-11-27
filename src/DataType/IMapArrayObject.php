@@ -328,4 +328,11 @@ interface IMapArrayObject extends IArrayObject
      * @return static
      */
     public function with(callable $condition);
+
+    /**
+     * Возвращает коллекцию, опуская заданное количество элементов с начала
+     *
+     * @return static
+     */
+    public function drop(int $count);
 }

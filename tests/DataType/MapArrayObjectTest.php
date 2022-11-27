@@ -602,4 +602,23 @@ class MapArrayObjectTest extends TestCase
 
         $this->assertEquals([3], $with->getArrayCopy());
     }
+
+    /**
+     * Возвращает коллекцию, опуская заданное количество элементов с начала
+     */
+    public function testDrop(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals([2, 3], $array->drop(1)->resetKeys()->getArrayCopy());
+    }
+
+    /**
+     * Возвращает коллекцию, опуская заданное количество элементов с начала (исключение)
+     */
+    public function testDropException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $array = new MapArrayObject([1, 2, 3]);
+        $array->drop(0);
+    }
 }
