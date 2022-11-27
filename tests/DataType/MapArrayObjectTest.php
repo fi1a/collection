@@ -300,21 +300,6 @@ class MapArrayObjectTest extends TestCase
     }
 
     /**
-     * Тестирование метода contains массива
-     */
-    public function testContains(): void
-    {
-        $array = new MapArrayObject();
-        $array->add(1);
-        $array->add(2);
-        $array->add(3);
-        $this->assertTrue($array->contains(1));
-        $this->assertTrue($array->contains(2));
-        $this->assertTrue($array->contains(3));
-        $this->assertFalse($array->contains(4));
-    }
-
-    /**
      * Тестирование метода column массива
      */
     public function testColumn(): void
@@ -478,6 +463,19 @@ class MapArrayObjectTest extends TestCase
     }
 
     /**
+     * Итеративно уменьшает коллекцию к единственному значению  в обратном порядке, используя callback-функцию
+     */
+    public function testReduceRight(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals('321', $array->reduceRight(function (?string $sum, int $value) {
+            $sum .= $value;
+
+            return $sum;
+        }));
+    }
+
+    /**
      * Оборачивает значения и возвращает новую коллекцию
      */
     public function testWraps(): void
@@ -494,5 +492,267 @@ class MapArrayObjectTest extends TestCase
     {
         $array = new MapArrayObject([1, 2, 3]);
         $this->assertEquals('1, 2, 3', $array->join(', '));
+    }
+
+    /**
+     * Вставить значения
+     */
+    public function testInsert(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $array->insert(1, [4, 5]);
+        $this->assertEquals([1, 4, 5, 2, 3], $array->getArrayCopy());
+
+        $array = new MapArrayObject([1, 2, 3]);
+        $array->insert(4, [4, 5]);
+        $this->assertEquals([1, 2, 3, 4, 5,], $array->getArrayCopy());
+
+        $array = new MapArrayObject([1, 2, 3]);
+        $array->insert(0, [4, 5]);
+        $this->assertEquals([4, 5, 1, 2, 3,], $array->getArrayCopy());
+    }
+
+    /**
+     * Возвращает ключ первого элемента
+     */
+    public function testFirstKey(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals(0, $array->firstKey());
+
+        $array = new MapArrayObject(['foo' => 'foo', 'bar' => 'bar']);
+        $this->assertEquals('foo', $array->firstKey());
+
+        $array = new MapArrayObject([]);
+        $this->assertFalse($array->firstKey());
+    }
+
+    /**
+     * Возвращает ключ последнего элемента
+     */
+    public function testLastKey(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals(2, $array->lastKey());
+
+        $array = new MapArrayObject(['foo' => 'foo', 'bar' => 'bar']);
+        $this->assertEquals('bar', $array->lastKey());
+
+        $array = new MapArrayObject([]);
+        $this->assertFalse($array->lastKey());
+    }
+
+    /**
+     * Переключает значения
+     */
+    public function testToggle(): void
+    {
+        $array = new MapArrayObject(['foo' => 'foo']);
+        $array->toggle('foo', 'foo', 'bar');
+        $this->assertEquals(['foo' => 'bar'], $array->getArrayCopy());
+        $array->toggle('foo', 'foo', 'bar');
+        $this->assertEquals(['foo' => 'foo'], $array->getArrayCopy());
+
+        $array = new MapArrayObject(['' => 'foo']);
+        $array->toggle(null, 'foo', 'bar');
+        $this->assertEquals(['' => 'bar'], $array->getArrayCopy());
+        $array->toggle(null, 'foo', 'bar');
+        $this->assertEquals(['' => 'foo'], $array->getArrayCopy());
+    }
+
+    /**
+     * Возвращает true, если все элементы удовлетворяют условию
+     */
+    public function testEvery(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertFalse($array->every(function (int $value, $index) {
+            return $value > 2;
+        }));
+
+        $array = new MapArrayObject([3, 4, 5]);
+        $this->assertTrue($array->every(function (int $value, $index) {
+            return $value > 2;
+        }));
+    }
+
+    /**
+     * Возвращает коллекцию без элементов удовлетворяющих условию
+     */
+    public function testWithout(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $without = $array->without(function (int $value, $index) {
+            return $value > 2;
+        });
+
+        $this->assertEquals([1], $without->getArrayCopy());
+    }
+
+    /**
+     * Возвращает коллекцию без элементов удовлетворяющих условию
+     */
+    public function testWith(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $with = $array->with(function (int $value, $index) {
+            return $value > 2;
+        });
+        $with->resetKeys();
+
+        $this->assertEquals([3], $with->getArrayCopy());
+    }
+
+    /**
+     * Возвращает коллекцию, опуская заданное количество элементов с начала
+     */
+    public function testDrop(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals([2, 3], $array->drop(1)->resetKeys()->getArrayCopy());
+    }
+
+    /**
+     * Возвращает коллекцию, опуская заданное количество элементов с начала (исключение)
+     */
+    public function testDropException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $array = new MapArrayObject([1, 2, 3]);
+        $array->drop(0);
+    }
+
+    /**
+     * Возвращает коллекцию, опуская заданное количество элементов с конца
+     */
+    public function testDropRight(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals([1, 2], $array->dropRight(1)->resetKeys()->getArrayCopy());
+    }
+
+    /**
+     * Возвращает коллекцию, опуская заданное количество элементов с конца (исключение)
+     */
+    public function testDropRightException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $array = new MapArrayObject([1, 2, 3]);
+        $array->dropRight(0);
+    }
+
+    /**
+     * Возвращает первый элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     */
+    public function testFind(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals(2, $array->find(function ($value, $index) {
+            return $value > 1;
+        }));
+        $this->assertFalse($array->find(function ($value, $index) {
+            return $value > 3;
+        }));
+    }
+
+    /**
+     * Возвращает последний элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     */
+    public function testFindLast(): void
+    {
+        $array = new MapArrayObject([3, 2, 1]);
+        $this->assertEquals(1, $array->findLast(function ($value, $index) {
+            return $value < 3;
+        }));
+        $this->assertFalse($array->findLast(function ($value, $index) {
+            return $value > 3;
+        }));
+    }
+
+    /**
+     * Возвращает первый ключ элемента, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     */
+    public function testFindKey(): void
+    {
+        $array = new MapArrayObject(['foo' => 1, 'bar' => 2, 'baz' => 3]);
+        $this->assertEquals('bar', $array->findKey(function ($value, $index) {
+            return $value > 1;
+        }));
+        $this->assertFalse($array->findKey(function ($value, $index) {
+            return $value > 3;
+        }));
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals(1, $array->findKey(function ($value, $index) {
+            return $value > 1;
+        }));
+    }
+
+    /**
+     * Возвращает последний ключ элемента, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     */
+    public function testFindLastKey(): void
+    {
+        $array = new MapArrayObject(['foo' => 1, 'bar' => 2, 'baz' => 3]);
+        $this->assertEquals('baz', $array->findLastKey(function ($value, $index) {
+            return $value > 1;
+        }));
+        $this->assertFalse($array->findLastKey(function ($value, $index) {
+            return $value > 3;
+        }));
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertEquals(2, $array->findLastKey(function ($value, $index) {
+            return $value > 1;
+        }));
+    }
+
+    /**
+     * Возвращает новый массив с переданным ключем и колонкой
+     */
+    public function testMapAndColumn(): void
+    {
+        $array = new MapArrayObject([
+            [
+                'key' => 'foo',
+                'value' => 'value1',
+            ],
+            [
+                'key' => 'bar',
+                'value' => 'value2',
+            ],
+            [
+                'key' => 'baz',
+                'value' => 'value3',
+            ],
+            'qux',
+        ]);
+        $this->assertEquals(
+            [
+                'foo' => 'value1',
+                'bar' => 'value2',
+                'baz' => 'value3',
+            ],
+            $array->mapAndColumn('key', 'value')->getArrayCopy()
+        );
+        $this->assertEquals(
+            [
+                'foo' => [
+                    'key' => 'foo',
+                    'value' => 'value1',
+                ],
+                'bar' => [
+                    'key' => 'bar',
+                    'value' => 'value2',
+                ],
+                'baz' => [
+                    'key' => 'baz',
+                    'value' => 'value3',
+                ],
+            ],
+            $array->mapAndColumn('key')->getArrayCopy()
+        );
     }
 }

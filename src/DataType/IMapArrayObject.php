@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection\DataType;
 
+use Fi1a\Collection\Helpers\ArrayHelper;
+
 /**
  * Интерфейс IMapArrayObject
  */
 interface IMapArrayObject extends IArrayObject
 {
-    public const SORT_ASC = 'asc';
+    public const SORT_ASC = ArrayHelper::SORT_ASC;
 
-    public const SORT_DESC = 'desc';
+    public const SORT_DESC = ArrayHelper::SORT_DESC;
 
     /**
      * Определяет пустой массив или нет
@@ -35,7 +37,7 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Очистить массив значений
      *
-     * @return self
+     * @return $this
      */
     public function clear();
 
@@ -76,7 +78,7 @@ interface IMapArrayObject extends IArrayObject
      * @param string|int|null $key ключ
      * @param mixed $value устанавливаемое значение
      *
-     * @return self
+     * @return $this
      */
     public function set($key, $value);
 
@@ -142,7 +144,7 @@ interface IMapArrayObject extends IArrayObject
      *
      * @param mixed $value значение
      *
-     * @return self
+     * @return $this
      */
     public function add($value);
 
@@ -151,7 +153,7 @@ interface IMapArrayObject extends IArrayObject
      *
      * @param callable(mixed, mixed):void $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return self
+     * @return $this
      */
     public function each(callable $callback);
 
@@ -160,17 +162,9 @@ interface IMapArrayObject extends IArrayObject
      *
      * @param callable(mixed, mixed):mixed $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return self
+     * @return $this
      */
     public function map(callable $callback);
-
-    /**
-     * Проверяет, присутствует ли в коллекции значение
-     *
-     * @param mixed $value значение
-     * @param bool $strict если true, также проверяет типы значений
-     */
-    public function contains($value, bool $strict = true): bool;
 
     /**
      * Возвращает значения переданного ключа, свойства или метода
@@ -213,46 +207,56 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
      *
-     * @param IArrayObject $collection коллекция для вычисления расхождения
+     * @param IArrayObject|mixed[] $collection коллекция для вычисления расхождения
      *
      * @return static
      */
-    public function diff(IArrayObject $collection);
+    public function diff($collection);
 
     /**
      * Возвращает новую коллекцию с пересечением элементов текущей коллекции с переданной
      *
-     * @param IArrayObject $collection коллекция для вычисления пересечения
+     * @param IArrayObject|mixed[] $collection коллекция для вычисления пересечения
      *
      * @return static
      */
-    public function intersect(IArrayObject $collection);
+    public function intersect($collection);
 
     /**
      * Объединяет элементы текущей коллекции с элементами переданной и возвращает новую коллекцию
      *
-     * @param IArrayObject $collection коллекция для объединения
+     * @param IArrayObject|mixed[] $collection коллекция для объединения
      *
      * @return static
      */
-    public function merge(IArrayObject $collection);
+    public function merge($collection);
 
     /**
      * Сбросить ключи коллекции
      *
-     * @return self
+     * @return $this
      */
     public function resetKeys();
 
     /**
      * Итеративно уменьшает коллекцию к единственному значению, используя callback-функцию
      *
-     * @param callable(mixed, mixed):mixed $callback
+     * @param callable(mixed, mixed): mixed $callback
      * @param mixed    $initial
      *
      * @return mixed
      */
     public function reduce(callable $callback, $initial = null);
+
+    /**
+     * Итеративно уменьшает коллекцию к единственному значению  в обратном порядке, используя callback-функцию
+     *
+     * @param callable(mixed, mixed): mixed $callback
+     * @param mixed $initial
+     *
+     * @return mixed
+     */
+    public function reduceRight(callable $callback, $initial = null);
 
     /**
      * Оборачивает значения и возвращает новую коллекцию
@@ -265,4 +269,127 @@ interface IMapArrayObject extends IArrayObject
      * Объединяет элементы в строку
      */
     public function join(string $separator): string;
+
+    /**
+     * Вставить значения
+     *
+     * @param mixed[] $values
+     *
+     * @return $this
+     */
+    public function insert(int $index, array $values);
+
+    /**
+     * Возвращает ключ первого элемента
+     *
+     * @return string|int|false
+     */
+    public function firstKey();
+
+    /**
+     * Возвращает ключ последнего элемента
+     *
+     * @return string|int|false
+     */
+    public function lastKey();
+
+    /**
+     * Переключает значения
+     *
+     * @param string|int|null $key
+     * @param mixed           $firstValue
+     * @param mixed           $secondValue
+     *
+     * @return $this
+     */
+    public function toggle($key, $firstValue, $secondValue);
+
+    /**
+     * Возвращает true, если все элементы удовлетворяют условию
+     *
+     * @param callable(mixed, string|int): bool $condition
+     */
+    public function every(callable $condition): bool;
+
+    /**
+     * Возвращает коллекцию без элементов удовлетворяющих условию
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return static
+     */
+    public function without(callable $condition);
+
+    /**
+     * Возвращает коллекцию с элементами удовлетворяющими условию
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return static
+     */
+    public function with(callable $condition);
+
+    /**
+     * Возвращает коллекцию, опуская заданное количество элементов с начала
+     *
+     * @return static
+     */
+    public function drop(int $count);
+
+    /**
+     * Возвращает коллекцию, опуская заданное количество элементов с конца
+     *
+     * @return static
+     */
+    public function dropRight(int $count);
+
+    /**
+     * Возвращает первый элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public function find(callable $condition);
+
+    /**
+     * Возвращает последний элемент, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public function findLast(callable $condition);
+
+    /**
+     * Возвращает первый ключ элемента, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public function findKey(callable $condition);
+
+    /**
+     * Возвращает последний ключ элемента, который удовлетворяет условию $condition,
+     * возвращает false, если такого элемента не существует
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return mixed
+     */
+    public function findLastKey(callable $condition);
+
+    /**
+     * Возвращает новый массив с переданным ключем и колонкой
+     *
+     * @param string|int     $map
+     * @param string|int|null $column
+     *
+     * @return static
+     */
+    public function mapAndColumn($map, $column = null);
 }
