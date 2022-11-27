@@ -472,7 +472,7 @@ trait TMapArrayObject
     }
 
     /**
-     * Удаляет все элементы удовлетворяющие условию
+     * Возвращает коллекцию без элементов удовлетворяющих условию
      *
      * @param callable(mixed, string|int): bool $condition
      *
@@ -482,6 +482,21 @@ trait TMapArrayObject
     {
         $collection = clone $this;
         $collection->exchangeArray(ArrayHelper::without($this->storage, $condition));
+
+        return $collection;
+    }
+
+    /**
+     * Возвращает коллекцию с элементами удовлетворяющими условию
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return static
+     */
+    public function with(callable $condition)
+    {
+        $collection = clone $this;
+        $collection->exchangeArray(ArrayHelper::with($this->storage, $condition));
 
         return $collection;
     }

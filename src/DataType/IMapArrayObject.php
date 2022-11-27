@@ -312,11 +312,20 @@ interface IMapArrayObject extends IArrayObject
     public function every(callable $condition): bool;
 
     /**
-     * Удаляет все элементы удовлетворяющие условию
+     * Возвращает коллекцию без элементов удовлетворяющих условию
      *
      * @param callable(mixed, string|int): bool $condition
      *
      * @return static
      */
     public function without(callable $condition);
+
+    /**
+     * Возвращает коллекцию с элементами удовлетворяющими условию
+     *
+     * @param callable(mixed, string|int): bool $condition
+     *
+     * @return static
+     */
+    public function with(callable $condition);
 }

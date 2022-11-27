@@ -577,7 +577,7 @@ class MapArrayObjectTest extends TestCase
     }
 
     /**
-     * Удаляет все элементы удовлетворяющие условию
+     * Возвращает коллекцию без элементов удовлетворяющих условию
      */
     public function testWithout(): void
     {
@@ -587,5 +587,19 @@ class MapArrayObjectTest extends TestCase
         });
 
         $this->assertEquals([1], $without->getArrayCopy());
+    }
+
+    /**
+     * Возвращает коллекцию без элементов удовлетворяющих условию
+     */
+    public function testWith(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $with = $array->with(function (int $value, $index) {
+            return $value > 2;
+        });
+        $with->resetKeys();
+
+        $this->assertEquals([3], $with->getArrayCopy());
     }
 }
