@@ -37,7 +37,7 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Очистить массив значений
      *
-     * @return self
+     * @return $this
      */
     public function clear();
 
@@ -78,7 +78,7 @@ interface IMapArrayObject extends IArrayObject
      * @param string|int|null $key ключ
      * @param mixed $value устанавливаемое значение
      *
-     * @return self
+     * @return $this
      */
     public function set($key, $value);
 
@@ -144,7 +144,7 @@ interface IMapArrayObject extends IArrayObject
      *
      * @param mixed $value значение
      *
-     * @return self
+     * @return $this
      */
     public function add($value);
 
@@ -153,7 +153,7 @@ interface IMapArrayObject extends IArrayObject
      *
      * @param callable(mixed, mixed):void $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return self
+     * @return $this
      */
     public function each(callable $callback);
 
@@ -162,7 +162,7 @@ interface IMapArrayObject extends IArrayObject
      *
      * @param callable(mixed, mixed):mixed $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return self
+     * @return $this
      */
     public function map(callable $callback);
 
@@ -234,7 +234,7 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Сбросить ключи коллекции
      *
-     * @return self
+     * @return $this
      */
     public function resetKeys();
 

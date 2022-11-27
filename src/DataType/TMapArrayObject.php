@@ -206,7 +206,7 @@ trait TMapArrayObject
      *
      * @param callable(mixed, mixed):void $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return self
+     * @return $this
      */
     public function each(callable $callback)
     {
@@ -220,7 +220,7 @@ trait TMapArrayObject
      *
      * @param callable(mixed, mixed):mixed $callback функция, принимающая ключ и значение из коллекции
      *
-     * @return self
+     * @return $this
      */
     public function map(callable $callback)
     {
@@ -352,7 +352,7 @@ trait TMapArrayObject
     /**
      * Сбросить ключи коллекции
      *
-     * @return self
+     * @return $this
      */
     public function resetKeys()
     {
