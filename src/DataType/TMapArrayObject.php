@@ -462,6 +462,16 @@ trait TMapArrayObject
     }
 
     /**
+     * Возвращает true, если все элементы удовлетворяют условию
+     *
+     * @param callable(mixed, string|int): bool $condition
+     */
+    public function every(callable $condition): bool
+    {
+        return ArrayHelper::every($this->storage, $condition);
+    }
+
+    /**
      * @deprecated
      *
      * Проверяет, присутствует ли в коллекции значение

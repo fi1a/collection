@@ -559,4 +559,20 @@ class MapArrayObjectTest extends TestCase
         $array->toggle(null, 'foo', 'bar');
         $this->assertEquals(['' => 'foo'], $array->getArrayCopy());
     }
+
+    /**
+     * Возвращает true, если все элементы удовлетворяют условию
+     */
+    public function testEvery(): void
+    {
+        $array = new MapArrayObject([1, 2, 3]);
+        $this->assertFalse($array->every(function (int $value, $index) {
+            return $value > 2;
+        }));
+
+        $array = new MapArrayObject([3, 4, 5]);
+        $this->assertTrue($array->every(function (int $value, $index) {
+            return $value > 2;
+        }));
+    }
 }

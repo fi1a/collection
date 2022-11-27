@@ -241,7 +241,7 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Итеративно уменьшает коллекцию к единственному значению, используя callback-функцию
      *
-     * @param callable(mixed, mixed):mixed $callback
+     * @param callable(mixed, mixed): mixed $callback
      * @param mixed    $initial
      *
      * @return mixed
@@ -251,7 +251,7 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Итеративно уменьшает коллекцию к единственному значению  в обратном порядке, используя callback-функцию
      *
-     * @param callable(mixed, mixed):mixed $callback
+     * @param callable(mixed, mixed): mixed $callback
      * @param mixed $initial
      *
      * @return mixed
@@ -303,4 +303,11 @@ interface IMapArrayObject extends IArrayObject
      * @return $this
      */
     public function toggle($key, $firstValue, $secondValue);
+
+    /**
+     * Возвращает true, если все элементы удовлетворяют условию
+     *
+     * @param callable(mixed, string|int): bool $condition
+     */
+    public function every(callable $condition): bool;
 }

@@ -636,4 +636,26 @@ class ArrayHelper
 
         throw new ExtractValueException(sprintf('Name of column "%s" not found', $name));
     }
+
+    /**
+     * Возвращает true, если все элементы удовлетворяют условию
+     *
+     * @param mixed[]               $array
+     * @param callable(mixed, string|int): bool $condition
+     */
+    public static function every(array $array, callable $condition): bool
+    {
+        $result = true;
+
+        /** @psalm-suppress MixedAssignment */
+        foreach ($array as $index => $value) {
+            if ($condition($value, $index) === false) {
+                $result = false;
+
+                break;
+            }
+        }
+
+        return $result;
+    }
 }
