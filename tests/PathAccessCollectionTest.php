@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection;
 
-use Fi1a\Collection\DataType\IPathAccess;
 use Fi1a\Collection\DataType\PathAccess;
+use Fi1a\Collection\DataType\PathAccessInterface;
 use Fi1a\Collection\PathAccessCollection;
 use PHPUnit\Framework\TestCase;
 
@@ -27,7 +27,7 @@ class PathAccessCollectionTest extends TestCase
             'string',
         ]);
         foreach ($collection as $array) {
-            $this->assertTrue($array === false || $array instanceof IPathAccess);
+            $this->assertTrue($array === false || $array instanceof PathAccessInterface);
         }
     }
 

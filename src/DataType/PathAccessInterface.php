@@ -7,7 +7,7 @@ namespace Fi1a\Collection\DataType;
 /**
  * Интерфейс класса реализующего доступ по пути к значениям
  */
-interface IPathAccess extends ArrayObjectInterface
+interface PathAccessInterface extends ArrayObjectInterface
 {
     public const PATH_SEPARATOR = ':';
 
@@ -34,14 +34,14 @@ interface IPathAccess extends ArrayObjectInterface
      * @param mixed $key
      * @param mixed $value
      */
-    public function set($key, $value): IPathAccess;
+    public function set($key, $value): PathAccessInterface;
 
     /**
      * Удалить значение по пути
      *
      * @param mixed $key
      */
-    public function delete($key): IPathAccess;
+    public function delete($key): PathAccessInterface;
 
     /**
      * Возвращает значение с преобразованием к boolean.

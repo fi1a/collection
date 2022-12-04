@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
-use Fi1a\Collection\DataType\IPathAccess;
 use Fi1a\Collection\DataType\PathAccess;
+use Fi1a\Collection\DataType\PathAccessInterface;
 
 /**
  * Коллекция экземпляров классов PathAccess
@@ -31,6 +31,6 @@ class PathAccessCollection extends AInstanceCollection
      */
     protected function isInstance($value): bool
     {
-        return $value instanceof IPathAccess;
+        return $value instanceof PathAccessInterface;
     }
 }

@@ -7,7 +7,7 @@ namespace Fi1a\Collection\DataType;
 /**
  * Класс реализует доступ по пути к значениям
  */
-class PathAccess extends ArrayObject implements IPathAccess
+class PathAccess extends ArrayObject implements PathAccessInterface
 {
     /**
      * @inheritDoc
@@ -57,7 +57,7 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * @inheritDoc
      */
-    public function set($key, $value): IPathAccess
+    public function set($key, $value): PathAccessInterface
     {
         /**
          * @var mixed[]
@@ -110,7 +110,7 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * @inheritDoc
      */
-    public function delete($key): IPathAccess
+    public function delete($key): PathAccessInterface
     {
         $this->exchangeArray($this->deleteRecursive($this->getArrayCopy(), $this->getKeys((string) $key)));
 
