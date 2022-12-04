@@ -7,7 +7,7 @@ namespace Fi1a\Collection\DataType;
 /**
  * Объект-массив
  */
-class ArrayObject implements IArrayObject
+class ArrayObject implements ArrayObjectInterface
 {
-    use TArrayObject;
+    use ArrayObjectTrait;
 }

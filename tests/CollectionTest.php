@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Fi1a\Unit\Collection;
 
 use Fi1a\Collection\Collection;
+use Fi1a\Collection\CollectionInterface;
 use Fi1a\Collection\Exception\ExtractValueException;
 use Fi1a\Collection\Exception\InvalidArgumentException;
-use Fi1a\Collection\ICollection;
 use Fi1a\Unit\Collection\Fixtures\FixtureInstanceCollection;
 use PHPUnit\Framework\TestCase;
 
@@ -113,10 +113,10 @@ class CollectionTest extends TestCase
         $collection->add(['foo' => 3,]);
         $collection->add(['foo' => 2,]);
         $collection->add(['foo' => 1,]);
-        $sorted = $collection->sort('foo', ICollection::SORT_ASC);
+        $sorted = $collection->sort('foo', CollectionInterface::SORT_ASC);
         $this->assertEquals([1, 2, 3,], $sorted->column('foo'));
         $this->assertEquals([3, 2, 1,], $collection->column('foo'));
-        $sorted = $collection->sort('foo', ICollection::SORT_DESC);
+        $sorted = $collection->sort('foo', CollectionInterface::SORT_DESC);
         $this->assertEquals([3, 2, 1,], $sorted->column('foo'));
         $this->assertEquals([3, 2, 1,], $collection->column('foo'));
     }

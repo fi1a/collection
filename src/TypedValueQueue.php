@@ -9,9 +9,9 @@ use Fi1a\Collection\Exception\InvalidArgumentException;
 /**
  * Очередь с типизацией значений
  */
-class TypedValueQueue extends Queue implements ITypedValueQueue
+class TypedValueQueue extends Queue implements TypedValueQueueInterface
 {
-    use TTypedValue;
+    use TypedValueTrait;
 
     /**
      * @inheritDoc

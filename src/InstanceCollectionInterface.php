@@ -4,30 +4,13 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
-use Fi1a\Collection\DataType\IArrayObject;
+use Fi1a\Collection\DataType\ArrayObjectInterface;
 
 /**
  * Интерфейс коллекции экземпляров классов
  */
-interface IInstanceCollection extends IArrayObject
+interface InstanceCollectionInterface extends ArrayObjectInterface
 {
-    /**
-     * Возвращает экземпляр класса элемента коллекции
-     *
-     * @param string|int|null $key ключ
-     * @param mixed $value значение
-     *
-     * @return mixed
-     */
-    public static function factory($key, $value);
-
-    /**
-     * Определяет является ли значение экземпляром класса элемента коллекции
-     *
-     * @param mixed $value значение
-     */
-    public static function isInstance($value): bool;
-
     /**
      * Магический метод
      *

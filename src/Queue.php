@@ -10,7 +10,7 @@ use Fi1a\Collection\Exception\EmptyQueueException;
 /**
  * Очередь
  */
-class Queue extends ArrayObject implements IQueue
+class Queue extends ArrayObject implements QueueInterface
 {
     /**
      * @inheritDoc

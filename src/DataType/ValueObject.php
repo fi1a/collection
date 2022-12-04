@@ -9,7 +9,7 @@ use ErrorException;
 /**
  * Класс модели вызова set & get методов при обращении к ключам массива
  */
-class ValueObject extends ArrayObject implements IValueObject
+class ValueObject extends ArrayObject implements ValueObjectInterface
 {
     /**
      * @var string
@@ -38,7 +38,7 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * @inheritDoc
      */
-    public function fromArray($input): IValueObject
+    public function fromArray($input): ValueObjectInterface
     {
         $default = $this->getDefaultModelValues();
         $this->exchangeArray($default);
@@ -105,7 +105,7 @@ class ValueObject extends ArrayObject implements IValueObject
     /**
      * @inheritDoc
      */
-    public static function __set_state(array $input): IValueObject
+    public static function __set_state(array $input): ValueObjectInterface
     {
         return new static($input);
     }

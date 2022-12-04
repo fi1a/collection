@@ -9,7 +9,7 @@ use Fi1a\Collection\Exception\InvalidArgumentException;
 /**
  * Методы типизации значений
  */
-trait TTypedValue
+trait TypedValueTrait
 {
     /**
      * @var string

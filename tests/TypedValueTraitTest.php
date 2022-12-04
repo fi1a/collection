@@ -12,7 +12,7 @@ use stdClass;
 /**
  * Тестирование методов типизации значений
  */
-class TTypedValueTest extends TestCase
+class TypedValueTraitTest extends TestCase
 {
     /**
      * Провайдер данных для теста testConstruct

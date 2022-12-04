@@ -10,7 +10,7 @@ use Traversable;
 /**
  * Реализует интерфейсы \ArrayAccess, \Countable
  */
-trait TArrayObject
+trait ArrayObjectTrait
 {
     /**
      * @var mixed[]|mixed[][]

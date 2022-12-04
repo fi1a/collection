@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
-use Fi1a\Collection\DataType\IMapArrayObject;
 use Fi1a\Collection\DataType\MapArrayObject;
+use Fi1a\Collection\DataType\MapArrayObjectInterface;
 
 /**
  * Коллекция экземпляров классов ArrayObject
  *
- * @mixin IMapArrayObject
+ * @mixin MapArrayObjectInterface
  */
-class MapArrayObjectCollection extends AInstanceCollection
+class MapArrayObjectCollection extends AbstractInstanceCollection
 {
     /**
      * @inheritDoc
      */
-    public static function factory($key, $value)
+    protected function factory($key, $value)
     {
         if (!is_array($value)) {
             return false;
@@ -29,8 +29,8 @@ class MapArrayObjectCollection extends AInstanceCollection
     /**
      * @inheritDoc
      */
-    public static function isInstance($value): bool
+    protected function isInstance($value): bool
     {
-        return $value instanceof IMapArrayObject;
+        return $value instanceof MapArrayObjectInterface;
     }
 }

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Fi1a\Unit\Collection\DataType;
 
 use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
-use Fi1a\Collection\DataType\IMapArrayObject;
 use Fi1a\Collection\DataType\MapArrayObject;
+use Fi1a\Collection\DataType\MapArrayObjectInterface;
 use Fi1a\Collection\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -320,10 +320,10 @@ class MapArrayObjectTest extends TestCase
         $array->add(['foo' => 3,]);
         $array->add(['foo' => 2,]);
         $array->add(['foo' => 1,]);
-        $sorted = $array->sort('foo', IMapArrayObject::SORT_ASC);
+        $sorted = $array->sort('foo', MapArrayObjectInterface::SORT_ASC);
         $this->assertEquals([1, 2, 3,], $sorted->column('foo'));
         $this->assertEquals([3, 2, 1,], $array->column('foo'));
-        $sorted = $array->sort('foo', IMapArrayObject::SORT_DESC);
+        $sorted = $array->sort('foo', MapArrayObjectInterface::SORT_DESC);
         $this->assertEquals([3, 2, 1,], $sorted->column('foo'));
         $this->assertEquals([3, 2, 1,], $array->column('foo'));
     }

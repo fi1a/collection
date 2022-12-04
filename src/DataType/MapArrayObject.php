@@ -7,7 +7,7 @@ namespace Fi1a\Collection\DataType;
 /**
  * Объект-массив
  */
-class MapArrayObject extends ArrayObject implements IMapArrayObject
+class MapArrayObject extends ArrayObject implements MapArrayObjectInterface
 {
-    use TMapArrayObject;
+    use MapArrayObjectTrait;
 }

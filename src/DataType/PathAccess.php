@@ -7,7 +7,7 @@ namespace Fi1a\Collection\DataType;
 /**
  * Класс реализует доступ по пути к значениям
  */
-class PathAccess extends ArrayObject implements IPathAccess
+class PathAccess extends ArrayObject implements PathAccessInterface
 {
     /**
      * @inheritDoc
@@ -19,7 +19,7 @@ class PathAccess extends ArrayObject implements IPathAccess
         while (count($paths)) {
             $currentKey = array_shift($paths);
             if (
-                !(is_array($data) || $data instanceof IArrayObject)
+                !(is_array($data) || $data instanceof ArrayObjectInterface)
                 || (is_array($data) && !array_key_exists($currentKey, $data))
             ) {
                 return $default;
@@ -57,7 +57,7 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * @inheritDoc
      */
-    public function set($key, $value): IPathAccess
+    public function set($key, $value): PathAccessInterface
     {
         /**
          * @var mixed[]
@@ -75,11 +75,11 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * Рекурсивная реализация установления значения.
      *
-     * @param mixed[]|IArrayObject $data копия текущего массива.
-     * @param string[] $paths стек ключей.
-     * @param mixed $value значение.
+     * @param mixed[]|ArrayObjectInterface $data  копия текущего массива.
+     * @param string[]                     $paths стек ключей.
+     * @param mixed                        $value значение.
      *
-     * @return mixed[]|IArrayObject
+     * @return mixed[]|ArrayObjectInterface
      */
     private function setRecursive($data, array $paths, $value)
     {
@@ -89,7 +89,7 @@ class PathAccess extends ArrayObject implements IPathAccess
             $data[$key] = $count ? [] : null;
         }
         if ($count) {
-            if (!(is_array($data[$key]) || $data[$key] instanceof IArrayObject)) {
+            if (!(is_array($data[$key]) || $data[$key] instanceof ArrayObjectInterface)) {
                 $data[$key] = [];
             }
             /**
@@ -110,7 +110,7 @@ class PathAccess extends ArrayObject implements IPathAccess
     /**
      * @inheritDoc
      */
-    public function delete($key): IPathAccess
+    public function delete($key): PathAccessInterface
     {
         $this->exchangeArray($this->deleteRecursive($this->getArrayCopy(), $this->getKeys((string) $key)));
 

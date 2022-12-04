@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
-use Fi1a\Collection\DataType\IArrayObject;
+use Fi1a\Collection\DataType\ArrayObjectInterface;
 
 /**
  * Интерфейс очереди
  */
-interface IQueue extends IArrayObject
+interface QueueInterface extends ArrayObjectInterface
 {
     /**
      * Добавить в начало очереди

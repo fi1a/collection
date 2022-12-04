@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Fi1a\Collection;
 
 use Fi1a\Collection\DataType\ArrayObject;
-use Fi1a\Collection\DataType\IArrayObject;
+use Fi1a\Collection\DataType\ArrayObjectInterface;
 
 /**
  * Коллекция экземпляров классов ArrayObject
  *
- * @mixin IArrayObject
+ * @mixin ArrayObjectInterface
  */
-class ArrayObjectCollection extends AInstanceCollection
+class ArrayObjectCollection extends AbstractInstanceCollection
 {
     /**
      * @inheritDoc
      */
-    public static function factory($key, $value)
+    protected function factory($key, $value)
     {
         if (!is_array($value)) {
             return false;
@@ -29,8 +29,8 @@ class ArrayObjectCollection extends AInstanceCollection
     /**
      * @inheritDoc
      */
-    public static function isInstance($value): bool
+    protected function isInstance($value): bool
     {
-        return $value instanceof IArrayObject;
+        return $value instanceof ArrayObjectInterface;
     }
 }

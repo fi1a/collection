@@ -9,7 +9,7 @@ use Fi1a\Collection\Helpers\ArrayHelper;
 /**
  * Реализует интерфейсы \ArrayAccess, \Countable
  */
-trait TMapArrayObject
+trait MapArrayObjectTrait
 {
     /**
      * Определяет пустой массив или нет
@@ -292,7 +292,7 @@ trait TMapArrayObject
     /**
      * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
      *
-     * @param IArrayObject|mixed[] $collection коллекция для вычисления расхождения
+     * @param ArrayObjectInterface|mixed[] $collection коллекция для вычисления расхождения
      *
      * @return static
      */
@@ -302,7 +302,7 @@ trait TMapArrayObject
         $cloneCollection->exchangeArray(
             ArrayHelper::diff(
                 $this->storage,
-                $collection instanceof IArrayObject ? $collection->getArrayCopy() : $collection
+                $collection instanceof ArrayObjectInterface ? $collection->getArrayCopy() : $collection
             )
         );
 
@@ -312,7 +312,7 @@ trait TMapArrayObject
     /**
      * Возвращает новую коллекцию с пересечением элементов текущей коллекции с переданной
      *
-     * @param IArrayObject|mixed[] $collection коллекция для вычисления пересечения
+     * @param ArrayObjectInterface|mixed[] $collection коллекция для вычисления пересечения
      *
      * @return static
      */
@@ -322,7 +322,7 @@ trait TMapArrayObject
         $cloneCollection->exchangeArray(
             ArrayHelper::intersect(
                 $this->storage,
-                $collection instanceof IArrayObject ? $collection->getArrayCopy() : $collection
+                $collection instanceof ArrayObjectInterface ? $collection->getArrayCopy() : $collection
             )
         );
 
@@ -332,7 +332,7 @@ trait TMapArrayObject
     /**
      * Объединяет элементы текущей коллекции с элементами переданной и возвращает новую коллекцию
      *
-     * @param IArrayObject|mixed[] $collection коллекция для объединения
+     * @param ArrayObjectInterface|mixed[] $collection коллекция для объединения
      *
      * @return static
      */
@@ -342,7 +342,7 @@ trait TMapArrayObject
         $cloneCollection->exchangeArray(
             array_merge(
                 $this->storage,
-                $collection instanceof IArrayObject ? $collection->getArrayCopy() : $collection
+                $collection instanceof ArrayObjectInterface ? $collection->getArrayCopy() : $collection
             )
         );
 

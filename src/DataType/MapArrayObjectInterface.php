@@ -7,9 +7,9 @@ namespace Fi1a\Collection\DataType;
 use Fi1a\Collection\Helpers\ArrayHelper;
 
 /**
- * Интерфейс IMapArrayObject
+ * Интерфейс MapArrayObjectInterface
  */
-interface IMapArrayObject extends IArrayObject
+interface MapArrayObjectInterface extends ArrayObjectInterface
 {
     public const SORT_ASC = ArrayHelper::SORT_ASC;
 
@@ -207,7 +207,7 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Возвращает новую коллекцию с расходящимися элементами текущей коллекции с переданной
      *
-     * @param IArrayObject|mixed[] $collection коллекция для вычисления расхождения
+     * @param ArrayObjectInterface|mixed[] $collection коллекция для вычисления расхождения
      *
      * @return static
      */
@@ -216,7 +216,7 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Возвращает новую коллекцию с пересечением элементов текущей коллекции с переданной
      *
-     * @param IArrayObject|mixed[] $collection коллекция для вычисления пересечения
+     * @param ArrayObjectInterface|mixed[] $collection коллекция для вычисления пересечения
      *
      * @return static
      */
@@ -225,7 +225,7 @@ interface IMapArrayObject extends IArrayObject
     /**
      * Объединяет элементы текущей коллекции с элементами переданной и возвращает новую коллекцию
      *
-     * @param IArrayObject|mixed[] $collection коллекция для объединения
+     * @param ArrayObjectInterface|mixed[] $collection коллекция для объединения
      *
      * @return static
      */

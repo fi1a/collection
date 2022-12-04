@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection\Helpers;
 
+use Fi1a\Collection\DataType\ArrayObjectInterface;
 use Fi1a\Collection\DataType\Exception\OutOfBoundsException;
-use Fi1a\Collection\DataType\IArrayObject;
 use Fi1a\Collection\Exception\ExtractValueException;
 use Fi1a\Collection\Exception\InvalidArgumentException;
 
@@ -622,7 +622,7 @@ class ArrayHelper
      */
     private static function extractValue($object, string $name)
     {
-        if (is_array($object) || $object instanceof IArrayObject) {
+        if (is_array($object) || $object instanceof ArrayObjectInterface) {
             return $object[$name];
         }
         if (is_object($object)) {

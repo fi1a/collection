@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection;
 
+use Fi1a\Collection\DataType\MapArrayObject;
+use Fi1a\Collection\DataType\MapArrayObjectInterface;
 use Fi1a\Collection\MapArrayObjectCollection;
 use PHPUnit\Framework\TestCase;
 
@@ -25,7 +27,7 @@ class MapArrayObjectCollectionTest extends TestCase
             'string',
         ]);
         foreach ($collection as $array) {
-            $this->assertTrue($array === false || $collection::isInstance($array));
+            $this->assertTrue($array === false || $array instanceof MapArrayObjectInterface);
         }
     }
 
@@ -40,7 +42,8 @@ class MapArrayObjectCollectionTest extends TestCase
         $collection = new MapArrayObjectCollection();
         $collection[] = ['key1' => 1, 'key2' => null,];
         $collection[] = 'key1';
-        $collection[] = MapArrayObjectCollection::factory(2, ['key1' => 2, 'key2' => null,]);
-        $this->assertCount(3, $collection);
+        $collection[] = new MapArrayObject(['key3']);
+        $collection[] = [['key1' => 2, 'key2' => null,]];
+        $this->assertCount(4, $collection);
     }
 }

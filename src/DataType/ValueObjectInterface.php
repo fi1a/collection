@@ -7,19 +7,19 @@ namespace Fi1a\Collection\DataType;
 /**
  * Интерфейс модели вызова set & get методов класса при обращении к ключам массива
  */
-interface IValueObject extends IArrayObject
+interface ValueObjectInterface extends ArrayObjectInterface
 {
     /**
      * @param mixed[] $input массив со значениями
      */
-    public static function __set_state(array $input): IValueObject;
+    public static function __set_state(array $input): ValueObjectInterface;
 
     /**
      * Инициализация из массива
      *
-     * @param mixed[]|IArrayObject $input массив для инициализации
+     * @param mixed[]|ArrayObjectInterface $input массив для инициализации
      */
-    public function fromArray($input): IValueObject;
+    public function fromArray($input): ValueObjectInterface;
 
     /**
      * Возвращает массив с вызовом set & get методов
