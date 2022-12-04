@@ -7,7 +7,7 @@ namespace Fi1a\Collection\DataType;
 /**
  * Интерфейс модели вызова set & get методов класса при обращении к ключам массива
  */
-interface IValueObject extends IArrayObject
+interface IValueObject extends ArrayObjectInterface
 {
     /**
      * @param mixed[] $input массив со значениями
@@ -17,7 +17,7 @@ interface IValueObject extends IArrayObject
     /**
      * Инициализация из массива
      *
-     * @param mixed[]|IArrayObject $input массив для инициализации
+     * @param mixed[]|ArrayObjectInterface $input массив для инициализации
      */
     public function fromArray($input): IValueObject;
 

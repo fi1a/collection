@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
-use Fi1a\Collection\DataType\IArrayObject;
+use Fi1a\Collection\DataType\ArrayObjectInterface;
 
 /**
  * Интерфейс коллекции экземпляров классов
  */
-interface IInstanceCollection extends IArrayObject
+interface IInstanceCollection extends ArrayObjectInterface
 {
     /**
      * Магический метод

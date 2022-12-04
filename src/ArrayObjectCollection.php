@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Fi1a\Collection;
 
 use Fi1a\Collection\DataType\ArrayObject;
-use Fi1a\Collection\DataType\IArrayObject;
+use Fi1a\Collection\DataType\ArrayObjectInterface;
 
 /**
  * Коллекция экземпляров классов ArrayObject
  *
- * @mixin IArrayObject
+ * @mixin ArrayObjectInterface
  */
 class ArrayObjectCollection extends AInstanceCollection
 {
@@ -31,6 +31,6 @@ class ArrayObjectCollection extends AInstanceCollection
      */
     protected function isInstance($value): bool
     {
-        return $value instanceof IArrayObject;
+        return $value instanceof ArrayObjectInterface;
     }
 }

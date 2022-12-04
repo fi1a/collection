@@ -7,7 +7,7 @@ namespace Fi1a\Collection\DataType;
 /**
  * Объект-массив с типизацией значений
  */
-interface ITypedValueArray extends IArrayObject
+interface ITypedValueArray extends ArrayObjectInterface
 {
     /**
      * Возвращает объявленный тип значений

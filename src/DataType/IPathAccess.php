@@ -7,7 +7,7 @@ namespace Fi1a\Collection\DataType;
 /**
  * Интерфейс класса реализующего доступ по пути к значениям
  */
-interface IPathAccess extends IArrayObject
+interface IPathAccess extends ArrayObjectInterface
 {
     public const PATH_SEPARATOR = ':';
 

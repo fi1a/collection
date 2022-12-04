@@ -11,7 +11,7 @@ use IteratorAggregate;
 /**
  * Интерфейс IArrayObject
  */
-interface IArrayObject extends IteratorAggregate, ArrayAccess, Countable
+interface ArrayObjectInterface extends IteratorAggregate, ArrayAccess, Countable
 {
     /**
      * Creates a copy of the ArrayObject.
