@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection\Fixtures;
 
-use Fi1a\Collection\AInstanceCollection;
+use Fi1a\Collection\AbstractInstanceCollection;
 
 /**
  * Для тестирования коллекции экземпляров классов
  */
-class FixtureInstanceCollection extends AInstanceCollection
+class FixtureInstanceCollection extends AbstractInstanceCollection
 {
     /**
      * @inheritDoc

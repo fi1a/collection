@@ -12,7 +12,7 @@ use Fi1a\Collection\DataType\PathAccessInterface;
  *
  * @mixin PathAccess
  */
-class PathAccessCollection extends AInstanceCollection
+class PathAccessCollection extends AbstractInstanceCollection
 {
     /**
      * @inheritDoc

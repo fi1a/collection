@@ -12,7 +12,7 @@ use Fi1a\Collection\DataType\MapArrayObjectInterface;
  *
  * @mixin MapArrayObjectInterface
  */
-class MapArrayObjectCollection extends AInstanceCollection
+class MapArrayObjectCollection extends AbstractInstanceCollection
 {
     /**
      * @inheritDoc

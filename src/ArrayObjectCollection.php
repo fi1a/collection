@@ -12,7 +12,7 @@ use Fi1a\Collection\DataType\ArrayObjectInterface;
  *
  * @mixin ArrayObjectInterface
  */
-class ArrayObjectCollection extends AInstanceCollection
+class ArrayObjectCollection extends AbstractInstanceCollection
 {
     /**
      * @inheritDoc

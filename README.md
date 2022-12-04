@@ -248,7 +248,7 @@ $collection->has(2); // false
 Реализует интерфейс Fi1a\Collection\IInstanceCollection.
 
 ```php
-use Fi1a\Collection\AInstanceCollection;
+use Fi1a\Collection\AbstractInstanceCollection;
 
 class Foo
 {
@@ -265,7 +265,7 @@ class Foo
     }
 }
 
-class FooCollection extends AInstanceCollection
+class FooCollection extends AbstractInstanceCollection
 {
     public static function factory($key, $value)
     {
