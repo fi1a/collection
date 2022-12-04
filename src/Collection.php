@@ -9,7 +9,7 @@ use Fi1a\Collection\DataType\MapArrayObject;
 /**
  * Коллекция
  */
-class Collection extends MapArrayObject implements ICollection
+class Collection extends MapArrayObject implements CollectionInterface
 {
     use TTypedValue;
 

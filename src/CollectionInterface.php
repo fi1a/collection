@@ -9,7 +9,7 @@ use Fi1a\Collection\DataType\MapArrayObjectInterface;
 /**
  * Интерфейс коллекции
  */
-interface ICollection extends MapArrayObjectInterface
+interface CollectionInterface extends MapArrayObjectInterface
 {
     /**
      * Возвращает объявленный тип значений
