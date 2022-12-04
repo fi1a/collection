@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Тестироввние методов коллекции
  */
-class AInstanceCollectionTest extends TestCase
+class AbstractInstanceCollectionTest extends TestCase
 {
     /**
      * Тестирование методов
