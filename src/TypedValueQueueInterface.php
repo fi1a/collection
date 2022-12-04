@@ -7,7 +7,7 @@ namespace Fi1a\Collection;
 /**
  * Очередь с типизацией значений
  */
-interface ITypedValueQueue extends QueueInterface
+interface TypedValueQueueInterface extends QueueInterface
 {
     /**
      * Конструктор
