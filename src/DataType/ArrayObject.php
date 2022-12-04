@@ -9,5 +9,5 @@ namespace Fi1a\Collection\DataType;
  */
 class ArrayObject implements ArrayObjectInterface
 {
-    use TArrayObject;
+    use ArrayObjectTrait;
 }
