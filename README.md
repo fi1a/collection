@@ -13,7 +13,7 @@
 Установить этот пакет можно как зависимость, используя Composer.
 
 ``` bash
-composer require fi1a/collection ~1.3
+composer require fi1a/collection
 ```
 
 ## Использование
@@ -22,7 +22,7 @@ composer require fi1a/collection ~1.3
 
 #### Объект Fi1a\Collection\DataType\ArrayObject, работающий также как и массив
 
-Реализует интерфейс Fi1a\Collection\DataType\IArrayObject.
+Реализует интерфейс `Fi1a\Collection\DataType\ValueObjectInterface`.
 
 ```php
 use Fi1a\Collection\DataType\ArrayObject;
@@ -38,7 +38,7 @@ count($arrayObject); // 3
 
 #### Объект Fi1a\Collection\DataType\MapArrayObject, работающий также как и массив
 
-Реализует интерфейс Fi1a\Collection\DataType\IMapArrayObject с методами расширяющими использование.
+Реализует интерфейс `Fi1a\Collection\DataType\MapArrayObjectInterface` с методами расширяющими использование массивов.
 
 ```php
 use Fi1a\Collection\DataType\MapArrayObject;
@@ -107,7 +107,7 @@ $arrayObject->count(); // 3
 
 #### Fi1a\Collection\DataType\PathAccess класс реализует доступ по пути к значениям
 
-Реализует интерфейс Fi1a\Collection\DataType\IPathAccess. Данный класс позволяет получать доступ к ключам массива по пути (foo:bar:baz).
+Реализует интерфейс `Fi1a\Collection\DataType\PathAccessInterface`. Данный класс позволяет получать доступ к ключам массива по пути (foo:bar:baz).
 
 ```php
 use Fi1a\Collection\DataType\PathAccess;
@@ -124,7 +124,7 @@ $register->has('foo:bar:baz:bat'); // false
 
 #### Объект-значение Fi1a\Collection\DataType\ValueObject с методами set/get
 
-Реализует интерфейс Fi1a\Collection\DataType\IValueObject. Предоставляет возможность задать set/get методы для значений и работает также как и массив.
+Реализует интерфейс `Fi1a\Collection\DataType\ValueObjectInterface`. Предоставляет возможность задать set/get методы для значений и работает также как и массив.
 
 ```php
 use Fi1a\Collection\DataType\ValueObject;
@@ -207,7 +207,7 @@ $valueObject->getBar(); // 'barbaz'
 
 #### Коллекция значений Fi1a\Collection\Collection
 
-Реализует интерфейс Fi1a\Collection\ICollection.
+Реализует интерфейс `Fi1a\Collection\CollectionInterface`.
 
 Возможные типы значений:
 
@@ -245,7 +245,7 @@ $collection->has(2); // false
 
 #### Коллекции экземпляров классов
 
-Реализует интерфейс Fi1a\Collection\IInstanceCollection.
+Реализует интерфейс `Fi1a\Collection\InstanceCollectionInterface`.
 
 ```php
 use Fi1a\Collection\AbstractInstanceCollection;
@@ -289,7 +289,7 @@ foreach ($collection as $foo) {
 
 #### Коллекция экземпляров классов Fi1a\Collection\DataType\ArrayObject
 
-Частная реализация коллекции Fi1a\Collection\AInstanceCollection для классов ArrayObject.
+Частная реализация коллекции `Fi1a\Collection\AbstractInstanceCollection` для классов `Fi1a\Collection\DataType\ArrayObject`.
 
 ```php
 use Fi1a\Collection\ArrayObjectCollection;
@@ -308,7 +308,7 @@ count($collection); // 3
 
 #### Коллекция экземпляров классов Fi1a\Collection\DataType\MapArrayObject
 
-Частная реализация коллекции Fi1a\Collection\AInstanceCollection для классов MapArrayObject.
+Частная реализация коллекции `Fi1a\Collection\AbstractInstanceCollection` для классов `Fi1a\Collection\DataType\MapArrayObject`.
 
 ```php
 use Fi1a\Collection\MapArrayObjectCollection;
@@ -327,7 +327,7 @@ $collection->count(); // 3
 
 #### Коллекция экземпляров классов Fi1a\Collection\DataType\PathAccess
 
-Частная реализация коллекции Fi1a\Collection\AInstanceCollection для классов PathAccess.
+Частная реализация коллекции `Fi1a\Collection\AbstractInstanceCollection` для классов `Fi1a\Collection\DataType\PathAccess`.
 
 ```php
 use Fi1a\Collection\PathAccessCollection;
