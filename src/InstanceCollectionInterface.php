@@ -9,7 +9,7 @@ use Fi1a\Collection\DataType\ArrayObjectInterface;
 /**
  * Интерфейс коллекции экземпляров классов
  */
-interface IInstanceCollection extends ArrayObjectInterface
+interface InstanceCollectionInterface extends ArrayObjectInterface
 {
     /**
      * Магический метод

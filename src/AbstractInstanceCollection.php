@@ -9,7 +9,7 @@ use Fi1a\Collection\DataType\MapArrayObject;
 /**
  * Абстрактный класс коллекции экземпляров классов
  */
-abstract class AbstractInstanceCollection extends MapArrayObject implements IInstanceCollection
+abstract class AbstractInstanceCollection extends MapArrayObject implements InstanceCollectionInterface
 {
     /**
      * Возвращает экземпляр класса элемента коллекции
