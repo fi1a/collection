@@ -11,7 +11,7 @@ use Fi1a\Collection\DataType\MapArrayObject;
  */
 class Collection extends MapArrayObject implements CollectionInterface
 {
-    use TTypedValue;
+    use TypedValueTrait;
 
     /**
      * @inheritDoc

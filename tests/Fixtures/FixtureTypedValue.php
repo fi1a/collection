@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection\Fixtures;
 
-use Fi1a\Collection\TTypedValue;
+use Fi1a\Collection\TypedValueTrait;
 
 /**
  * Для тестирование методов типизации значений
  */
 class FixtureTypedValue
 {
-    use TTypedValue;
+    use TypedValueTrait;
 
     /**
      * @param mixed $value

@@ -11,7 +11,7 @@ use Fi1a\Collection\Exception\InvalidArgumentException;
  */
 class TypedValueQueue extends Queue implements TypedValueQueueInterface
 {
-    use TTypedValue;
+    use TypedValueTrait;
 
     /**
      * @inheritDoc
