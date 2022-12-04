@@ -9,7 +9,7 @@ use Fi1a\Collection\DataType\ArrayObjectInterface;
 /**
  * Интерфейс очереди
  */
-interface IQueue extends ArrayObjectInterface
+interface QueueInterface extends ArrayObjectInterface
 {
     /**
      * Добавить в начало очереди
