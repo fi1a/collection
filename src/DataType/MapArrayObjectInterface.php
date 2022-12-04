@@ -7,9 +7,9 @@ namespace Fi1a\Collection\DataType;
 use Fi1a\Collection\Helpers\ArrayHelper;
 
 /**
- * Интерфейс IMapArrayObject
+ * Интерфейс MapArrayObjectInterface
  */
-interface IMapArrayObject extends ArrayObjectInterface
+interface MapArrayObjectInterface extends ArrayObjectInterface
 {
     public const SORT_ASC = ArrayHelper::SORT_ASC;
 

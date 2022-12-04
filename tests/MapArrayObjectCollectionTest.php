@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\Collection;
 
-use Fi1a\Collection\DataType\IMapArrayObject;
 use Fi1a\Collection\DataType\MapArrayObject;
+use Fi1a\Collection\DataType\MapArrayObjectInterface;
 use Fi1a\Collection\MapArrayObjectCollection;
 use PHPUnit\Framework\TestCase;
 
@@ -27,7 +27,7 @@ class MapArrayObjectCollectionTest extends TestCase
             'string',
         ]);
         foreach ($collection as $array) {
-            $this->assertTrue($array === false || $array instanceof IMapArrayObject);
+            $this->assertTrue($array === false || $array instanceof MapArrayObjectInterface);
         }
     }
 
