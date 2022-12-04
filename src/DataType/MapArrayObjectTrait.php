@@ -9,7 +9,7 @@ use Fi1a\Collection\Helpers\ArrayHelper;
 /**
  * Реализует интерфейсы \ArrayAccess, \Countable
  */
-trait TMapArrayObject
+trait MapArrayObjectTrait
 {
     /**
      * Определяет пустой массив или нет

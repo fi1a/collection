@@ -9,5 +9,5 @@ namespace Fi1a\Collection\DataType;
  */
 class MapArrayObject extends ArrayObject implements MapArrayObjectInterface
 {
-    use TMapArrayObject;
+    use MapArrayObjectTrait;
 }
