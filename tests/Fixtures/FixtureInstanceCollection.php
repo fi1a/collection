@@ -14,7 +14,7 @@ class FixtureInstanceCollection extends AInstanceCollection
     /**
      * @inheritDoc
      */
-    public static function factory($key, $value)
+    protected function factory($key, $value)
     {
         return $key % 2 === 0 ? new FixtureClass1($value) : new FixtureClass2($value);
     }
@@ -22,7 +22,7 @@ class FixtureInstanceCollection extends AInstanceCollection
     /**
      * @inheritDoc
      */
-    public static function isInstance($value): bool
+    protected function isInstance($value): bool
     {
         return $value instanceof FixtureClass1 || $value instanceof FixtureClass2;
     }

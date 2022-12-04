@@ -12,6 +12,23 @@ use Fi1a\Collection\DataType\MapArrayObject;
 abstract class AInstanceCollection extends MapArrayObject implements IInstanceCollection
 {
     /**
+     * Возвращает экземпляр класса элемента коллекции
+     *
+     * @param string|int|null $key ключ
+     * @param mixed $value значение
+     *
+     * @return mixed
+     */
+    abstract protected function factory($key, $value);
+
+    /**
+     * Определяет является ли значение экземпляром класса элемента коллекции
+     *
+     * @param mixed $value значение
+     */
+    abstract protected function isInstance($value): bool;
+
+    /**
      * Конструктор
      *
      * @param mixed[]|null $input массив со значениями
@@ -58,12 +75,12 @@ abstract class AInstanceCollection extends MapArrayObject implements IInstanceCo
      */
     public function offsetSet($key, $value)
     {
-        if (!is_object($value) || !static::isInstance($value)) {
+        if (!is_object($value) || !$this->isInstance($value)) {
             /**
              * @var mixed $value
              * @psalm-suppress PossiblyNullArgument
              */
-            $value = static::factory($key, $value);
+            $value = $this->factory($key, $value);
         }
 
         parent::offsetSet($key, $value);
@@ -74,12 +91,12 @@ abstract class AInstanceCollection extends MapArrayObject implements IInstanceCo
      */
     public function set($key, $value)
     {
-        if (!is_object($value) || !static::isInstance($value)) {
+        if (!is_object($value) || !$this->isInstance($value)) {
             /**
              * @var mixed $value
              * @psalm-suppress PossiblyNullArgument
              */
-            $value = static::factory($key, $value);
+            $value = $this->factory($key, $value);
         }
 
         return parent::set($key, $value);

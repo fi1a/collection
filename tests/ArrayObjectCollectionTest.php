@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fi1a\Unit\Collection;
 
 use Fi1a\Collection\ArrayObjectCollection;
+use Fi1a\Collection\DataType\ArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -25,7 +26,7 @@ class ArrayObjectCollectionTest extends TestCase
             'string',
         ]);
         foreach ($collection as $array) {
-            $this->assertTrue($array === false || $collection::isInstance($array));
+            $this->assertTrue($array === false || $collection->isInstance($array));
         }
     }
 
@@ -40,7 +41,8 @@ class ArrayObjectCollectionTest extends TestCase
         $collection = new ArrayObjectCollection();
         $collection[] = ['key1' => 1, 'key2' => null,];
         $collection[] = 'key1';
-        $collection[] = ArrayObjectCollection::factory(2, ['key1' => 2, 'key2' => null,]);
-        $this->assertCount(3, $collection);
+        $collection[] = new ArrayObject(['key3']);
+        $collection[] = $collection->factory(2, ['key1' => 2, 'key2' => null,]);
+        $this->assertCount(4, $collection);
     }
 }

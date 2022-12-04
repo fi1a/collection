@@ -17,7 +17,7 @@ class ArrayObjectCollection extends AInstanceCollection
     /**
      * @inheritDoc
      */
-    public static function factory($key, $value)
+    protected function factory($key, $value)
     {
         if (!is_array($value)) {
             return false;
@@ -29,7 +29,7 @@ class ArrayObjectCollection extends AInstanceCollection
     /**
      * @inheritDoc
      */
-    public static function isInstance($value): bool
+    protected function isInstance($value): bool
     {
         return $value instanceof IArrayObject;
     }
