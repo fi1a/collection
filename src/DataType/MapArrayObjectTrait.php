@@ -580,19 +580,6 @@ trait MapArrayObjectTrait
     }
 
     /**
-     * @deprecated
-     *
-     * Проверяет, присутствует ли в коллекции значение
-     *
-     * @param mixed $value значение
-     * @param bool $strict если true, также проверяет типы значений
-     */
-    public function contains($value, bool $strict = true): bool
-    {
-        return $this->hasValue($value, $strict);
-    }
-
-    /**
      * Возвращает новый массив с переданным ключем и колонкой
      *
      * @param string|int $map
