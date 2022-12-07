@@ -120,4 +120,23 @@ abstract class AbstractInstanceCollection extends MapArrayObject implements Inst
 
         return $collection;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function exchangeArray(array $input): void
+    {
+        /**
+         * @var mixed $value
+         */
+        foreach ($input as $key => $value) {
+            if (!is_object($value) || !$this->isInstance($value)) {
+                /**
+                 * @psalm-suppress MixedAssignment
+                 */
+                $input[$key] = $this->factory($key, $value);
+            }
+        }
+        parent::exchangeArray($input);
+    }
 }
