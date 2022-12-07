@@ -99,4 +99,17 @@ class AbstractInstanceCollectionTest extends TestCase
         $collection2->add($value1);
         $this->assertEquals([$value1, $value2], $collection1->intersect($collection2)->getArrayCopy());
     }
+
+    /**
+     * Заменяет массив.
+     */
+    public function testExchangeArray(): void
+    {
+        $collection = new FixtureInstanceCollection();
+        $collection->exchangeArray([1, 2, 3, new FixtureClass1(4)]);
+        $this->assertTrue($collection->has(0));
+        $this->assertInstanceOf(FixtureClass1::class, $collection->get(0));
+        $this->assertEquals(1, $collection->get(0)->value);
+        $this->assertEquals(4, $collection->get(3)->value);
+    }
 }
