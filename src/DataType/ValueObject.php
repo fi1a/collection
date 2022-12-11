@@ -56,7 +56,7 @@ class ValueObject extends ArrayObject implements ValueObjectInterface
     /**
      * Возвращает массив со значениями по умолчанию
      *
-     * @return null[]
+     * @return mixed[]
      */
     protected function getDefaultModelValues()
     {
