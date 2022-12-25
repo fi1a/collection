@@ -6,6 +6,8 @@ namespace Fi1a\Collection;
 
 use Fi1a\Collection\DataType\MapArrayObject;
 
+use const ReturnTypeWillChange;
+
 /**
  * Абстрактный класс коллекции экземпляров классов
  */
@@ -73,6 +75,7 @@ abstract class AbstractInstanceCollection extends MapArrayObject implements Inst
     /**
      * @inheritDoc
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         if (!is_object($value) || !$this->isInstance($value)) {

@@ -6,6 +6,8 @@ namespace Fi1a\Collection;
 
 use Fi1a\Collection\DataType\MapArrayObject;
 
+use const ReturnTypeWillChange;
+
 /**
  * Коллекция
  */
@@ -25,6 +27,7 @@ class Collection extends MapArrayObject implements CollectionInterface
     /**
      * @inheritDoc
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         $this->validateType($value);
