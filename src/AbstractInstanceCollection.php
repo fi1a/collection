@@ -73,6 +73,7 @@ abstract class AbstractInstanceCollection extends MapArrayObject implements Inst
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         if (!is_object($value) || !$this->isInstance($value)) {

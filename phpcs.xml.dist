@@ -467,4 +467,9 @@
         <exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore" />
     </rule>
 
+    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
+        <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName" />
+    </rule>
+
+
 </ruleset>

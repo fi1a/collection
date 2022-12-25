@@ -25,6 +25,7 @@ class Collection extends MapArrayObject implements CollectionInterface
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         $this->validateType($value);
