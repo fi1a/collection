@@ -7,8 +7,6 @@ namespace Fi1a\Collection\DataType;
 use ArrayIterator;
 use Traversable;
 
-use const ReturnTypeWillChange;
-
 /**
  * Реализует интерфейсы \ArrayAccess, \Countable
  */
@@ -37,7 +35,7 @@ trait ArrayObjectTrait
      *
      * @param string|int|null $offset ключ.
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset): bool
     {
         if (is_null($offset)) {
@@ -54,7 +52,7 @@ trait ArrayObjectTrait
      *
      * @return mixed
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         $value = null;
@@ -77,7 +75,7 @@ trait ArrayObjectTrait
      * @param string|int|null $key ключ.
      * @param mixed $value значение.
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         if (is_null($key)) {
@@ -93,7 +91,7 @@ trait ArrayObjectTrait
      *
      * @param string|int|null $offset ключ.
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         if (is_null($offset)) {
