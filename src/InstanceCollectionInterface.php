@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Fi1a\Collection;
 
-use Fi1a\Collection\DataType\ArrayObjectInterface;
+use Fi1a\Collection\DataType\MapArrayObjectInterface;
 
 /**
  * Интерфейс коллекции экземпляров классов
  */
-interface InstanceCollectionInterface extends ArrayObjectInterface
+interface InstanceCollectionInterface extends MapArrayObjectInterface
 {
     /**
      * Магический метод
